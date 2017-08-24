@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span>User Notification</span> {{vm.userNotification.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.userNotification.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Is Visable</span></dt>
+        <dd>
+            <span>{{vm.userNotification.isVisable}}</span>
+        </dd>
+        <dt><span>Is Read</span></dt>
+        <dd>
+            <span>{{vm.userNotification.isRead}}</span>
+        </dd>
+        <dt><span>Is Completed</span></dt>
+        <dd>
+            <span>{{vm.userNotification.isCompleted}}</span>
+        </dd>
+        <dt><span>Notification Type</span></dt>
+        <dd>
+            <span>{{vm.userNotification.notificationType}}</span>
+        </dd>
+        <dt><span>User Info</span></dt>
+        <dd>
+            <a ui-sref="user-info-detail({id:vm.userNotification.userInfo.id})">{{vm.userNotification.userInfo.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="user-notification-detail.edit({id:vm.userNotification.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

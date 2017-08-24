@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Track Metric</span> {{vm.trackMetric.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.trackMetric.name}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.trackMetric.description}}</span>
+        </dd>
+        <dt><span>Track Icon</span></dt>
+        <dd>
+            <span>{{vm.trackMetric.trackIcon}}</span>
+        </dd>
+        <dt><span>Info Bubble</span></dt>
+        <dd>
+            <span>{{vm.trackMetric.infoBubble}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="track-metric-detail.edit({id:vm.trackMetric.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Wellness History</span> {{vm.wellnessHistory.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.wellnessHistory.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Wellnessscore</span></dt>
+        <dd>
+            <span>{{vm.wellnessHistory.wellnessscore}}</span>
+        </dd>
+        <dt><span>User Info</span></dt>
+        <dd>
+            <a ui-sref="user-info-detail({id:vm.wellnessHistory.userInfo.id})">{{vm.wellnessHistory.userInfo.id}}</a>
+        </dd>
+        <dt><span>Wellness Item</span></dt>
+        <dd>
+            <a ui-sref="wellness-item-detail({id:vm.wellnessHistory.wellnessItem.id})">{{vm.wellnessHistory.wellnessItem.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="wellness-history-detail.edit({id:vm.wellnessHistory.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

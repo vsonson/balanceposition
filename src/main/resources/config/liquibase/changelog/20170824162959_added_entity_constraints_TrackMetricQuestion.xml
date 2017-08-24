@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity TrackMetricQuestion.
+    -->
+    <changeSet id="20170824162959-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="track_metric_id"
+                                 baseTableName="track_metric_question"
+                                 constraintName="fk_track_metric_question_track_metric_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="track_metric"/>
+
+    </changeSet>
+</databaseChangeLog>

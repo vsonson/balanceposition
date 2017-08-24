@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity MetricHistory.
+    -->
+    <changeSet id="20170824163000-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_info_id"
+                                 baseTableName="metric_history"
+                                 constraintName="fk_metric_history_user_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_info"/>
+
+        <addForeignKeyConstraint baseColumnNames="track_metric_id"
+                                 baseTableName="metric_history"
+                                 constraintName="fk_metric_history_track_metric_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="track_metric"/>
+
+        <addForeignKeyConstraint baseColumnNames="metric_question_id"
+                                 baseTableName="metric_history"
+                                 constraintName="fk_metric_history_metric_question_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="track_metric_question"/>
+
+    </changeSet>
+</databaseChangeLog>

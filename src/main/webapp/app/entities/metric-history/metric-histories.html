@@ -1,0 +1,74 @@
+<div>
+    <h2>Metric Histories</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="metric-history.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Metric History
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metricValue"><span>Metric Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userInfo.id"><span>User Info</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="trackMetric.id"><span>Track Metric</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metricQuestion.id"><span>Metric Question</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="metricHistory in vm.metricHistories track by metricHistory.id">
+                    <td><a ui-sref="metric-history-detail({id:metricHistory.id})">{{metricHistory.id}}</a></td>
+                        <td>{{metricHistory.date | date:'mediumDate'}}</td>
+                    <td>{{metricHistory.metricValue}}</td>
+                    <td>
+                        <a ui-sref="user-info-detail({id:metricHistory.userInfo.id})">{{metricHistory.userInfo.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="track-metric-detail({id:metricHistory.trackMetric.id})">{{metricHistory.trackMetric.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="track-metric-question-detail({id:metricHistory.metricQuestion.id})">{{metricHistory.metricQuestion.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="metric-history-detail({id:metricHistory.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="metric-history.edit({id:metricHistory.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="metric-history.delete({id:metricHistory.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

@@ -1,0 +1,66 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myMetricHistoryLabel">Create or edit a Metric History</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.metricHistory.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.metricHistory.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_date">Date</label>
+                <div class="input-group">
+                    <input id="field_date" type="text" class="form-control" name="date" uib-datepicker-popup="{{dateformat}}" ng-model="vm.metricHistory.date" is-open="vm.datePickerOpenStatus.date"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_metricValue">Metric Value</label>
+            <input type="text" class="form-control" name="metricValue" id="field_metricValue"
+                    ng-model="vm.metricHistory.metricValue"
+                    required/>
+            <div ng-show="editForm.metricValue.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.metricValue.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_userInfo">User Info</label>
+            <select class="form-control" id="field_userInfo" name="userInfo" ng-model="vm.metricHistory.userInfo" ng-options="userInfo as userInfo.id for userInfo in vm.userinfos track by userInfo.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_trackMetric">Track Metric</label>
+            <select class="form-control" id="field_trackMetric" name="trackMetric" ng-model="vm.metricHistory.trackMetric" ng-options="trackMetric as trackMetric.id for trackMetric in vm.trackmetrics | orderBy:'id' track by trackMetric.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_metricQuestion">Metric Question</label>
+            <select class="form-control" id="field_metricQuestion" name="metricQuestion" ng-model="vm.metricHistory.metricQuestion" ng-options="trackMetricQuestion as trackMetricQuestion.id for trackMetricQuestion in vm.metricquestions | orderBy:'id' track by trackMetricQuestion.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

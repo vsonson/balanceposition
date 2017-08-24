@@ -1,0 +1,92 @@
+
+<div>
+    <h2><span>User Info</span> {{vm.userInfo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Userstatus</span></dt>
+        <dd>
+            <span>{{vm.userInfo.userstatus}}</span>
+        </dd>
+        <dt><span>User Type</span></dt>
+        <dd>
+            <span>{{vm.userInfo.userType}}</span>
+        </dd>
+        <dt><span>User Name</span></dt>
+        <dd>
+            <span>{{vm.userInfo.userName}}</span>
+        </dd>
+        <dt><span>Password</span></dt>
+        <dd>
+            <span>{{vm.userInfo.password}}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+            <span>{{vm.userInfo.email}}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+            <span>{{vm.userInfo.phone}}</span>
+        </dd>
+        <dt><span>Fname</span></dt>
+        <dd>
+            <span>{{vm.userInfo.fname}}</span>
+        </dd>
+        <dt><span>Mname</span></dt>
+        <dd>
+            <span>{{vm.userInfo.mname}}</span>
+        </dd>
+        <dt><span>Lname</span></dt>
+        <dd>
+            <span>{{vm.userInfo.lname}}</span>
+        </dd>
+        <dt><span>Address</span></dt>
+        <dd>
+            <span>{{vm.userInfo.address}}</span>
+        </dd>
+        <dt><span>Address 2</span></dt>
+        <dd>
+            <span>{{vm.userInfo.address2}}</span>
+        </dd>
+        <dt><span>City</span></dt>
+        <dd>
+            <span>{{vm.userInfo.city}}</span>
+        </dd>
+        <dt><span>State</span></dt>
+        <dd>
+            <span>{{vm.userInfo.state}}</span>
+        </dd>
+        <dt><span>Zip</span></dt>
+        <dd>
+            <span>{{vm.userInfo.zip}}</span>
+        </dd>
+        <dt><span>Country</span></dt>
+        <dd>
+            <span>{{vm.userInfo.country}}</span>
+        </dd>
+        <dt><span>Profile Pic</span></dt>
+        <dd>
+            <div ng-if="vm.userInfo.profilePic">
+                <a ng-click="vm.openFile(vm.userInfo.profilePicContentType, vm.userInfo.profilePic)">
+                    <img data-ng-src="{{'data:' + vm.userInfo.profilePicContentType + ';base64,' + vm.userInfo.profilePic}}" style="max-width: 100%;" alt="userInfo image"/>
+                </a>
+                {{vm.userInfo.profilePicContentType}}, {{vm.byteSize(vm.userInfo.profilePic)}}
+            </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.userInfo.user.email}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="user-info-detail.edit({id:vm.userInfo.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

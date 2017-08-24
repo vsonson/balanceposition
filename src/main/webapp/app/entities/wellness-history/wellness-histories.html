@@ -1,0 +1,70 @@
+<div>
+    <h2>Wellness Histories</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="wellness-history.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Wellness History
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="wellnessscore"><span>Wellnessscore</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userInfo.id"><span>User Info</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="wellnessItem.id"><span>Wellness Item</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="wellnessHistory in vm.wellnessHistories track by wellnessHistory.id">
+                    <td><a ui-sref="wellness-history-detail({id:wellnessHistory.id})">{{wellnessHistory.id}}</a></td>
+                        <td>{{wellnessHistory.date | date:'mediumDate'}}</td>
+                    <td>{{wellnessHistory.wellnessscore}}</td>
+                    <td>
+                        <a ui-sref="user-info-detail({id:wellnessHistory.userInfo.id})">{{wellnessHistory.userInfo.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="wellness-item-detail({id:wellnessHistory.wellnessItem.id})">{{wellnessHistory.wellnessItem.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="wellness-history-detail({id:wellnessHistory.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="wellness-history.edit({id:wellnessHistory.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="wellness-history.delete({id:wellnessHistory.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

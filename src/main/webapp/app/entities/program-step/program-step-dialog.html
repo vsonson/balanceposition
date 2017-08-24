@@ -1,0 +1,84 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myProgramStepLabel">Create or edit a Program Step</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.programStep.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.programStep.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.programStep.name"
+                    required/>
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_descriptionF">Description F</label>
+            <input type="text" class="form-control" name="descriptionF" id="field_descriptionF"
+                    ng-model="vm.programStep.descriptionF"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_mediaUrl">Media Url</label>
+            <input type="text" class="form-control" name="mediaUrl" id="field_mediaUrl"
+                    ng-model="vm.programStep.mediaUrl"
+                    required/>
+            <div ng-show="editForm.mediaUrl.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.mediaUrl.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_isLocked">Is Locked</label>
+                <input type="checkbox" name="isLocked" id="field_isLocked"
+                          ng-model="vm.programStep.isLocked"/>
+            <div ng-show="editForm.isLocked.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.isLocked.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_isPaid">Is Paid</label>
+                <input type="checkbox" name="isPaid" id="field_isPaid"
+                          ng-model="vm.programStep.isPaid"/>
+        </div>
+
+        <div class="form-group">
+            <label for="field_programLevel">Program Level</label>
+            <select class="form-control" id="field_programLevel" name="programLevel" ng-model="vm.programStep.programLevel" ng-options="programLevel as programLevel.id for programLevel in vm.programlevels track by programLevel.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_programHistory">Program History</label>
+            <select class="form-control" id="field_programHistory" name="programHistory" ng-model="vm.programStep.programHistory" ng-options="programHistory as programHistory.id for programHistory in vm.programhistories track by programHistory.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

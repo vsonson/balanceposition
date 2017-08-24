@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span>Path Action</span> {{vm.pathAction.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.pathAction.name}}</span>
+        </dd>
+        <dt><span>Action Url</span></dt>
+        <dd>
+            <span>{{vm.pathAction.actionUrl}}</span>
+        </dd>
+        <dt><span>Action Type</span></dt>
+        <dd>
+            <span>{{vm.pathAction.actionType}}</span>
+        </dd>
+        <dt><span>Path Step</span></dt>
+        <dd>
+            <a ui-sref="path-step-detail({id:vm.pathAction.pathStep.id})">{{vm.pathAction.pathStep.id}}</a>
+        </dd>
+        <dt><span>Track Metric</span></dt>
+        <dd>
+            <a ui-sref="track-metric-detail({id:vm.pathAction.trackMetric.id})">{{vm.pathAction.trackMetric.id}}</a>
+        </dd>
+        <dt><span>Program</span></dt>
+        <dd>
+            <a ui-sref="program-detail({id:vm.pathAction.program.id})">{{vm.pathAction.program.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="path-action-detail.edit({id:vm.pathAction.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

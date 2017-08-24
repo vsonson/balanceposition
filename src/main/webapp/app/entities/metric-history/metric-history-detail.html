@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span>Metric History</span> {{vm.metricHistory.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.metricHistory.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Metric Value</span></dt>
+        <dd>
+            <span>{{vm.metricHistory.metricValue}}</span>
+        </dd>
+        <dt><span>User Info</span></dt>
+        <dd>
+            <a ui-sref="user-info-detail({id:vm.metricHistory.userInfo.id})">{{vm.metricHistory.userInfo.id}}</a>
+        </dd>
+        <dt><span>Track Metric</span></dt>
+        <dd>
+            <a ui-sref="track-metric-detail({id:vm.metricHistory.trackMetric.id})">{{vm.metricHistory.trackMetric.id}}</a>
+        </dd>
+        <dt><span>Metric Question</span></dt>
+        <dd>
+            <a ui-sref="track-metric-question-detail({id:vm.metricHistory.metricQuestion.id})">{{vm.metricHistory.metricQuestion.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="metric-history-detail.edit({id:vm.metricHistory.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

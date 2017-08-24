@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Trigger.
+    -->
+    <changeSet id="20170824163007-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="notifcation_trigger_id"
+                                 baseTableName="jhi_trigger"
+                                 constraintName="fk_trigger_notifcation_trigger_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="notifcation_trigger"/>
+
+        <addForeignKeyConstraint baseColumnNames="wellness_item_id"
+                                 baseTableName="jhi_trigger"
+                                 constraintName="fk_trigger_wellness_item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wellness_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="incentive_action_id"
+                                 baseTableName="jhi_trigger"
+                                 constraintName="fk_trigger_incentive_action_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="incentive_action"/>
+
+    </changeSet>
+</databaseChangeLog>

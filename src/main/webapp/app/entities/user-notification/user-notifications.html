@@ -1,0 +1,72 @@
+<div>
+    <h2>User Notifications</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="user-notification.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new User Notification
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isVisable"><span>Is Visable</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isRead"><span>Is Read</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isCompleted"><span>Is Completed</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="notificationType"><span>Notification Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userInfo.id"><span>User Info</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="userNotification in vm.userNotifications track by userNotification.id">
+                    <td><a ui-sref="user-notification-detail({id:userNotification.id})">{{userNotification.id}}</a></td>
+                        <td>{{userNotification.date | date:'mediumDate'}}</td>
+                    <td>{{userNotification.isVisable}}</td>
+                    <td>{{userNotification.isRead}}</td>
+                    <td>{{userNotification.isCompleted}}</td>
+                    <td>{{userNotification.notificationType}}</td>
+                    <td>
+                        <a ui-sref="user-info-detail({id:userNotification.userInfo.id})">{{userNotification.userInfo.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="user-notification-detail({id:userNotification.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="user-notification.edit({id:userNotification.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="user-notification.delete({id:userNotification.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

@@ -1,0 +1,48 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myNetworkMemberLabel">Create or edit a Network Member</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.networkMember.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.networkMember.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_isDataShared">Is Data Shared</label>
+                <input type="checkbox" name="isDataShared" id="field_isDataShared"
+                          ng-model="vm.networkMember.isDataShared"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sendAlerts">Send Alerts</label>
+                <input type="checkbox" name="sendAlerts" id="field_sendAlerts"
+                          ng-model="vm.networkMember.sendAlerts"/>
+        </div>
+
+        <div class="form-group">
+            <label for="field_networkMemberUser">Network Member User</label>
+            <select class="form-control" id="field_networkMemberUser" name="networkMemberUser" ng-model="vm.networkMember.networkMemberUser" ng-options="userInfo as userInfo.email for userInfo in vm.userinfos track by userInfo.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_networkOwner">Network Owner</label>
+            <select class="form-control" id="field_networkOwner" name="networkOwner" ng-model="vm.networkMember.networkOwner" ng-options="userInfo as userInfo.email for userInfo in vm.userinfos track by userInfo.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

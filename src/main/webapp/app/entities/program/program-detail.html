@@ -1,0 +1,40 @@
+
+<div>
+    <h2><span>Program</span> {{vm.program.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.program.name}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.program.description}}</span>
+        </dd>
+        <dt><span>Icon</span></dt>
+        <dd>
+            <div ng-if="vm.program.icon">
+                <a ng-click="vm.openFile(vm.program.iconContentType, vm.program.icon)">
+                    <img data-ng-src="{{'data:' + vm.program.iconContentType + ';base64,' + vm.program.icon}}" style="max-width: 100%;" alt="program image"/>
+                </a>
+                {{vm.program.iconContentType}}, {{vm.byteSize(vm.program.icon)}}
+            </div>
+        </dd>
+        <dt><span>Is Paid</span></dt>
+        <dd>
+            <span>{{vm.program.isPaid}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="program-detail.edit({id:vm.program.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

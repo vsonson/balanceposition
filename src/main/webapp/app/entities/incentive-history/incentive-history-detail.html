@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span>Incentive History</span> {{vm.incentiveHistory.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.incentiveHistory.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Points</span></dt>
+        <dd>
+            <span>{{vm.incentiveHistory.points}}</span>
+        </dd>
+        <dt><span>User Info</span></dt>
+        <dd>
+            <a ui-sref="user-info-detail({id:vm.incentiveHistory.userInfo.id})">{{vm.incentiveHistory.userInfo.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="incentive-history-detail.edit({id:vm.incentiveHistory.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

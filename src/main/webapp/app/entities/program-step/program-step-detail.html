@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span>Program Step</span> {{vm.programStep.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.programStep.name}}</span>
+        </dd>
+        <dt><span>Description F</span></dt>
+        <dd>
+            <span>{{vm.programStep.descriptionF}}</span>
+        </dd>
+        <dt><span>Media Url</span></dt>
+        <dd>
+            <span>{{vm.programStep.mediaUrl}}</span>
+        </dd>
+        <dt><span>Is Locked</span></dt>
+        <dd>
+            <span>{{vm.programStep.isLocked}}</span>
+        </dd>
+        <dt><span>Is Paid</span></dt>
+        <dd>
+            <span>{{vm.programStep.isPaid}}</span>
+        </dd>
+        <dt><span>Program Level</span></dt>
+        <dd>
+            <a ui-sref="program-level-detail({id:vm.programStep.programLevel.id})">{{vm.programStep.programLevel.id}}</a>
+        </dd>
+        <dt><span>Program History</span></dt>
+        <dd>
+            <a ui-sref="program-history-detail({id:vm.programStep.programHistory.id})">{{vm.programStep.programHistory.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="program-step-detail.edit({id:vm.programStep.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

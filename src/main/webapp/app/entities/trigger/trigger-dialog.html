@@ -1,0 +1,68 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTriggerLabel">Create or edit a Trigger</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.trigger.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.trigger.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.trigger.name"
+                    required/>
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_desc">Desc</label>
+            <input type="text" class="form-control" name="desc" id="field_desc"
+                    ng-model="vm.trigger.desc"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_triggerMetric">Trigger Metric</label>
+            <input type="text" class="form-control" name="triggerMetric" id="field_triggerMetric"
+                    ng-model="vm.trigger.triggerMetric"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label for="field_notifcationTrigger">Notifcation Trigger</label>
+            <select class="form-control" id="field_notifcationTrigger" name="notifcationTrigger" ng-model="vm.trigger.notifcationTrigger" ng-options="notifcationTrigger as notifcationTrigger.id for notifcationTrigger in vm.notifcationtriggers track by notifcationTrigger.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_wellnessItem">Wellness Item</label>
+            <select class="form-control" id="field_wellnessItem" name="wellnessItem" ng-model="vm.trigger.wellnessItem" ng-options="wellnessItem as wellnessItem.id for wellnessItem in vm.wellnessitems track by wellnessItem.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_incentiveAction">Incentive Action</label>
+            <select class="form-control" id="field_incentiveAction" name="incentiveAction" ng-model="vm.trigger.incentiveAction" ng-options="incentiveAction as incentiveAction.id for incentiveAction in vm.incentiveactions track by incentiveAction.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

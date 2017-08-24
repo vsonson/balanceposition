@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span>Program Level</span> {{vm.programLevel.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.programLevel.name}}</span>
+        </dd>
+        <dt><span>Is Locked</span></dt>
+        <dd>
+            <span>{{vm.programLevel.isLocked}}</span>
+        </dd>
+        <dt><span>Is Paid</span></dt>
+        <dd>
+            <span>{{vm.programLevel.isPaid}}</span>
+        </dd>
+        <dt><span>Program</span></dt>
+        <dd>
+            <a ui-sref="program-detail({id:vm.programLevel.program.id})">{{vm.programLevel.program.id}}</a>
+        </dd>
+        <dt><span>Program History</span></dt>
+        <dd>
+            <a ui-sref="program-history-detail({id:vm.programLevel.programHistory.id})">{{vm.programLevel.programHistory.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="program-level-detail.edit({id:vm.programLevel.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

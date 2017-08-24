@@ -1,0 +1,72 @@
+<div>
+    <h2>Program Levels</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="program-level.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Program Level
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isLocked"><span>Is Locked</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isPaid"><span>Is Paid</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="program.id"><span>Program</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="programHistory.id"><span>Program History</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="programLevel in vm.programLevels track by programLevel.id">
+                    <td><a ui-sref="program-level-detail({id:programLevel.id})">{{programLevel.id}}</a></td>
+                    <td>{{programLevel.name}}</td>
+                    <td>{{programLevel.isLocked}}</td>
+                    <td>{{programLevel.isPaid}}</td>
+                    <td>
+                        <a ui-sref="program-detail({id:programLevel.program.id})">{{programLevel.program.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="program-history-detail({id:programLevel.programHistory.id})">{{programLevel.programHistory.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="program-level-detail({id:programLevel.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="program-level.edit({id:programLevel.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="program-level.delete({id:programLevel.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

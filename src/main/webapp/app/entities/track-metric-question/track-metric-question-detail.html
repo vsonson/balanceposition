@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span>Track Metric Question</span> {{vm.trackMetricQuestion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Question</span></dt>
+        <dd>
+            <span>{{vm.trackMetricQuestion.question}}</span>
+        </dd>
+        <dt><span>Is Mandatory</span></dt>
+        <dd>
+            <span>{{vm.trackMetricQuestion.isMandatory}}</span>
+        </dd>
+        <dt><span>Track Metric</span></dt>
+        <dd>
+            <a ui-sref="track-metric-detail({id:vm.trackMetricQuestion.trackMetric.id})">{{vm.trackMetricQuestion.trackMetric.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="track-metric-question-detail.edit({id:vm.trackMetricQuestion.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

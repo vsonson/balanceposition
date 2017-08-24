@@ -1,0 +1,68 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myKeyPairLabel">Create or edit a Key Pair</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.keyPair.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.keyPair.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_pairType">Pair Type</label>
+            <input type="text" class="form-control" name="pairType" id="field_pairType"
+                    ng-model="vm.keyPair.pairType"
+                    required/>
+            <div ng-show="editForm.pairType.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.pairType.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_keyName">Key Name</label>
+            <input type="text" class="form-control" name="keyName" id="field_keyName"
+                    ng-model="vm.keyPair.keyName"
+                    required/>
+            <div ng-show="editForm.keyName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.keyName.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_keyValue">Key Value</label>
+            <input type="text" class="form-control" name="keyValue" id="field_keyValue"
+                    ng-model="vm.keyPair.keyValue"
+                    required/>
+            <div ng-show="editForm.keyValue.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.keyValue.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_trackMetricQuestion">Track Metric Question</label>
+            <select class="form-control" id="field_trackMetricQuestion" name="trackMetricQuestion" ng-model="vm.keyPair.trackMetricQuestion" ng-options="trackMetricQuestion as trackMetricQuestion.id for trackMetricQuestion in vm.trackmetricquestions track by trackMetricQuestion.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

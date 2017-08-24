@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Alert</span> {{vm.alert.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.alert.name}}</span>
+        </dd>
+        <dt><span>Desc</span></dt>
+        <dd>
+            <span>{{vm.alert.desc}}</span>
+        </dd>
+        <dt><span>Alert Type</span></dt>
+        <dd>
+            <span>{{vm.alert.alertType}}</span>
+        </dd>
+        <dt><span>User Notification</span></dt>
+        <dd>
+            <a ui-sref="user-notification-detail({id:vm.alert.userNotification.id})">{{vm.alert.userNotification.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="alert-detail.edit({id:vm.alert.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

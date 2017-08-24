@@ -1,0 +1,155 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUserInfoLabel">Create or edit a User Info</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.userInfo.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.userInfo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_userstatus">Userstatus</label>
+            <select class="form-control" name="userstatus" ng-model="vm.userInfo.userstatus" id="field_userstatus">
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INVITED">INVITED</option>
+                <option value="DISABLED">DISABLED</option>
+                <option value="ACTIVEPAID">ACTIVEPAID</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_userType">User Type</label>
+            <select class="form-control" name="userType" ng-model="vm.userInfo.userType" id="field_userType">
+                <option value="STUDENTATHLETE">STUDENTATHLETE</option>
+                <option value="ADMIN">ADMIN</option>
+                <option value="SUPPORTER">SUPPORTER</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_userName">User Name</label>
+            <input type="text" class="form-control" name="userName" id="field_userName"
+                    ng-model="vm.userInfo.userName"
+                    required/>
+            <div ng-show="editForm.userName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.userName.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_password">Password</label>
+            <input type="text" class="form-control" name="password" id="field_password"
+                    ng-model="vm.userInfo.password"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                    ng-model="vm.userInfo.email"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="field_phone"
+                    ng-model="vm.userInfo.phone"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_fname">Fname</label>
+            <input type="text" class="form-control" name="fname" id="field_fname"
+                    ng-model="vm.userInfo.fname"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_mname">Mname</label>
+            <input type="text" class="form-control" name="mname" id="field_mname"
+                    ng-model="vm.userInfo.mname"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lname">Lname</label>
+            <input type="text" class="form-control" name="lname" id="field_lname"
+                    ng-model="vm.userInfo.lname"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_address">Address</label>
+            <input type="text" class="form-control" name="address" id="field_address"
+                    ng-model="vm.userInfo.address"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_address2">Address 2</label>
+            <input type="text" class="form-control" name="address2" id="field_address2"
+                    ng-model="vm.userInfo.address2"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                    ng-model="vm.userInfo.city"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_state">State</label>
+            <input type="text" class="form-control" name="state" id="field_state"
+                    ng-model="vm.userInfo.state"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_zip">Zip</label>
+            <input type="number" class="form-control" name="zip" id="field_zip"
+                    ng-model="vm.userInfo.zip"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_country">Country</label>
+            <input type="text" class="form-control" name="country" id="field_country"
+                    ng-model="vm.userInfo.country"
+                    />
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setProfilePic($file, vm.userInfo)" ngf-pattern="'image/*'">
+            <label class="control-label" for="field_profilePic">Profile Pic</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.userInfo.profilePicContentType + ';base64,' + vm.userInfo.profilePic}}" style="max-height: 100px;" ng-if="vm.userInfo.profilePic" alt="userInfo image"/>
+                <div ng-if="vm.userInfo.profilePic" class="help-block clearfix">
+                    <span class="pull-left">{{vm.userInfo.profilePicContentType}}, {{vm.byteSize(vm.userInfo.profilePic)}}</span>
+                    <button type="button" ng-click="vm.userInfo.profilePic=null;vm.userInfo.profilePicContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setProfilePic($file, vm.userInfo)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="profilePic" id="field_profilePic"
+                    ng-model="vm.userInfo.profilePic"
+                    />
+            <input type="hidden" class="form-control" name="profilePicContentType" id="field_profilePicContentType"
+                    ng-model="vm.userInfo.profilePicContentType" />
+        </div>
+
+        <div class="form-group">
+            <label for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.userInfo.user" ng-options="user as user.email for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Key Pair</span> {{vm.keyPair.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Pair Type</span></dt>
+        <dd>
+            <span>{{vm.keyPair.pairType}}</span>
+        </dd>
+        <dt><span>Key Name</span></dt>
+        <dd>
+            <span>{{vm.keyPair.keyName}}</span>
+        </dd>
+        <dt><span>Key Value</span></dt>
+        <dd>
+            <span>{{vm.keyPair.keyValue}}</span>
+        </dd>
+        <dt><span>Track Metric Question</span></dt>
+        <dd>
+            <a ui-sref="track-metric-question-detail({id:vm.keyPair.trackMetricQuestion.id})">{{vm.keyPair.trackMetricQuestion.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="key-pair-detail.edit({id:vm.keyPair.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>
