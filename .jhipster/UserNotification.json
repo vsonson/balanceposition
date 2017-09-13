@@ -1,0 +1,51 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "alerts",
+            "otherEntityName": "alert",
+            "otherEntityRelationshipName": "userNotification"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "pathways",
+            "otherEntityName": "pathWay",
+            "otherEntityRelationshipName": "userNotification"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "isVisable",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isRead",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isCompleted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "notificationType",
+            "fieldType": "NotificationType",
+            "fieldValues": "SMS,EMAIL,PATHWAY,ALERT"
+        }
+    ],
+    "changelogDate": "20170824163006",
+    "entityTableName": "user_notification",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

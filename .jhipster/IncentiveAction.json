@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "incentive",
+            "otherEntityName": "incentive",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "triggers",
+            "otherEntityName": "trigger",
+            "otherEntityRelationshipName": "incentiveAction"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170824163019",
+    "entityTableName": "incentive_action",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

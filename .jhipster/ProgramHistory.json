@@ -1,0 +1,42 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "programSteps",
+            "otherEntityName": "programStep",
+            "otherEntityRelationshipName": "programHistory"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "programLevel",
+            "otherEntityName": "programLevel",
+            "otherEntityRelationshipName": "programHistory"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "rating",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "feeling",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170824163004",
+    "entityTableName": "program_history",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

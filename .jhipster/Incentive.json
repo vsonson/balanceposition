@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "incentiveActions",
+            "otherEntityName": "incentiveAction",
+            "otherEntityRelationshipName": "incentive"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pointvalue",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20170824163015",
+    "entityTableName": "incentive",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

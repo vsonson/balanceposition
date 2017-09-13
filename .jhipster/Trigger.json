@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "notifcationTrigger",
+            "otherEntityName": "notifcationTrigger",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "wellnessItem",
+            "otherEntityName": "wellnessItem",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "incentiveAction",
+            "otherEntityName": "incentiveAction",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "triggerMetric",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170824163007",
+    "entityTableName": "trigger",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

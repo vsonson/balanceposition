@@ -1,0 +1,133 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "email",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "userDetail(userName)"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "networkMembers",
+            "otherEntityName": "networkMember",
+            "otherEntityRelationshipName": "networkOwner"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "metricHistory",
+            "otherEntityName": "metricHistory",
+            "otherEntityRelationshipName": "userInfo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "notes",
+            "otherEntityName": "note",
+            "otherEntityRelationshipName": "userInfo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "programHistory",
+            "otherEntityName": "programHistory",
+            "otherEntityRelationshipName": "userInfo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "userNotifications",
+            "otherEntityName": "userNotification",
+            "otherEntityRelationshipName": "userInfo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "wellnessHistory",
+            "otherEntityName": "wellnessHistory",
+            "otherEntityRelationshipName": "userInfo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "incentiveHistory",
+            "otherEntityName": "incentiveHistory",
+            "otherEntityRelationshipName": "userInfo"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "userstatus",
+            "fieldType": "UserStatus",
+            "fieldValues": "ACTIVE,INVITED,DISABLED,ACTIVEPAID"
+        },
+        {
+            "fieldName": "userType",
+            "fieldType": "UserType",
+            "fieldValues": "STUDENTATHLETE,ADMIN,SUPPORTER"
+        },
+        {
+            "fieldName": "userName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "password",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "zip",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "profilePic",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "changelogDate": "20170824162954",
+    "javadoc": "User is a default entity in a JHipster monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity",
+    "entityTableName": "user_info",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "wellnessTriggers",
+            "otherEntityName": "trigger",
+            "otherEntityRelationshipName": "wellnessItem"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "wellnessvalue",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20170824163017",
+    "entityTableName": "wellness_item",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

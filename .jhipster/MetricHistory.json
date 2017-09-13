@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "trackMetric",
+            "otherEntityName": "trackMetric",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "metricHistory"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "metricQuestion",
+            "otherEntityName": "trackMetricQuestion",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "metricHistory"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "metricValue",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170824163000",
+    "entityTableName": "metric_history",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

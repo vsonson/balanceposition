@@ -1,0 +1,22 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "trigger",
+            "otherEntityName": "trigger",
+            "otherEntityRelationshipName": "notifcationTrigger"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "desc",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170824163008",
+    "entityTableName": "notifcation_trigger",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

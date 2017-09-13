@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "trackMetric",
+            "otherEntityName": "trackMetric",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "answerOptions",
+            "otherEntityName": "keyPair",
+            "otherEntityRelationshipName": "trackMetricQuestion"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "question",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "isMandatory",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170824162959",
+    "entityTableName": "track_metric_question",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

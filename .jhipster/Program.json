@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "programLevels",
+            "otherEntityName": "programLevel",
+            "otherEntityRelationshipName": "program"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "icon",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "isPaid",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170824163001",
+    "entityTableName": "program",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

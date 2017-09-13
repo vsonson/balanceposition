@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "userNotification",
+            "otherEntityName": "userNotification",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "alertType",
+            "fieldType": "AlertType",
+            "fieldValues": "SMS,EMAIL,CALL"
+        }
+    ],
+    "changelogDate": "20170824163013",
+    "entityTableName": "alert",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

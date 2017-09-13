@@ -1,0 +1,50 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "pathStep",
+            "otherEntityName": "pathStep",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "trackMetric",
+            "otherEntityName": "trackMetric",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "pathAction"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "program",
+            "otherEntityName": "program",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "pathAction"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "actionUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "actionType",
+            "fieldType": "ActionType",
+            "fieldValues": "TRACKMETRIC,NOTE,CONTACT,PROGRAM"
+        }
+    ],
+    "changelogDate": "20170824163011",
+    "entityTableName": "path_action",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

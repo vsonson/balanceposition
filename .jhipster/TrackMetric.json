@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "questions",
+            "otherEntityName": "trackMetricQuestion",
+            "otherEntityRelationshipName": "trackMetric"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "trackIcon",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "infoBubble",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "changelogDate": "20170824162958",
+    "entityTableName": "track_metric",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

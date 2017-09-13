@@ -1,0 +1,53 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "programLevel",
+            "otherEntityName": "programLevel",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "programHistory",
+            "otherEntityName": "programHistory",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descriptionF",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mediaUrl",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "isLocked",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "isPaid",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170824163003",
+    "entityTableName": "program_step",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

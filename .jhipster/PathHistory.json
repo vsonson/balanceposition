@@ -1,0 +1,44 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "pathway",
+            "otherEntityName": "pathWay",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "pathHistory"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "pathStep",
+            "otherEntityName": "pathStep",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "pathHistory"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "pathAction",
+            "otherEntityName": "pathAction",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "pathHistory"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "isCompleted",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170824163012",
+    "entityTableName": "path_history",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

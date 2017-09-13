@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "program",
+            "otherEntityName": "program",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "programSteps",
+            "otherEntityName": "programStep",
+            "otherEntityRelationshipName": "programLevel"
+        },
+        {
+            "relationshipName": "programHistory",
+            "otherEntityName": "programHistory",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "isLocked",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "isPaid",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170824163002",
+    "entityTableName": "program_level",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

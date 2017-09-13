@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "networkMemberUser",
+            "otherEntityName": "userInfo",
+            "otherEntityField": "email"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "networkOwner",
+            "otherEntityName": "userInfo",
+            "otherEntityField": "email"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "isDataShared",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "sendAlerts",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170824162956",
+    "entityTableName": "network_member",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

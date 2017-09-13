@@ -142,5 +142,5 @@ Desktop.ini
 .eslintcache
 gulp/
 gradle/
-.jhipster/
 *.lock
+package-lock.json
