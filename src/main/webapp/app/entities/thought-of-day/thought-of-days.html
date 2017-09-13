@@ -22,6 +22,7 @@
                     <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="url"><span>Url</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="image"><span>Image</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="shortText"><span>Short Text</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="longText"><span>Long Text</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -33,6 +34,12 @@
                         <td>{{thoughtOfDay.date | date:'mediumDate'}}</td>
                     <td>{{thoughtOfDay.title}}</td>
                     <td>{{thoughtOfDay.url}}</td>
+                    <td>
+                        <a ng-if="thoughtOfDay.image" ng-click="vm.openFile(thoughtOfDay.imageContentType, thoughtOfDay.image)">
+                            <img data-ng-src="{{'data:' + thoughtOfDay.imageContentType + ';base64,' + thoughtOfDay.image}}" style="max-height: 30px;" alt="thoughtOfDay image"/>
+                        </a>
+                        <span ng-if="thoughtOfDay.image">{{thoughtOfDay.imageContentType}}, {{vm.byteSize(thoughtOfDay.image)}}</span>
+                    </td>
                     <td>{{thoughtOfDay.shortText}}</td>
                     <td>{{thoughtOfDay.longText}}</td>
                     <td class="text-right">

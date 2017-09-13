@@ -28,6 +28,13 @@ public class ThoughtOfDay implements Serializable {
     @Column(name = "url")
     private String url;
 
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
+
+    @Column(name = "image_content_type")
+    private String imageContentType;
+
     @Column(name = "short_text")
     private String shortText;
 
@@ -81,6 +88,32 @@ public class ThoughtOfDay implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public ThoughtOfDay image(byte[] image) {
+        this.image = image;
+        return this;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageContentType() {
+        return imageContentType;
+    }
+
+    public ThoughtOfDay imageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
+        return this;
+    }
+
+    public void setImageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
     }
 
     public String getShortText() {
@@ -137,6 +170,8 @@ public class ThoughtOfDay implements Serializable {
             ", date='" + getDate() + "'" +
             ", title='" + getTitle() + "'" +
             ", url='" + getUrl() + "'" +
+            ", image='" + getImage() + "'" +
+            ", imageContentType='" + imageContentType + "'" +
             ", shortText='" + getShortText() + "'" +
             ", longText='" + getLongText() + "'" +
             "}";

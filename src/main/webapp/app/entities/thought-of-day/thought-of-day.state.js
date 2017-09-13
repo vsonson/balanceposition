@@ -118,6 +118,8 @@
                                 date: null,
                                 title: null,
                                 url: null,
+                                image: null,
+                                imageContentType: null,
                                 shortText: null,
                                 longText: null,
                                 id: null

@@ -35,6 +35,28 @@
                     ng-model="vm.thoughtOfDay.url"
                     />
         </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setImage($file, vm.thoughtOfDay)" ngf-pattern="'image/*'">
+            <label class="control-label" for="field_image">Image</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.thoughtOfDay.imageContentType + ';base64,' + vm.thoughtOfDay.image}}" style="max-height: 100px;" ng-if="vm.thoughtOfDay.image" alt="thoughtOfDay image"/>
+                <div ng-if="vm.thoughtOfDay.image" class="help-block clearfix">
+                    <span class="pull-left">{{vm.thoughtOfDay.imageContentType}}, {{vm.byteSize(vm.thoughtOfDay.image)}}</span>
+                    <button type="button" ng-click="vm.thoughtOfDay.image=null;vm.thoughtOfDay.imageContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setImage($file, vm.thoughtOfDay)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                    ng-model="vm.thoughtOfDay.image"
+                    />
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                    ng-model="vm.thoughtOfDay.imageContentType" />
+        </div>
         <div class="form-group">
             <label class="control-label" for="field_shortText">Short Text</label>
             <input type="text" class="form-control" name="shortText" id="field_shortText"

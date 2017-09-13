@@ -50,6 +50,11 @@ public class ThoughtOfDayResourceIntTest {
     private static final String DEFAULT_URL = "AAAAAAAAAA";
     private static final String UPDATED_URL = "BBBBBBBBBB";
 
+    private static final byte[] DEFAULT_IMAGE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGE = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
+
     private static final String DEFAULT_SHORT_TEXT = "AAAAAAAAAA";
     private static final String UPDATED_SHORT_TEXT = "BBBBBBBBBB";
 
@@ -99,6 +104,8 @@ public class ThoughtOfDayResourceIntTest {
             .date(DEFAULT_DATE)
             .title(DEFAULT_TITLE)
             .url(DEFAULT_URL)
+            .image(DEFAULT_IMAGE)
+            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
             .shortText(DEFAULT_SHORT_TEXT)
             .longText(DEFAULT_LONG_TEXT);
         return thoughtOfDay;
@@ -127,6 +134,8 @@ public class ThoughtOfDayResourceIntTest {
         assertThat(testThoughtOfDay.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testThoughtOfDay.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testThoughtOfDay.getUrl()).isEqualTo(DEFAULT_URL);
+        assertThat(testThoughtOfDay.getImage()).isEqualTo(DEFAULT_IMAGE);
+        assertThat(testThoughtOfDay.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
         assertThat(testThoughtOfDay.getShortText()).isEqualTo(DEFAULT_SHORT_TEXT);
         assertThat(testThoughtOfDay.getLongText()).isEqualTo(DEFAULT_LONG_TEXT);
     }
@@ -164,6 +173,8 @@ public class ThoughtOfDayResourceIntTest {
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
             .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())))
+            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
             .andExpect(jsonPath("$.[*].shortText").value(hasItem(DEFAULT_SHORT_TEXT.toString())))
             .andExpect(jsonPath("$.[*].longText").value(hasItem(DEFAULT_LONG_TEXT.toString())));
     }
@@ -182,6 +193,8 @@ public class ThoughtOfDayResourceIntTest {
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
             .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()))
+            .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.shortText").value(DEFAULT_SHORT_TEXT.toString()))
             .andExpect(jsonPath("$.longText").value(DEFAULT_LONG_TEXT.toString()));
     }
@@ -208,6 +221,8 @@ public class ThoughtOfDayResourceIntTest {
             .date(UPDATED_DATE)
             .title(UPDATED_TITLE)
             .url(UPDATED_URL)
+            .image(UPDATED_IMAGE)
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
             .shortText(UPDATED_SHORT_TEXT)
             .longText(UPDATED_LONG_TEXT);
 
@@ -223,6 +238,8 @@ public class ThoughtOfDayResourceIntTest {
         assertThat(testThoughtOfDay.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testThoughtOfDay.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testThoughtOfDay.getUrl()).isEqualTo(UPDATED_URL);
+        assertThat(testThoughtOfDay.getImage()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testThoughtOfDay.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
         assertThat(testThoughtOfDay.getShortText()).isEqualTo(UPDATED_SHORT_TEXT);
         assertThat(testThoughtOfDay.getLongText()).isEqualTo(UPDATED_LONG_TEXT);
     }
