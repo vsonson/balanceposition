@@ -8,12 +8,6 @@
     -->
     <changeSet id="20170824163011-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="path_step_id"
-                                 baseTableName="path_action"
-                                 constraintName="fk_path_action_path_step_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="path_step"/>
-
         <addForeignKeyConstraint baseColumnNames="track_metric_id"
                                  baseTableName="path_action"
                                  constraintName="fk_path_action_track_metric_id"
@@ -25,6 +19,12 @@
                                  constraintName="fk_path_action_program_id"
                                  referencedColumnNames="id"
                                  referencedTableName="program"/>
+
+        <addForeignKeyConstraint baseColumnNames="path_step_id"
+                                 baseTableName="path_action"
+                                 constraintName="fk_path_action_path_step_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="path_step"/>
 
     </changeSet>
 </databaseChangeLog>

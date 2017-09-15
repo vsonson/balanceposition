@@ -5,16 +5,16 @@
         .module('balancepositionApp')
         .controller('IncentiveActionDialogController', IncentiveActionDialogController);
 
-    IncentiveActionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'IncentiveAction', 'Incentive', 'Trigger'];
+    IncentiveActionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'IncentiveAction', 'Trigger', 'Incentive'];
 
-    function IncentiveActionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, IncentiveAction, Incentive, Trigger) {
+    function IncentiveActionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, IncentiveAction, Trigger, Incentive) {
         var vm = this;
 
         vm.incentiveAction = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.incentives = Incentive.query();
         vm.triggers = Trigger.query();
+        vm.incentives = Incentive.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

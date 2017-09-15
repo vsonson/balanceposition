@@ -8,12 +8,6 @@
     -->
     <changeSet id="20170824163000-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="user_info_id"
-                                 baseTableName="metric_history"
-                                 constraintName="fk_metric_history_user_info_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="user_info"/>
-
         <addForeignKeyConstraint baseColumnNames="track_metric_id"
                                  baseTableName="metric_history"
                                  constraintName="fk_metric_history_track_metric_id"
@@ -25,6 +19,12 @@
                                  constraintName="fk_metric_history_metric_question_id"
                                  referencedColumnNames="id"
                                  referencedTableName="track_metric_question"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_info_id"
+                                 baseTableName="metric_history"
+                                 constraintName="fk_metric_history_user_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_info"/>
 
     </changeSet>
 </databaseChangeLog>

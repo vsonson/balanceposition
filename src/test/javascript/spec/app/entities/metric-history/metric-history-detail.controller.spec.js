@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('MetricHistory Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockMetricHistory, MockUserInfo, MockTrackMetric, MockTrackMetricQuestion;
+        var MockEntity, MockPreviousState, MockMetricHistory, MockTrackMetric, MockTrackMetricQuestion, MockUserInfo;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,9 +13,9 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockMetricHistory = jasmine.createSpy('MockMetricHistory');
-            MockUserInfo = jasmine.createSpy('MockUserInfo');
             MockTrackMetric = jasmine.createSpy('MockTrackMetric');
             MockTrackMetricQuestion = jasmine.createSpy('MockTrackMetricQuestion');
+            MockUserInfo = jasmine.createSpy('MockUserInfo');
             
 
             var locals = {
@@ -24,9 +24,9 @@ describe('Controller Tests', function() {
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
                 'MetricHistory': MockMetricHistory,
-                'UserInfo': MockUserInfo,
                 'TrackMetric': MockTrackMetric,
-                'TrackMetricQuestion': MockTrackMetricQuestion
+                'TrackMetricQuestion': MockTrackMetricQuestion,
+                'UserInfo': MockUserInfo
             };
             createController = function() {
                 $injector.get('$controller')("MetricHistoryDetailController", locals);

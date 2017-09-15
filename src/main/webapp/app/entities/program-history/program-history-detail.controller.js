@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('ProgramHistoryDetailController', ProgramHistoryDetailController);
 
-    ProgramHistoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'ProgramHistory', 'UserInfo', 'ProgramStep', 'ProgramLevel'];
+    ProgramHistoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'ProgramHistory', 'ProgramLevel', 'ProgramStep', 'UserInfo'];
 
-    function ProgramHistoryDetailController($scope, $rootScope, $stateParams, previousState, entity, ProgramHistory, UserInfo, ProgramStep, ProgramLevel) {
+    function ProgramHistoryDetailController($scope, $rootScope, $stateParams, previousState, entity, ProgramHistory, ProgramLevel, ProgramStep, UserInfo) {
         var vm = this;
 
         vm.programHistory = entity;

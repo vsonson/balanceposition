@@ -45,5 +45,16 @@
         }
 
 
+        vm.setInfoBubble = function ($file, trackMetric) {
+            if ($file) {
+                DataUtils.toBase64($file, function(base64Data) {
+                    $scope.$apply(function() {
+                        trackMetric.infoBubble = base64Data;
+                        trackMetric.infoBubbleContentType = $file.type;
+                    });
+                });
+            }
+        };
+
     }
 })();

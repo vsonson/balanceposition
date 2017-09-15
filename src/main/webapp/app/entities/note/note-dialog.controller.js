@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('NoteDialogController', NoteDialogController);
 
-    NoteDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'DataUtils', 'entity', 'Note', 'UserInfo', 'TrackMetric', 'ProgramStep'];
+    NoteDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'DataUtils', 'entity', 'Note', 'TrackMetric', 'ProgramStep', 'UserInfo'];
 
-    function NoteDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, DataUtils, entity, Note, UserInfo, TrackMetric, ProgramStep) {
+    function NoteDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, DataUtils, entity, Note, TrackMetric, ProgramStep, UserInfo) {
         var vm = this;
 
         vm.note = entity;
@@ -17,7 +17,6 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-        vm.userinfos = UserInfo.query();
         vm.trackmetrics = TrackMetric.query({filter: 'note-is-null'});
         $q.all([vm.note.$promise, vm.trackmetrics.$promise]).then(function() {
             if (!vm.note.trackMetric || !vm.note.trackMetric.id) {
@@ -36,6 +35,7 @@
         }).then(function(programStep) {
             vm.programsteps.push(programStep);
         });
+        vm.userinfos = UserInfo.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -65,6 +65,17 @@
         }
 
         vm.datePickerOpenStatus.date = false;
+
+        vm.setText = function ($file, note) {
+            if ($file) {
+                DataUtils.toBase64($file, function(base64Data) {
+                    $scope.$apply(function() {
+                        note.text = base64Data;
+                        note.textContentType = $file.type;
+                    });
+                });
+            }
+        };
 
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;

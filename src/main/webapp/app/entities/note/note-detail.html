@@ -10,11 +10,10 @@
         </dd>
         <dt><span>Text</span></dt>
         <dd>
-            <span>{{vm.note.text}}</span>
-        </dd>
-        <dt><span>User Info</span></dt>
-        <dd>
-            <a ui-sref="user-info-detail({id:vm.note.userInfo.id})">{{vm.note.userInfo.id}}</a>
+            <div ng-if="vm.note.text">
+                <a ng-click="vm.openFile(vm.note.textContentType, vm.note.text)">open</a>
+                {{vm.note.textContentType}}, {{vm.byteSize(vm.note.text)}}
+            </div>
         </dd>
         <dt><span>Track Metric</span></dt>
         <dd>
@@ -23,6 +22,10 @@
         <dt><span>Program Step</span></dt>
         <dd>
             <a ui-sref="program-step-detail({id:vm.note.programStep.id})">{{vm.note.programStep.id}}</a>
+        </dd>
+        <dt><span>User Info</span></dt>
+        <dd>
+            <a ui-sref="user-info-detail({id:vm.note.userInfo.id})">{{vm.note.userInfo.id}}</a>
         </dd>
     </dl>
 

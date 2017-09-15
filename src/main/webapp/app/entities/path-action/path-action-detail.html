@@ -16,10 +16,6 @@
         <dd>
             <span>{{vm.pathAction.actionType}}</span>
         </dd>
-        <dt><span>Path Step</span></dt>
-        <dd>
-            <a ui-sref="path-step-detail({id:vm.pathAction.pathStep.id})">{{vm.pathAction.pathStep.id}}</a>
-        </dd>
         <dt><span>Track Metric</span></dt>
         <dd>
             <a ui-sref="track-metric-detail({id:vm.pathAction.trackMetric.id})">{{vm.pathAction.trackMetric.id}}</a>
@@ -27,6 +23,10 @@
         <dt><span>Program</span></dt>
         <dd>
             <a ui-sref="program-detail({id:vm.pathAction.program.id})">{{vm.pathAction.program.id}}</a>
+        </dd>
+        <dt><span>Path Step</span></dt>
+        <dd>
+            <a ui-sref="path-step-detail({id:vm.pathAction.pathStep.id})">{{vm.pathAction.pathStep.id}}</a>
         </dd>
     </dl>
 

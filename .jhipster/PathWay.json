@@ -2,16 +2,16 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "userNotification",
-            "otherEntityName": "userNotification",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "pathSteps",
             "otherEntityName": "pathStep",
             "otherEntityRelationshipName": "pathWay"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "userNotification",
+            "otherEntityName": "userNotification",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

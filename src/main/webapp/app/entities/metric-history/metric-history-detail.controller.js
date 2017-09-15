@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('MetricHistoryDetailController', MetricHistoryDetailController);
 
-    MetricHistoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'MetricHistory', 'UserInfo', 'TrackMetric', 'TrackMetricQuestion'];
+    MetricHistoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'MetricHistory', 'TrackMetric', 'TrackMetricQuestion', 'UserInfo'];
 
-    function MetricHistoryDetailController($scope, $rootScope, $stateParams, previousState, entity, MetricHistory, UserInfo, TrackMetric, TrackMetricQuestion) {
+    function MetricHistoryDetailController($scope, $rootScope, $stateParams, previousState, entity, MetricHistory, TrackMetric, TrackMetricQuestion, UserInfo) {
         var vm = this;
 
         vm.metricHistory = entity;

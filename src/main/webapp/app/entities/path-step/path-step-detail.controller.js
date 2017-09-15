@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('PathStepDetailController', PathStepDetailController);
 
-    PathStepDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'PathStep', 'PathWay', 'PathAction'];
+    PathStepDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'PathStep', 'PathAction', 'PathWay'];
 
-    function PathStepDetailController($scope, $rootScope, $stateParams, previousState, entity, PathStep, PathWay, PathAction) {
+    function PathStepDetailController($scope, $rootScope, $stateParams, previousState, entity, PathStep, PathAction, PathWay) {
         var vm = this;
 
         vm.pathStep = entity;

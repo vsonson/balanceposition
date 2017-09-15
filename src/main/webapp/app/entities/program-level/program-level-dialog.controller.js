@@ -5,16 +5,16 @@
         .module('balancepositionApp')
         .controller('ProgramLevelDialogController', ProgramLevelDialogController);
 
-    ProgramLevelDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ProgramLevel', 'Program', 'ProgramStep', 'ProgramHistory'];
+    ProgramLevelDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ProgramLevel', 'ProgramStep', 'Program', 'ProgramHistory'];
 
-    function ProgramLevelDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ProgramLevel, Program, ProgramStep, ProgramHistory) {
+    function ProgramLevelDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ProgramLevel, ProgramStep, Program, ProgramHistory) {
         var vm = this;
 
         vm.programLevel = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.programs = Program.query();
         vm.programsteps = ProgramStep.query();
+        vm.programs = Program.query();
         vm.programhistories = ProgramHistory.query();
 
         $timeout(function (){

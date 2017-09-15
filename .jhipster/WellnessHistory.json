@@ -2,18 +2,18 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "userInfo",
-            "otherEntityName": "userInfo",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-one",
             "relationshipName": "wellnessItem",
             "otherEntityName": "wellnessItem",
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "wellnessHistory"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

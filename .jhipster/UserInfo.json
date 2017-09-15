@@ -7,7 +7,7 @@
             "otherEntityName": "user",
             "otherEntityField": "email",
             "ownerSide": true,
-            "otherEntityRelationshipName": "userDetail(userName)"
+            "otherEntityRelationshipName": "userInfo"
         },
         {
             "relationshipType": "one-to-many",
@@ -23,14 +23,14 @@
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "notes",
-            "otherEntityName": "note",
+            "relationshipName": "programHistory",
+            "otherEntityName": "programHistory",
             "otherEntityRelationshipName": "userInfo"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "programHistory",
-            "otherEntityName": "programHistory",
+            "relationshipName": "notes",
+            "otherEntityName": "note",
             "otherEntityRelationshipName": "userInfo"
         },
         {
@@ -121,7 +121,7 @@
         {
             "fieldName": "profilePic",
             "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldTypeBlobContent": "any"
         }
     ],
     "changelogDate": "20170824162954",

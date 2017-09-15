@@ -48,9 +48,6 @@
         vm.datePickerOpenStatus.date = false;
 
         vm.setImage = function ($file, thoughtOfDay) {
-            if ($file && $file.$error === 'pattern') {
-                return;
-            }
             if ($file) {
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {

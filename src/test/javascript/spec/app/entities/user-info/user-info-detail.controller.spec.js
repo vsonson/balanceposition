@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('UserInfo Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockUserInfo, MockUser, MockNetworkMember, MockMetricHistory, MockNote, MockProgramHistory, MockUserNotification, MockWellnessHistory, MockIncentiveHistory;
+        var MockEntity, MockPreviousState, MockUserInfo, MockUser, MockNetworkMember, MockMetricHistory, MockProgramHistory, MockNote, MockUserNotification, MockWellnessHistory, MockIncentiveHistory;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -16,8 +16,8 @@ describe('Controller Tests', function() {
             MockUser = jasmine.createSpy('MockUser');
             MockNetworkMember = jasmine.createSpy('MockNetworkMember');
             MockMetricHistory = jasmine.createSpy('MockMetricHistory');
-            MockNote = jasmine.createSpy('MockNote');
             MockProgramHistory = jasmine.createSpy('MockProgramHistory');
+            MockNote = jasmine.createSpy('MockNote');
             MockUserNotification = jasmine.createSpy('MockUserNotification');
             MockWellnessHistory = jasmine.createSpy('MockWellnessHistory');
             MockIncentiveHistory = jasmine.createSpy('MockIncentiveHistory');
@@ -32,8 +32,8 @@ describe('Controller Tests', function() {
                 'User': MockUser,
                 'NetworkMember': MockNetworkMember,
                 'MetricHistory': MockMetricHistory,
-                'Note': MockNote,
                 'ProgramHistory': MockProgramHistory,
+                'Note': MockNote,
                 'UserNotification': MockUserNotification,
                 'WellnessHistory': MockWellnessHistory,
                 'IncentiveHistory': MockIncentiveHistory

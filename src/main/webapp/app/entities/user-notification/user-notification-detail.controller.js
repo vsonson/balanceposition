@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('UserNotificationDetailController', UserNotificationDetailController);
 
-    UserNotificationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'UserNotification', 'UserInfo', 'Alert', 'PathWay'];
+    UserNotificationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'UserNotification', 'PathWay', 'Alert', 'UserInfo'];
 
-    function UserNotificationDetailController($scope, $rootScope, $stateParams, previousState, entity, UserNotification, UserInfo, Alert, PathWay) {
+    function UserNotificationDetailController($scope, $rootScope, $stateParams, previousState, entity, UserNotification, PathWay, Alert, UserInfo) {
         var vm = this;
 
         vm.userNotification = entity;

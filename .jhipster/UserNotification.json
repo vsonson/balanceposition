@@ -2,10 +2,10 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "userInfo",
-            "otherEntityName": "userInfo",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "relationshipType": "one-to-many",
+            "relationshipName": "pathways",
+            "otherEntityName": "pathWay",
+            "otherEntityRelationshipName": "userNotification"
         },
         {
             "relationshipType": "one-to-many",
@@ -14,10 +14,10 @@
             "otherEntityRelationshipName": "userNotification"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "pathways",
-            "otherEntityName": "pathWay",
-            "otherEntityRelationshipName": "userNotification"
+            "relationshipType": "many-to-one",
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('IncentiveActionDetailController', IncentiveActionDetailController);
 
-    IncentiveActionDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'IncentiveAction', 'Incentive', 'Trigger'];
+    IncentiveActionDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'IncentiveAction', 'Trigger', 'Incentive'];
 
-    function IncentiveActionDetailController($scope, $rootScope, $stateParams, previousState, entity, IncentiveAction, Incentive, Trigger) {
+    function IncentiveActionDetailController($scope, $rootScope, $stateParams, previousState, entity, IncentiveAction, Trigger, Incentive) {
         var vm = this;
 
         vm.incentiveAction = entity;

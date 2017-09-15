@@ -26,12 +26,12 @@ public class IncentiveAction implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne
-    private Incentive incentive;
-
     @OneToMany(mappedBy = "incentiveAction")
     @JsonIgnore
     private Set<Trigger> triggers = new HashSet<>();
+
+    @ManyToOne
+    private Incentive incentive;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -53,19 +53,6 @@ public class IncentiveAction implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Incentive getIncentive() {
-        return incentive;
-    }
-
-    public IncentiveAction incentive(Incentive incentive) {
-        this.incentive = incentive;
-        return this;
-    }
-
-    public void setIncentive(Incentive incentive) {
-        this.incentive = incentive;
     }
 
     public Set<Trigger> getTriggers() {
@@ -91,6 +78,19 @@ public class IncentiveAction implements Serializable {
 
     public void setTriggers(Set<Trigger> triggers) {
         this.triggers = triggers;
+    }
+
+    public Incentive getIncentive() {
+        return incentive;
+    }
+
+    public IncentiveAction incentive(Incentive incentive) {
+        this.incentive = incentive;
+        return this;
+    }
+
+    public void setIncentive(Incentive incentive) {
+        this.incentive = incentive;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

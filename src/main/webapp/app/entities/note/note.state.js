@@ -117,6 +117,7 @@
                             return {
                                 date: null,
                                 text: null,
+                                textContentType: null,
                                 id: null
                             };
                         }

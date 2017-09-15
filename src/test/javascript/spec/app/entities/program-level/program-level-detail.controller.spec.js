@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('ProgramLevel Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockProgramLevel, MockProgram, MockProgramStep, MockProgramHistory;
+        var MockEntity, MockPreviousState, MockProgramLevel, MockProgramStep, MockProgram, MockProgramHistory;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,8 +13,8 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockProgramLevel = jasmine.createSpy('MockProgramLevel');
-            MockProgram = jasmine.createSpy('MockProgram');
             MockProgramStep = jasmine.createSpy('MockProgramStep');
+            MockProgram = jasmine.createSpy('MockProgram');
             MockProgramHistory = jasmine.createSpy('MockProgramHistory');
             
 
@@ -24,8 +24,8 @@ describe('Controller Tests', function() {
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
                 'ProgramLevel': MockProgramLevel,
-                'Program': MockProgram,
                 'ProgramStep': MockProgramStep,
+                'Program': MockProgram,
                 'ProgramHistory': MockProgramHistory
             };
             createController = function() {

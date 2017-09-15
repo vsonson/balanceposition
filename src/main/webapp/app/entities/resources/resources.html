@@ -33,9 +33,7 @@
                     <td>{{resources.name}}</td>
                     <td>{{resources.desc}}</td>
                     <td>
-                        <a ng-if="resources.icon" ng-click="vm.openFile(resources.iconContentType, resources.icon)">
-                            <img data-ng-src="{{'data:' + resources.iconContentType + ';base64,' + resources.icon}}" style="max-height: 30px;" alt="resources image"/>
-                        </a>
+                        <a ng-if="resources.icon" ng-click="vm.openFile(resources.iconContentType, resources.icon)">open</a>
                         <span ng-if="resources.icon">{{resources.iconContentType}}, {{vm.byteSize(resources.icon)}}</span>
                     </td>
                     <td>{{resources.resourceUrl}}</td>

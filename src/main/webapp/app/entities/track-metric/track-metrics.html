@@ -32,7 +32,10 @@
                     <td>{{trackMetric.name}}</td>
                     <td>{{trackMetric.description}}</td>
                     <td>{{trackMetric.trackIcon}}</td>
-                    <td>{{trackMetric.infoBubble}}</td>
+                    <td>
+                        <a ng-if="trackMetric.infoBubble" ng-click="vm.openFile(trackMetric.infoBubbleContentType, trackMetric.infoBubble)">open</a>
+                        <span ng-if="trackMetric.infoBubble">{{trackMetric.infoBubbleContentType}}, {{vm.byteSize(trackMetric.infoBubble)}}</span>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

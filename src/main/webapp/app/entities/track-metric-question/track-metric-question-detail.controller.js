@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('TrackMetricQuestionDetailController', TrackMetricQuestionDetailController);
 
-    TrackMetricQuestionDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'TrackMetricQuestion', 'TrackMetric', 'KeyPair'];
+    TrackMetricQuestionDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'TrackMetricQuestion', 'KeyPair', 'TrackMetric'];
 
-    function TrackMetricQuestionDetailController($scope, $rootScope, $stateParams, previousState, entity, TrackMetricQuestion, TrackMetric, KeyPair) {
+    function TrackMetricQuestionDetailController($scope, $rootScope, $stateParams, previousState, entity, TrackMetricQuestion, KeyPair, TrackMetric) {
         var vm = this;
 
         vm.trackMetricQuestion = entity;

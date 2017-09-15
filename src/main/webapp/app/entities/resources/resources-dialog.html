@@ -31,11 +31,11 @@
                     ng-model="vm.resources.desc"
                     />
         </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setIcon($file, vm.resources)" ngf-pattern="'image/*'">
+        <div class="form-group" ngf-drop ngf-change="vm.setIcon($file, vm.resources)">
             <label class="control-label" for="field_icon">Icon</label>
             <div>
-                <img data-ng-src="{{'data:' + vm.resources.iconContentType + ';base64,' + vm.resources.icon}}" style="max-height: 100px;" ng-if="vm.resources.icon" alt="resources image"/>
                 <div ng-if="vm.resources.icon" class="help-block clearfix">
+                    <a class="pull-left" ng-click="vm.openFile(vm.resources.iconContentType, vm.resources.icon)">open</a><br>
                     <span class="pull-left">{{vm.resources.iconContentType}}, {{vm.byteSize(vm.resources.icon)}}</span>
                     <button type="button" ng-click="vm.resources.icon=null;vm.resources.iconContentType=null;"
                             class="btn btn-default btn-xs pull-right">
@@ -43,8 +43,8 @@
                     </button>
                 </div>
                 <button type="button" ngf-select class="btn btn-default btn-block"
-                        ngf-change="vm.setIcon($file, vm.resources)" accept="image/*">
-                    Add image
+                        ngf-change="vm.setIcon($file, vm.resources)">
+                    Add blob
                 </button>
             </div>
             <input type="hidden" class="form-control" name="icon" id="field_icon"

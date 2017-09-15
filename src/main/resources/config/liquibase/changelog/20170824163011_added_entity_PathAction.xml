@@ -33,15 +33,15 @@
             <column name="action_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-
-            <column name="path_step_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="track_metric_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>            <column name="program_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
+            <column name="path_step_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

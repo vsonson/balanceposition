@@ -30,7 +30,7 @@
         {
             "fieldName": "infoBubble",
             "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text"
+            "fieldTypeBlobContent": "any"
         }
     ],
     "changelogDate": "20170824162958",

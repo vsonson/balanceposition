@@ -22,9 +22,9 @@
                     <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="actionUrl"><span>Action Url</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="actionType"><span>Action Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="pathStep.id"><span>Path Step</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="trackMetric.id"><span>Track Metric</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="program.id"><span>Program</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pathStep.id"><span>Path Step</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -35,13 +35,13 @@
                     <td>{{pathAction.actionUrl}}</td>
                     <td>{{pathAction.actionType}}</td>
                     <td>
-                        <a ui-sref="path-step-detail({id:pathAction.pathStep.id})">{{pathAction.pathStep.id}}</a>
-                    </td>
-                    <td>
                         <a ui-sref="track-metric-detail({id:pathAction.trackMetric.id})">{{pathAction.trackMetric.id}}</a>
                     </td>
                     <td>
                         <a ui-sref="program-detail({id:pathAction.program.id})">{{pathAction.program.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="path-step-detail({id:pathAction.pathStep.id})">{{pathAction.pathStep.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

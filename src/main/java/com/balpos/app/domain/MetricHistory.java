@@ -27,9 +27,6 @@ public class MetricHistory implements Serializable {
     @Column(name = "metric_value", nullable = false)
     private String metricValue;
 
-    @ManyToOne
-    private UserInfo userInfo;
-
     @OneToOne
     @JoinColumn(unique = true)
     private TrackMetric trackMetric;
@@ -37,6 +34,9 @@ public class MetricHistory implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private TrackMetricQuestion metricQuestion;
+
+    @ManyToOne
+    private UserInfo userInfo;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -73,19 +73,6 @@ public class MetricHistory implements Serializable {
         this.metricValue = metricValue;
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    public MetricHistory userInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
-        return this;
-    }
-
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
-    }
-
     public TrackMetric getTrackMetric() {
         return trackMetric;
     }
@@ -110,6 +97,19 @@ public class MetricHistory implements Serializable {
 
     public void setMetricQuestion(TrackMetricQuestion trackMetricQuestion) {
         this.metricQuestion = trackMetricQuestion;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public MetricHistory userInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+        return this;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

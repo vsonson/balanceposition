@@ -38,7 +38,6 @@ public class ThoughtOfDay implements Serializable {
     @Column(name = "short_text")
     private String shortText;
 
-    @Lob
     @Column(name = "long_text")
     private String longText;
 

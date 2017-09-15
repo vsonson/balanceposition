@@ -45,7 +45,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="long_text" type="clob">
+            <column name="long_text" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

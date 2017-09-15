@@ -44,8 +44,10 @@ public class NoteResourceIntTest {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_TEXT = "AAAAAAAAAA";
-    private static final String UPDATED_TEXT = "BBBBBBBBBB";
+    private static final byte[] DEFAULT_TEXT = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_TEXT = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_TEXT_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_TEXT_CONTENT_TYPE = "image/png";
 
     @Autowired
     private NoteRepository noteRepository;
@@ -88,7 +90,8 @@ public class NoteResourceIntTest {
     public static Note createEntity(EntityManager em) {
         Note note = new Note()
             .date(DEFAULT_DATE)
-            .text(DEFAULT_TEXT);
+            .text(DEFAULT_TEXT)
+            .textContentType(DEFAULT_TEXT_CONTENT_TYPE);
         return note;
     }
 
@@ -114,6 +117,7 @@ public class NoteResourceIntTest {
         Note testNote = noteList.get(noteList.size() - 1);
         assertThat(testNote.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testNote.getText()).isEqualTo(DEFAULT_TEXT);
+        assertThat(testNote.getTextContentType()).isEqualTo(DEFAULT_TEXT_CONTENT_TYPE);
     }
 
     @Test
@@ -147,7 +151,8 @@ public class NoteResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(note.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT.toString())));
+            .andExpect(jsonPath("$.[*].textContentType").value(hasItem(DEFAULT_TEXT_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].text").value(hasItem(Base64Utils.encodeToString(DEFAULT_TEXT))));
     }
 
     @Test
@@ -162,7 +167,8 @@ public class NoteResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(note.getId().intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.text").value(DEFAULT_TEXT.toString()));
+            .andExpect(jsonPath("$.textContentType").value(DEFAULT_TEXT_CONTENT_TYPE))
+            .andExpect(jsonPath("$.text").value(Base64Utils.encodeToString(DEFAULT_TEXT)));
     }
 
     @Test
@@ -185,7 +191,8 @@ public class NoteResourceIntTest {
         Note updatedNote = noteRepository.findOne(note.getId());
         updatedNote
             .date(UPDATED_DATE)
-            .text(UPDATED_TEXT);
+            .text(UPDATED_TEXT)
+            .textContentType(UPDATED_TEXT_CONTENT_TYPE);
 
         restNoteMockMvc.perform(put("/api/notes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -198,6 +205,7 @@ public class NoteResourceIntTest {
         Note testNote = noteList.get(noteList.size() - 1);
         assertThat(testNote.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testNote.getText()).isEqualTo(UPDATED_TEXT);
+        assertThat(testNote.getTextContentType()).isEqualTo(UPDATED_TEXT_CONTENT_TYPE);
     }
 
     @Test

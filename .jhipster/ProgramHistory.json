@@ -2,10 +2,10 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "userInfo",
-            "otherEntityName": "userInfo",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "relationshipType": "one-to-many",
+            "relationshipName": "programLevel",
+            "otherEntityName": "programLevel",
+            "otherEntityRelationshipName": "programHistory"
         },
         {
             "relationshipType": "one-to-many",
@@ -14,10 +14,10 @@
             "otherEntityRelationshipName": "programHistory"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "programLevel",
-            "otherEntityName": "programLevel",
-            "otherEntityRelationshipName": "programHistory"
+            "relationshipType": "many-to-one",
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

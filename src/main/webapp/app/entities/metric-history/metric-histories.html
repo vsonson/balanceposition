@@ -21,9 +21,9 @@
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="metricValue"><span>Metric Value</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="userInfo.id"><span>User Info</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="trackMetric.id"><span>Track Metric</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="metricQuestion.id"><span>Metric Question</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userInfo.id"><span>User Info</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -33,13 +33,13 @@
                         <td>{{metricHistory.date | date:'mediumDate'}}</td>
                     <td>{{metricHistory.metricValue}}</td>
                     <td>
-                        <a ui-sref="user-info-detail({id:metricHistory.userInfo.id})">{{metricHistory.userInfo.id}}</a>
-                    </td>
-                    <td>
                         <a ui-sref="track-metric-detail({id:metricHistory.trackMetric.id})">{{metricHistory.trackMetric.id}}</a>
                     </td>
                     <td>
                         <a ui-sref="track-metric-question-detail({id:metricHistory.metricQuestion.id})">{{metricHistory.metricQuestion.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="user-info-detail({id:metricHistory.userInfo.id})">{{metricHistory.userInfo.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

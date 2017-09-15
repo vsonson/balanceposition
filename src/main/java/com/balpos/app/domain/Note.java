@@ -29,10 +29,10 @@ public class Note implements Serializable {
     @ApiModelProperty(value = "journalType Integer,")
     @Lob
     @Column(name = "text")
-    private String text;
+    private byte[] text;
 
-    @ManyToOne
-    private UserInfo userInfo;
+    @Column(name = "text_content_type")
+    private String textContentType;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -41,6 +41,9 @@ public class Note implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private ProgramStep programStep;
+
+    @ManyToOne
+    private UserInfo userInfo;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -64,30 +67,30 @@ public class Note implements Serializable {
         this.date = date;
     }
 
-    public String getText() {
+    public byte[] getText() {
         return text;
     }
 
-    public Note text(String text) {
+    public Note text(byte[] text) {
         this.text = text;
         return this;
     }
 
-    public void setText(String text) {
+    public void setText(byte[] text) {
         this.text = text;
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public String getTextContentType() {
+        return textContentType;
     }
 
-    public Note userInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public Note textContentType(String textContentType) {
+        this.textContentType = textContentType;
         return this;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public void setTextContentType(String textContentType) {
+        this.textContentType = textContentType;
     }
 
     public TrackMetric getTrackMetric() {
@@ -114,6 +117,19 @@ public class Note implements Serializable {
 
     public void setProgramStep(ProgramStep programStep) {
         this.programStep = programStep;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public Note userInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+        return this;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
@@ -143,6 +159,7 @@ public class Note implements Serializable {
             "id=" + getId() +
             ", date='" + getDate() + "'" +
             ", text='" + getText() + "'" +
+            ", textContentType='" + textContentType + "'" +
             "}";
     }
 }

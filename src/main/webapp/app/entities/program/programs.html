@@ -32,9 +32,7 @@
                     <td>{{program.name}}</td>
                     <td>{{program.description}}</td>
                     <td>
-                        <a ng-if="program.icon" ng-click="vm.openFile(program.iconContentType, program.icon)">
-                            <img data-ng-src="{{'data:' + program.iconContentType + ';base64,' + program.icon}}" style="max-height: 30px;" alt="program image"/>
-                        </a>
+                        <a ng-if="program.icon" ng-click="vm.openFile(program.iconContentType, program.icon)">open</a>
                         <span ng-if="program.icon">{{program.iconContentType}}, {{vm.byteSize(program.icon)}}</span>
                     </td>
                     <td>{{program.isPaid}}</td>

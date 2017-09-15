@@ -29,15 +29,15 @@
             <column name="metric_value" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-
-            <column name="user_info_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="track_metric_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>            <column name="metric_question_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
+            <column name="user_info_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

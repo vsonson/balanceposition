@@ -40,16 +40,16 @@ public class UserNotification implements Serializable {
     @Column(name = "notification_type")
     private NotificationType notificationType;
 
-    @ManyToOne
-    private UserInfo userInfo;
+    @OneToMany(mappedBy = "userNotification")
+    @JsonIgnore
+    private Set<PathWay> pathways = new HashSet<>();
 
     @OneToMany(mappedBy = "userNotification")
     @JsonIgnore
     private Set<Alert> alerts = new HashSet<>();
 
-    @OneToMany(mappedBy = "userNotification")
-    @JsonIgnore
-    private Set<PathWay> pathways = new HashSet<>();
+    @ManyToOne
+    private UserInfo userInfo;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -125,17 +125,29 @@ public class UserNotification implements Serializable {
         this.notificationType = notificationType;
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public Set<PathWay> getPathways() {
+        return pathways;
     }
 
-    public UserNotification userInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public UserNotification pathways(Set<PathWay> pathWays) {
+        this.pathways = pathWays;
         return this;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public UserNotification addPathways(PathWay pathWay) {
+        this.pathways.add(pathWay);
+        pathWay.setUserNotification(this);
+        return this;
+    }
+
+    public UserNotification removePathways(PathWay pathWay) {
+        this.pathways.remove(pathWay);
+        pathWay.setUserNotification(null);
+        return this;
+    }
+
+    public void setPathways(Set<PathWay> pathWays) {
+        this.pathways = pathWays;
     }
 
     public Set<Alert> getAlerts() {
@@ -163,29 +175,17 @@ public class UserNotification implements Serializable {
         this.alerts = alerts;
     }
 
-    public Set<PathWay> getPathways() {
-        return pathways;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public UserNotification pathways(Set<PathWay> pathWays) {
-        this.pathways = pathWays;
+    public UserNotification userInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
         return this;
     }
 
-    public UserNotification addPathways(PathWay pathWay) {
-        this.pathways.add(pathWay);
-        pathWay.setUserNotification(this);
-        return this;
-    }
-
-    public UserNotification removePathways(PathWay pathWay) {
-        this.pathways.remove(pathWay);
-        pathWay.setUserNotification(null);
-        return this;
-    }
-
-    public void setPathways(Set<PathWay> pathWays) {
-        this.pathways = pathWays;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

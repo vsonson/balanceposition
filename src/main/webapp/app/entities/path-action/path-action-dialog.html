@@ -42,12 +42,6 @@
         </div>
 
         <div class="form-group">
-            <label for="field_pathStep">Path Step</label>
-            <select class="form-control" id="field_pathStep" name="pathStep" ng-model="vm.pathAction.pathStep" ng-options="pathStep as pathStep.id for pathStep in vm.pathsteps track by pathStep.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
             <label for="field_trackMetric">Track Metric</label>
             <select class="form-control" id="field_trackMetric" name="trackMetric" ng-model="vm.pathAction.trackMetric" ng-options="trackMetric as trackMetric.id for trackMetric in vm.trackmetrics | orderBy:'id' track by trackMetric.id">
                 <option value=""></option>
@@ -56,6 +50,12 @@
         <div class="form-group">
             <label for="field_program">Program</label>
             <select class="form-control" id="field_program" name="program" ng-model="vm.pathAction.program" ng-options="program as program.id for program in vm.programs | orderBy:'id' track by program.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_pathStep">Path Step</label>
+            <select class="form-control" id="field_pathStep" name="pathStep" ng-model="vm.pathAction.pathStep" ng-options="pathStep as pathStep.id for pathStep in vm.pathsteps track by pathStep.id">
                 <option value=""></option>
             </select>
         </div>

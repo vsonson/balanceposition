@@ -32,9 +32,6 @@ public class PathAction implements Serializable {
     @Column(name = "action_type")
     private ActionType actionType;
 
-    @ManyToOne
-    private PathStep pathStep;
-
     @OneToOne
     @JoinColumn(unique = true)
     private TrackMetric trackMetric;
@@ -42,6 +39,9 @@ public class PathAction implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private Program program;
+
+    @ManyToOne
+    private PathStep pathStep;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -91,19 +91,6 @@ public class PathAction implements Serializable {
         this.actionType = actionType;
     }
 
-    public PathStep getPathStep() {
-        return pathStep;
-    }
-
-    public PathAction pathStep(PathStep pathStep) {
-        this.pathStep = pathStep;
-        return this;
-    }
-
-    public void setPathStep(PathStep pathStep) {
-        this.pathStep = pathStep;
-    }
-
     public TrackMetric getTrackMetric() {
         return trackMetric;
     }
@@ -128,6 +115,19 @@ public class PathAction implements Serializable {
 
     public void setProgram(Program program) {
         this.program = program;
+    }
+
+    public PathStep getPathStep() {
+        return pathStep;
+    }
+
+    public PathAction pathStep(PathStep pathStep) {
+        this.pathStep = pathStep;
+        return this;
+    }
+
+    public void setPathStep(PathStep pathStep) {
+        this.pathStep = pathStep;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

@@ -46,9 +46,6 @@
 
 
         vm.setIcon = function ($file, program) {
-            if ($file && $file.$error === 'pattern') {
-                return;
-            }
             if ($file) {
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {

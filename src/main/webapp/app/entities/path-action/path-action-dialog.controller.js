@@ -5,15 +5,14 @@
         .module('balancepositionApp')
         .controller('PathActionDialogController', PathActionDialogController);
 
-    PathActionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'PathAction', 'PathStep', 'TrackMetric', 'Program'];
+    PathActionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'PathAction', 'TrackMetric', 'Program', 'PathStep'];
 
-    function PathActionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, PathAction, PathStep, TrackMetric, Program) {
+    function PathActionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, PathAction, TrackMetric, Program, PathStep) {
         var vm = this;
 
         vm.pathAction = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.pathsteps = PathStep.query();
         vm.trackmetrics = TrackMetric.query({filter: 'pathaction-is-null'});
         $q.all([vm.pathAction.$promise, vm.trackmetrics.$promise]).then(function() {
             if (!vm.pathAction.trackMetric || !vm.pathAction.trackMetric.id) {
@@ -32,6 +31,7 @@
         }).then(function(program) {
             vm.programs.push(program);
         });
+        vm.pathsteps = PathStep.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

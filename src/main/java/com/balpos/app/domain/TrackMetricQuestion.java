@@ -29,12 +29,12 @@ public class TrackMetricQuestion implements Serializable {
     @Column(name = "is_mandatory")
     private Boolean isMandatory;
 
-    @ManyToOne
-    private TrackMetric trackMetric;
-
     @OneToMany(mappedBy = "trackMetricQuestion")
     @JsonIgnore
     private Set<KeyPair> answerOptions = new HashSet<>();
+
+    @ManyToOne
+    private TrackMetric trackMetric;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -71,19 +71,6 @@ public class TrackMetricQuestion implements Serializable {
         this.isMandatory = isMandatory;
     }
 
-    public TrackMetric getTrackMetric() {
-        return trackMetric;
-    }
-
-    public TrackMetricQuestion trackMetric(TrackMetric trackMetric) {
-        this.trackMetric = trackMetric;
-        return this;
-    }
-
-    public void setTrackMetric(TrackMetric trackMetric) {
-        this.trackMetric = trackMetric;
-    }
-
     public Set<KeyPair> getAnswerOptions() {
         return answerOptions;
     }
@@ -107,6 +94,19 @@ public class TrackMetricQuestion implements Serializable {
 
     public void setAnswerOptions(Set<KeyPair> keyPairs) {
         this.answerOptions = keyPairs;
+    }
+
+    public TrackMetric getTrackMetric() {
+        return trackMetric;
+    }
+
+    public TrackMetricQuestion trackMetric(TrackMetric trackMetric) {
+        this.trackMetric = trackMetric;
+        return this;
+    }
+
+    public void setTrackMetric(TrackMetric trackMetric) {
+        this.trackMetric = trackMetric;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

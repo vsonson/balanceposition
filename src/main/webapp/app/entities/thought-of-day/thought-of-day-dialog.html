@@ -35,11 +35,11 @@
                     ng-model="vm.thoughtOfDay.url"
                     />
         </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setImage($file, vm.thoughtOfDay)" ngf-pattern="'image/*'">
+        <div class="form-group" ngf-drop ngf-change="vm.setImage($file, vm.thoughtOfDay)">
             <label class="control-label" for="field_image">Image</label>
             <div>
-                <img data-ng-src="{{'data:' + vm.thoughtOfDay.imageContentType + ';base64,' + vm.thoughtOfDay.image}}" style="max-height: 100px;" ng-if="vm.thoughtOfDay.image" alt="thoughtOfDay image"/>
                 <div ng-if="vm.thoughtOfDay.image" class="help-block clearfix">
+                    <a class="pull-left" ng-click="vm.openFile(vm.thoughtOfDay.imageContentType, vm.thoughtOfDay.image)">open</a><br>
                     <span class="pull-left">{{vm.thoughtOfDay.imageContentType}}, {{vm.byteSize(vm.thoughtOfDay.image)}}</span>
                     <button type="button" ng-click="vm.thoughtOfDay.image=null;vm.thoughtOfDay.imageContentType=null;"
                             class="btn btn-default btn-xs pull-right">
@@ -47,8 +47,8 @@
                     </button>
                 </div>
                 <button type="button" ngf-select class="btn btn-default btn-block"
-                        ngf-change="vm.setImage($file, vm.thoughtOfDay)" accept="image/*">
-                    Add image
+                        ngf-change="vm.setImage($file, vm.thoughtOfDay)">
+                    Add blob
                 </button>
             </div>
             <input type="hidden" class="form-control" name="image" id="field_image"
@@ -65,8 +65,9 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_longText">Long Text</label>
-                <textarea class="form-control" name="longText" id="field_longText"
-                    ng-model="vm.thoughtOfDay.longText" ></textarea>
+            <input type="text" class="form-control" name="longText" id="field_longText"
+                    ng-model="vm.thoughtOfDay.longText"
+                    />
         </div>
 
     </div>

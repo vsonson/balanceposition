@@ -35,9 +35,7 @@
                     <td>{{thoughtOfDay.title}}</td>
                     <td>{{thoughtOfDay.url}}</td>
                     <td>
-                        <a ng-if="thoughtOfDay.image" ng-click="vm.openFile(thoughtOfDay.imageContentType, thoughtOfDay.image)">
-                            <img data-ng-src="{{'data:' + thoughtOfDay.imageContentType + ';base64,' + thoughtOfDay.image}}" style="max-height: 30px;" alt="thoughtOfDay image"/>
-                        </a>
+                        <a ng-if="thoughtOfDay.image" ng-click="vm.openFile(thoughtOfDay.imageContentType, thoughtOfDay.image)">open</a>
                         <span ng-if="thoughtOfDay.image">{{thoughtOfDay.imageContentType}}, {{vm.byteSize(thoughtOfDay.image)}}</span>
                     </td>
                     <td>{{thoughtOfDay.shortText}}</td>

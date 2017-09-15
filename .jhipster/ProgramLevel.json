@@ -2,21 +2,21 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "program",
-            "otherEntityName": "program",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "programSteps",
             "otherEntityName": "programStep",
             "otherEntityRelationshipName": "programLevel"
         },
         {
+            "relationshipType": "many-to-one",
+            "relationshipName": "program",
+            "otherEntityName": "program",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
             "relationshipName": "programHistory",
             "otherEntityName": "programHistory",
-            "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }
     ],

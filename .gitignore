@@ -140,7 +140,5 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-gulp/
-gradle/
-*.lock
 package-lock.json
+yarn.lock

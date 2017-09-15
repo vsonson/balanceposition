@@ -35,7 +35,10 @@ public class TrackMetric implements Serializable {
 
     @Lob
     @Column(name = "info_bubble")
-    private String infoBubble;
+    private byte[] infoBubble;
+
+    @Column(name = "info_bubble_content_type")
+    private String infoBubbleContentType;
 
     @OneToMany(mappedBy = "trackMetric")
     @JsonIgnore
@@ -89,17 +92,30 @@ public class TrackMetric implements Serializable {
         this.trackIcon = trackIcon;
     }
 
-    public String getInfoBubble() {
+    public byte[] getInfoBubble() {
         return infoBubble;
     }
 
-    public TrackMetric infoBubble(String infoBubble) {
+    public TrackMetric infoBubble(byte[] infoBubble) {
         this.infoBubble = infoBubble;
         return this;
     }
 
-    public void setInfoBubble(String infoBubble) {
+    public void setInfoBubble(byte[] infoBubble) {
         this.infoBubble = infoBubble;
+    }
+
+    public String getInfoBubbleContentType() {
+        return infoBubbleContentType;
+    }
+
+    public TrackMetric infoBubbleContentType(String infoBubbleContentType) {
+        this.infoBubbleContentType = infoBubbleContentType;
+        return this;
+    }
+
+    public void setInfoBubbleContentType(String infoBubbleContentType) {
+        this.infoBubbleContentType = infoBubbleContentType;
     }
 
     public Set<TrackMetricQuestion> getQuestions() {
@@ -156,6 +172,7 @@ public class TrackMetric implements Serializable {
             ", description='" + getDescription() + "'" +
             ", trackIcon='" + getTrackIcon() + "'" +
             ", infoBubble='" + getInfoBubble() + "'" +
+            ", infoBubbleContentType='" + infoBubbleContentType + "'" +
             "}";
     }
 }

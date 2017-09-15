@@ -31,14 +31,14 @@
         </div>
 
         <div class="form-group">
-            <label for="field_userInfo">User Info</label>
-            <select class="form-control" id="field_userInfo" name="userInfo" ng-model="vm.wellnessHistory.userInfo" ng-options="userInfo as userInfo.id for userInfo in vm.userinfos track by userInfo.id">
+            <label for="field_wellnessItem">Wellness Item</label>
+            <select class="form-control" id="field_wellnessItem" name="wellnessItem" ng-model="vm.wellnessHistory.wellnessItem" ng-options="wellnessItem as wellnessItem.id for wellnessItem in vm.wellnessitems | orderBy:'id' track by wellnessItem.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_wellnessItem">Wellness Item</label>
-            <select class="form-control" id="field_wellnessItem" name="wellnessItem" ng-model="vm.wellnessHistory.wellnessItem" ng-options="wellnessItem as wellnessItem.id for wellnessItem in vm.wellnessitems | orderBy:'id' track by wellnessItem.id">
+            <label for="field_userInfo">User Info</label>
+            <select class="form-control" id="field_userInfo" name="userInfo" ng-model="vm.wellnessHistory.userInfo" ng-options="userInfo as userInfo.id for userInfo in vm.userinfos track by userInfo.id">
                 <option value=""></option>
             </select>
         </div>

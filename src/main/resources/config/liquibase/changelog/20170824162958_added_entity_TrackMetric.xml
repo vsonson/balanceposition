@@ -34,7 +34,10 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="info_bubble" type="clob">
+            <column name="info_bubble" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="info_bubble_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

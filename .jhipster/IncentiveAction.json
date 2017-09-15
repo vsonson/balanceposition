@@ -2,16 +2,16 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "incentive",
-            "otherEntityName": "incentive",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "triggers",
             "otherEntityName": "trigger",
             "otherEntityRelationshipName": "incentiveAction"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "incentive",
+            "otherEntityName": "incentive",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

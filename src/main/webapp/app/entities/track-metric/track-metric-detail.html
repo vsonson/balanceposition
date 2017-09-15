@@ -18,7 +18,10 @@
         </dd>
         <dt><span>Info Bubble</span></dt>
         <dd>
-            <span>{{vm.trackMetric.infoBubble}}</span>
+            <div ng-if="vm.trackMetric.infoBubble">
+                <a ng-click="vm.openFile(vm.trackMetric.infoBubbleContentType, vm.trackMetric.infoBubble)">open</a>
+                {{vm.trackMetric.infoBubbleContentType}}, {{vm.byteSize(vm.trackMetric.infoBubble)}}
+            </div>
         </dd>
     </dl>
 

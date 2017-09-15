@@ -2,16 +2,16 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "trackMetric",
-            "otherEntityName": "trackMetric",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "answerOptions",
             "otherEntityName": "keyPair",
             "otherEntityRelationshipName": "trackMetricQuestion"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "trackMetric",
+            "otherEntityName": "trackMetric",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

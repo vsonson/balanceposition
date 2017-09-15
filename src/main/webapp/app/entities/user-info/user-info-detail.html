@@ -67,9 +67,7 @@
         <dt><span>Profile Pic</span></dt>
         <dd>
             <div ng-if="vm.userInfo.profilePic">
-                <a ng-click="vm.openFile(vm.userInfo.profilePicContentType, vm.userInfo.profilePic)">
-                    <img data-ng-src="{{'data:' + vm.userInfo.profilePicContentType + ';base64,' + vm.userInfo.profilePic}}" style="max-width: 100%;" alt="userInfo image"/>
-                </a>
+                <a ng-click="vm.openFile(vm.userInfo.profilePicContentType, vm.userInfo.profilePic)">open</a>
                 {{vm.userInfo.profilePicContentType}}, {{vm.byteSize(vm.userInfo.profilePic)}}
             </div>
         </dd>

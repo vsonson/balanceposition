@@ -16,7 +16,7 @@
         {
             "fieldName": "icon",
             "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldTypeBlobContent": "any"
         },
         {
             "fieldName": "resourceUrl",

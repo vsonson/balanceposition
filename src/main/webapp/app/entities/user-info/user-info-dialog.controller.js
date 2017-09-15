@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('UserInfoDialogController', UserInfoDialogController);
 
-    UserInfoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'DataUtils', 'entity', 'UserInfo', 'User', 'NetworkMember', 'MetricHistory', 'Note', 'ProgramHistory', 'UserNotification', 'WellnessHistory', 'IncentiveHistory'];
+    UserInfoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'DataUtils', 'entity', 'UserInfo', 'User', 'NetworkMember', 'MetricHistory', 'ProgramHistory', 'Note', 'UserNotification', 'WellnessHistory', 'IncentiveHistory'];
 
-    function UserInfoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, DataUtils, entity, UserInfo, User, NetworkMember, MetricHistory, Note, ProgramHistory, UserNotification, WellnessHistory, IncentiveHistory) {
+    function UserInfoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, DataUtils, entity, UserInfo, User, NetworkMember, MetricHistory, ProgramHistory, Note, UserNotification, WellnessHistory, IncentiveHistory) {
         var vm = this;
 
         vm.userInfo = entity;
@@ -18,8 +18,8 @@
         vm.users = User.query();
         vm.networkmembers = NetworkMember.query();
         vm.metrichistories = MetricHistory.query();
-        vm.notes = Note.query();
         vm.programhistories = ProgramHistory.query();
+        vm.notes = Note.query();
         vm.usernotifications = UserNotification.query();
         vm.wellnesshistories = WellnessHistory.query();
         vm.incentivehistories = IncentiveHistory.query();
@@ -53,9 +53,6 @@
 
 
         vm.setProfilePic = function ($file, userInfo) {
-            if ($file && $file.$error === 'pattern') {
-                return;
-            }
             if ($file) {
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {

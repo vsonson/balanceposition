@@ -31,16 +31,16 @@ public class ProgramHistory implements Serializable {
     @Column(name = "feeling")
     private String feeling;
 
-    @ManyToOne
-    private UserInfo userInfo;
+    @OneToMany(mappedBy = "programHistory")
+    @JsonIgnore
+    private Set<ProgramLevel> programLevels = new HashSet<>();
 
     @OneToMany(mappedBy = "programHistory")
     @JsonIgnore
     private Set<ProgramStep> programSteps = new HashSet<>();
 
-    @OneToMany(mappedBy = "programHistory")
-    @JsonIgnore
-    private Set<ProgramLevel> programLevels = new HashSet<>();
+    @ManyToOne
+    private UserInfo userInfo;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -90,17 +90,29 @@ public class ProgramHistory implements Serializable {
         this.feeling = feeling;
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public Set<ProgramLevel> getProgramLevels() {
+        return programLevels;
     }
 
-    public ProgramHistory userInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public ProgramHistory programLevels(Set<ProgramLevel> programLevels) {
+        this.programLevels = programLevels;
         return this;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public ProgramHistory addProgramLevel(ProgramLevel programLevel) {
+        this.programLevels.add(programLevel);
+        programLevel.setProgramHistory(this);
+        return this;
+    }
+
+    public ProgramHistory removeProgramLevel(ProgramLevel programLevel) {
+        this.programLevels.remove(programLevel);
+        programLevel.setProgramHistory(null);
+        return this;
+    }
+
+    public void setProgramLevels(Set<ProgramLevel> programLevels) {
+        this.programLevels = programLevels;
     }
 
     public Set<ProgramStep> getProgramSteps() {
@@ -128,29 +140,17 @@ public class ProgramHistory implements Serializable {
         this.programSteps = programSteps;
     }
 
-    public Set<ProgramLevel> getProgramLevels() {
-        return programLevels;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public ProgramHistory programLevels(Set<ProgramLevel> programLevels) {
-        this.programLevels = programLevels;
+    public ProgramHistory userInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
         return this;
     }
 
-    public ProgramHistory addProgramLevel(ProgramLevel programLevel) {
-        this.programLevels.add(programLevel);
-        programLevel.setProgramHistory(this);
-        return this;
-    }
-
-    public ProgramHistory removeProgramLevel(ProgramLevel programLevel) {
-        this.programLevels.remove(programLevel);
-        programLevel.setProgramHistory(null);
-        return this;
-    }
-
-    public void setProgramLevels(Set<ProgramLevel> programLevels) {
-        this.programLevels = programLevels;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

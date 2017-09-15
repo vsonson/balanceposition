@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('UserNotificationDialogController', UserNotificationDialogController);
 
-    UserNotificationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserNotification', 'UserInfo', 'Alert', 'PathWay'];
+    UserNotificationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserNotification', 'PathWay', 'Alert', 'UserInfo'];
 
-    function UserNotificationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, UserNotification, UserInfo, Alert, PathWay) {
+    function UserNotificationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, UserNotification, PathWay, Alert, UserInfo) {
         var vm = this;
 
         vm.userNotification = entity;
@@ -15,9 +15,9 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.userinfos = UserInfo.query();
-        vm.alerts = Alert.query();
         vm.pathways = PathWay.query();
+        vm.alerts = Alert.query();
+        vm.userinfos = UserInfo.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('IncentiveAction Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockIncentiveAction, MockIncentive, MockTrigger;
+        var MockEntity, MockPreviousState, MockIncentiveAction, MockTrigger, MockIncentive;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,8 +13,8 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockIncentiveAction = jasmine.createSpy('MockIncentiveAction');
-            MockIncentive = jasmine.createSpy('MockIncentive');
             MockTrigger = jasmine.createSpy('MockTrigger');
+            MockIncentive = jasmine.createSpy('MockIncentive');
             
 
             var locals = {
@@ -23,8 +23,8 @@ describe('Controller Tests', function() {
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
                 'IncentiveAction': MockIncentiveAction,
-                'Incentive': MockIncentive,
-                'Trigger': MockTrigger
+                'Trigger': MockTrigger,
+                'Incentive': MockIncentive
             };
             createController = function() {
                 $injector.get('$controller')("IncentiveActionDetailController", locals);

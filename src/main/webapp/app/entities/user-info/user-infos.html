@@ -58,9 +58,7 @@
                     <td>{{userInfo.zip}}</td>
                     <td>{{userInfo.country}}</td>
                     <td>
-                        <a ng-if="userInfo.profilePic" ng-click="vm.openFile(userInfo.profilePicContentType, userInfo.profilePic)">
-                            <img data-ng-src="{{'data:' + userInfo.profilePicContentType + ';base64,' + userInfo.profilePic}}" style="max-height: 30px;" alt="userInfo image"/>
-                        </a>
+                        <a ng-if="userInfo.profilePic" ng-click="vm.openFile(userInfo.profilePicContentType, userInfo.profilePic)">open</a>
                         <span ng-if="userInfo.profilePic">{{userInfo.profilePicContentType}}, {{vm.byteSize(userInfo.profilePic)}}</span>
                     </td>
                     <td>

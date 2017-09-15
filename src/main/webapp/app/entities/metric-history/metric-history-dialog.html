@@ -37,12 +37,6 @@
         </div>
 
         <div class="form-group">
-            <label for="field_userInfo">User Info</label>
-            <select class="form-control" id="field_userInfo" name="userInfo" ng-model="vm.metricHistory.userInfo" ng-options="userInfo as userInfo.id for userInfo in vm.userinfos track by userInfo.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
             <label for="field_trackMetric">Track Metric</label>
             <select class="form-control" id="field_trackMetric" name="trackMetric" ng-model="vm.metricHistory.trackMetric" ng-options="trackMetric as trackMetric.id for trackMetric in vm.trackmetrics | orderBy:'id' track by trackMetric.id">
                 <option value=""></option>
@@ -51,6 +45,12 @@
         <div class="form-group">
             <label for="field_metricQuestion">Metric Question</label>
             <select class="form-control" id="field_metricQuestion" name="metricQuestion" ng-model="vm.metricHistory.metricQuestion" ng-options="trackMetricQuestion as trackMetricQuestion.id for trackMetricQuestion in vm.metricquestions | orderBy:'id' track by trackMetricQuestion.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_userInfo">User Info</label>
+            <select class="form-control" id="field_userInfo" name="userInfo" ng-model="vm.metricHistory.userInfo" ng-options="userInfo as userInfo.id for userInfo in vm.userinfos track by userInfo.id">
                 <option value=""></option>
             </select>
         </div>

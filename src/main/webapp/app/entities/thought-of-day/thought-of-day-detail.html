@@ -19,9 +19,7 @@
         <dt><span>Image</span></dt>
         <dd>
             <div ng-if="vm.thoughtOfDay.image">
-                <a ng-click="vm.openFile(vm.thoughtOfDay.imageContentType, vm.thoughtOfDay.image)">
-                    <img data-ng-src="{{'data:' + vm.thoughtOfDay.imageContentType + ';base64,' + vm.thoughtOfDay.image}}" style="max-width: 100%;" alt="thoughtOfDay image"/>
-                </a>
+                <a ng-click="vm.openFile(vm.thoughtOfDay.imageContentType, vm.thoughtOfDay.image)">open</a>
                 {{vm.thoughtOfDay.imageContentType}}, {{vm.byteSize(vm.thoughtOfDay.image)}}
             </div>
         </dd>

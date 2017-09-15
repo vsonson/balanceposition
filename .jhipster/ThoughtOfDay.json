@@ -17,7 +17,7 @@
         {
             "fieldName": "image",
             "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldTypeBlobContent": "any"
         },
         {
             "fieldName": "shortText",
@@ -25,8 +25,7 @@
         },
         {
             "fieldName": "longText",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text"
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20170824162955",

@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('NoteDetailController', NoteDetailController);
 
-    NoteDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Note', 'UserInfo', 'TrackMetric', 'ProgramStep'];
+    NoteDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Note', 'TrackMetric', 'ProgramStep', 'UserInfo'];
 
-    function NoteDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Note, UserInfo, TrackMetric, ProgramStep) {
+    function NoteDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Note, TrackMetric, ProgramStep, UserInfo) {
         var vm = this;
 
         vm.note = entity;

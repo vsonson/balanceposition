@@ -48,8 +48,10 @@ public class TrackMetricResourceIntTest {
     private static final String DEFAULT_TRACK_ICON = "AAAAAAAAAA";
     private static final String UPDATED_TRACK_ICON = "BBBBBBBBBB";
 
-    private static final String DEFAULT_INFO_BUBBLE = "AAAAAAAAAA";
-    private static final String UPDATED_INFO_BUBBLE = "BBBBBBBBBB";
+    private static final byte[] DEFAULT_INFO_BUBBLE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_INFO_BUBBLE = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_INFO_BUBBLE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_INFO_BUBBLE_CONTENT_TYPE = "image/png";
 
     @Autowired
     private TrackMetricRepository trackMetricRepository;
@@ -94,7 +96,8 @@ public class TrackMetricResourceIntTest {
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
             .trackIcon(DEFAULT_TRACK_ICON)
-            .infoBubble(DEFAULT_INFO_BUBBLE);
+            .infoBubble(DEFAULT_INFO_BUBBLE)
+            .infoBubbleContentType(DEFAULT_INFO_BUBBLE_CONTENT_TYPE);
         return trackMetric;
     }
 
@@ -122,6 +125,7 @@ public class TrackMetricResourceIntTest {
         assertThat(testTrackMetric.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testTrackMetric.getTrackIcon()).isEqualTo(DEFAULT_TRACK_ICON);
         assertThat(testTrackMetric.getInfoBubble()).isEqualTo(DEFAULT_INFO_BUBBLE);
+        assertThat(testTrackMetric.getInfoBubbleContentType()).isEqualTo(DEFAULT_INFO_BUBBLE_CONTENT_TYPE);
     }
 
     @Test
@@ -193,7 +197,8 @@ public class TrackMetricResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].trackIcon").value(hasItem(DEFAULT_TRACK_ICON.toString())))
-            .andExpect(jsonPath("$.[*].infoBubble").value(hasItem(DEFAULT_INFO_BUBBLE.toString())));
+            .andExpect(jsonPath("$.[*].infoBubbleContentType").value(hasItem(DEFAULT_INFO_BUBBLE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].infoBubble").value(hasItem(Base64Utils.encodeToString(DEFAULT_INFO_BUBBLE))));
     }
 
     @Test
@@ -210,7 +215,8 @@ public class TrackMetricResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.trackIcon").value(DEFAULT_TRACK_ICON.toString()))
-            .andExpect(jsonPath("$.infoBubble").value(DEFAULT_INFO_BUBBLE.toString()));
+            .andExpect(jsonPath("$.infoBubbleContentType").value(DEFAULT_INFO_BUBBLE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.infoBubble").value(Base64Utils.encodeToString(DEFAULT_INFO_BUBBLE)));
     }
 
     @Test
@@ -235,7 +241,8 @@ public class TrackMetricResourceIntTest {
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .trackIcon(UPDATED_TRACK_ICON)
-            .infoBubble(UPDATED_INFO_BUBBLE);
+            .infoBubble(UPDATED_INFO_BUBBLE)
+            .infoBubbleContentType(UPDATED_INFO_BUBBLE_CONTENT_TYPE);
 
         restTrackMetricMockMvc.perform(put("/api/track-metrics")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -250,6 +257,7 @@ public class TrackMetricResourceIntTest {
         assertThat(testTrackMetric.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testTrackMetric.getTrackIcon()).isEqualTo(UPDATED_TRACK_ICON);
         assertThat(testTrackMetric.getInfoBubble()).isEqualTo(UPDATED_INFO_BUBBLE);
+        assertThat(testTrackMetric.getInfoBubbleContentType()).isEqualTo(UPDATED_INFO_BUBBLE_CONTENT_TYPE);
     }
 
     @Test

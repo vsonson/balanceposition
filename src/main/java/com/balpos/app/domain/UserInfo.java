@@ -97,11 +97,11 @@ public class UserInfo implements Serializable {
 
     @OneToMany(mappedBy = "userInfo")
     @JsonIgnore
-    private Set<Note> notes = new HashSet<>();
+    private Set<ProgramHistory> programHistories = new HashSet<>();
 
     @OneToMany(mappedBy = "userInfo")
     @JsonIgnore
-    private Set<ProgramHistory> programHistories = new HashSet<>();
+    private Set<Note> notes = new HashSet<>();
 
     @OneToMany(mappedBy = "userInfo")
     @JsonIgnore
@@ -408,31 +408,6 @@ public class UserInfo implements Serializable {
         this.metricHistories = metricHistories;
     }
 
-    public Set<Note> getNotes() {
-        return notes;
-    }
-
-    public UserInfo notes(Set<Note> notes) {
-        this.notes = notes;
-        return this;
-    }
-
-    public UserInfo addNotes(Note note) {
-        this.notes.add(note);
-        note.setUserInfo(this);
-        return this;
-    }
-
-    public UserInfo removeNotes(Note note) {
-        this.notes.remove(note);
-        note.setUserInfo(null);
-        return this;
-    }
-
-    public void setNotes(Set<Note> notes) {
-        this.notes = notes;
-    }
-
     public Set<ProgramHistory> getProgramHistories() {
         return programHistories;
     }
@@ -456,6 +431,31 @@ public class UserInfo implements Serializable {
 
     public void setProgramHistories(Set<ProgramHistory> programHistories) {
         this.programHistories = programHistories;
+    }
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public UserInfo notes(Set<Note> notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public UserInfo addNotes(Note note) {
+        this.notes.add(note);
+        note.setUserInfo(this);
+        return this;
+    }
+
+    public UserInfo removeNotes(Note note) {
+        this.notes.remove(note);
+        note.setUserInfo(null);
+        return this;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
     }
 
     public Set<UserNotification> getUserNotifications() {

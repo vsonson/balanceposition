@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('PathWay Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockPathWay, MockUserNotification, MockPathStep;
+        var MockEntity, MockPreviousState, MockPathWay, MockPathStep, MockUserNotification;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,8 +13,8 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockPathWay = jasmine.createSpy('MockPathWay');
-            MockUserNotification = jasmine.createSpy('MockUserNotification');
             MockPathStep = jasmine.createSpy('MockPathStep');
+            MockUserNotification = jasmine.createSpy('MockUserNotification');
             
 
             var locals = {
@@ -23,8 +23,8 @@ describe('Controller Tests', function() {
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
                 'PathWay': MockPathWay,
-                'UserNotification': MockUserNotification,
-                'PathStep': MockPathStep
+                'PathStep': MockPathStep,
+                'UserNotification': MockUserNotification
             };
             createController = function() {
                 $injector.get('$controller')("PathWayDetailController", locals);

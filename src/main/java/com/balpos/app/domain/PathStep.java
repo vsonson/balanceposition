@@ -29,12 +29,12 @@ public class PathStep implements Serializable {
     @Column(name = "jhi_desc")
     private String desc;
 
-    @ManyToOne
-    private PathWay pathWay;
-
     @OneToMany(mappedBy = "pathStep")
     @JsonIgnore
     private Set<PathAction> pathActions = new HashSet<>();
+
+    @ManyToOne
+    private PathWay pathWay;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -71,19 +71,6 @@ public class PathStep implements Serializable {
         this.desc = desc;
     }
 
-    public PathWay getPathWay() {
-        return pathWay;
-    }
-
-    public PathStep pathWay(PathWay pathWay) {
-        this.pathWay = pathWay;
-        return this;
-    }
-
-    public void setPathWay(PathWay pathWay) {
-        this.pathWay = pathWay;
-    }
-
     public Set<PathAction> getPathActions() {
         return pathActions;
     }
@@ -107,6 +94,19 @@ public class PathStep implements Serializable {
 
     public void setPathActions(Set<PathAction> pathActions) {
         this.pathActions = pathActions;
+    }
+
+    public PathWay getPathWay() {
+        return pathWay;
+    }
+
+    public PathStep pathWay(PathWay pathWay) {
+        this.pathWay = pathWay;
+        return this;
+    }
+
+    public void setPathWay(PathWay pathWay) {
+        this.pathWay = pathWay;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

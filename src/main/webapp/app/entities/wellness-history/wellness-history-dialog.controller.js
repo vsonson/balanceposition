@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('WellnessHistoryDialogController', WellnessHistoryDialogController);
 
-    WellnessHistoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'WellnessHistory', 'UserInfo', 'WellnessItem'];
+    WellnessHistoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'WellnessHistory', 'WellnessItem', 'UserInfo'];
 
-    function WellnessHistoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, WellnessHistory, UserInfo, WellnessItem) {
+    function WellnessHistoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, WellnessHistory, WellnessItem, UserInfo) {
         var vm = this;
 
         vm.wellnessHistory = entity;
@@ -15,7 +15,6 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.userinfos = UserInfo.query();
         vm.wellnessitems = WellnessItem.query({filter: 'wellnesshistory-is-null'});
         $q.all([vm.wellnessHistory.$promise, vm.wellnessitems.$promise]).then(function() {
             if (!vm.wellnessHistory.wellnessItem || !vm.wellnessHistory.wellnessItem.id) {
@@ -25,6 +24,7 @@
         }).then(function(wellnessItem) {
             vm.wellnessitems.push(wellnessItem);
         });
+        vm.userinfos = UserInfo.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

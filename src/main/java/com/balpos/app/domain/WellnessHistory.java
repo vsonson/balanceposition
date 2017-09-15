@@ -25,12 +25,12 @@ public class WellnessHistory implements Serializable {
     @Column(name = "wellnessscore")
     private Integer wellnessscore;
 
-    @ManyToOne
-    private UserInfo userInfo;
-
     @OneToOne
     @JoinColumn(unique = true)
     private WellnessItem wellnessItem;
+
+    @ManyToOne
+    private UserInfo userInfo;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -67,19 +67,6 @@ public class WellnessHistory implements Serializable {
         this.wellnessscore = wellnessscore;
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    public WellnessHistory userInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
-        return this;
-    }
-
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
-    }
-
     public WellnessItem getWellnessItem() {
         return wellnessItem;
     }
@@ -91,6 +78,19 @@ public class WellnessHistory implements Serializable {
 
     public void setWellnessItem(WellnessItem wellnessItem) {
         this.wellnessItem = wellnessItem;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public WellnessHistory userInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+        return this;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

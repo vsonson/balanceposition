@@ -119,6 +119,7 @@
                                 description: null,
                                 trackIcon: null,
                                 infoBubble: null,
+                                infoBubbleContentType: null,
                                 id: null
                             };
                         }

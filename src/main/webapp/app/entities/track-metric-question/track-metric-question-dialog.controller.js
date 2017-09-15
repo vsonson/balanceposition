@@ -5,16 +5,16 @@
         .module('balancepositionApp')
         .controller('TrackMetricQuestionDialogController', TrackMetricQuestionDialogController);
 
-    TrackMetricQuestionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'TrackMetricQuestion', 'TrackMetric', 'KeyPair'];
+    TrackMetricQuestionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'TrackMetricQuestion', 'KeyPair', 'TrackMetric'];
 
-    function TrackMetricQuestionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, TrackMetricQuestion, TrackMetric, KeyPair) {
+    function TrackMetricQuestionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, TrackMetricQuestion, KeyPair, TrackMetric) {
         var vm = this;
 
         vm.trackMetricQuestion = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.trackmetrics = TrackMetric.query();
         vm.keypairs = KeyPair.query();
+        vm.trackmetrics = TrackMetric.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -15,9 +15,7 @@
         <dt><span>Icon</span></dt>
         <dd>
             <div ng-if="vm.resources.icon">
-                <a ng-click="vm.openFile(vm.resources.iconContentType, vm.resources.icon)">
-                    <img data-ng-src="{{'data:' + vm.resources.iconContentType + ';base64,' + vm.resources.icon}}" style="max-width: 100%;" alt="resources image"/>
-                </a>
+                <a ng-click="vm.openFile(vm.resources.iconContentType, vm.resources.icon)">open</a>
                 {{vm.resources.iconContentType}}, {{vm.byteSize(vm.resources.icon)}}
             </div>
         </dd>

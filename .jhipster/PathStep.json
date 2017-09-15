@@ -2,16 +2,16 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "pathWay",
-            "otherEntityName": "pathWay",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "pathActions",
             "otherEntityName": "pathAction",
             "otherEntityRelationshipName": "pathStep"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "pathWay",
+            "otherEntityName": "pathWay",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

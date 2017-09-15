@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('ProgramHistoryDialogController', ProgramHistoryDialogController);
 
-    ProgramHistoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ProgramHistory', 'UserInfo', 'ProgramStep', 'ProgramLevel'];
+    ProgramHistoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ProgramHistory', 'ProgramLevel', 'ProgramStep', 'UserInfo'];
 
-    function ProgramHistoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ProgramHistory, UserInfo, ProgramStep, ProgramLevel) {
+    function ProgramHistoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ProgramHistory, ProgramLevel, ProgramStep, UserInfo) {
         var vm = this;
 
         vm.programHistory = entity;
@@ -15,9 +15,9 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.userinfos = UserInfo.query();
-        vm.programsteps = ProgramStep.query();
         vm.programlevels = ProgramLevel.query();
+        vm.programsteps = ProgramStep.query();
+        vm.userinfos = UserInfo.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

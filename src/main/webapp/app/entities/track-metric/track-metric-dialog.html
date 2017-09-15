@@ -43,10 +43,27 @@
                     ng-model="vm.trackMetric.trackIcon"
                     />
         </div>
-        <div class="form-group">
+        <div class="form-group" ngf-drop ngf-change="vm.setInfoBubble($file, vm.trackMetric)">
             <label class="control-label" for="field_infoBubble">Info Bubble</label>
-                <textarea class="form-control" name="infoBubble" id="field_infoBubble"
-                    ng-model="vm.trackMetric.infoBubble" ></textarea>
+            <div>
+                <div ng-if="vm.trackMetric.infoBubble" class="help-block clearfix">
+                    <a class="pull-left" ng-click="vm.openFile(vm.trackMetric.infoBubbleContentType, vm.trackMetric.infoBubble)">open</a><br>
+                    <span class="pull-left">{{vm.trackMetric.infoBubbleContentType}}, {{vm.byteSize(vm.trackMetric.infoBubble)}}</span>
+                    <button type="button" ng-click="vm.trackMetric.infoBubble=null;vm.trackMetric.infoBubbleContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setInfoBubble($file, vm.trackMetric)">
+                    Add blob
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="infoBubble" id="field_infoBubble"
+                    ng-model="vm.trackMetric.infoBubble"
+                    />
+            <input type="hidden" class="form-control" name="infoBubbleContentType" id="field_infoBubbleContentType"
+                    ng-model="vm.trackMetric.infoBubbleContentType" />
         </div>
 
     </div>

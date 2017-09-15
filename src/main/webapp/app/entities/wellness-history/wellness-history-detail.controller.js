@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('WellnessHistoryDetailController', WellnessHistoryDetailController);
 
-    WellnessHistoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'WellnessHistory', 'UserInfo', 'WellnessItem'];
+    WellnessHistoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'WellnessHistory', 'WellnessItem', 'UserInfo'];
 
-    function WellnessHistoryDetailController($scope, $rootScope, $stateParams, previousState, entity, WellnessHistory, UserInfo, WellnessItem) {
+    function WellnessHistoryDetailController($scope, $rootScope, $stateParams, previousState, entity, WellnessHistory, WellnessItem, UserInfo) {
         var vm = this;
 
         vm.wellnessHistory = entity;

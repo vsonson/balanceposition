@@ -33,12 +33,12 @@ public class ProgramLevel implements Serializable {
     @Column(name = "is_paid")
     private Boolean isPaid;
 
-    @ManyToOne
-    private Program program;
-
     @OneToMany(mappedBy = "programLevel")
     @JsonIgnore
     private Set<ProgramStep> programSteps = new HashSet<>();
+
+    @ManyToOne
+    private Program program;
 
     @ManyToOne
     private ProgramHistory programHistory;
@@ -91,19 +91,6 @@ public class ProgramLevel implements Serializable {
         this.isPaid = isPaid;
     }
 
-    public Program getProgram() {
-        return program;
-    }
-
-    public ProgramLevel program(Program program) {
-        this.program = program;
-        return this;
-    }
-
-    public void setProgram(Program program) {
-        this.program = program;
-    }
-
     public Set<ProgramStep> getProgramSteps() {
         return programSteps;
     }
@@ -127,6 +114,19 @@ public class ProgramLevel implements Serializable {
 
     public void setProgramSteps(Set<ProgramStep> programSteps) {
         this.programSteps = programSteps;
+    }
+
+    public Program getProgram() {
+        return program;
+    }
+
+    public ProgramLevel program(Program program) {
+        this.program = program;
+        return this;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
     }
 
     public ProgramHistory getProgramHistory() {

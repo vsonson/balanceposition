@@ -5,16 +5,16 @@
         .module('balancepositionApp')
         .controller('PathWayDialogController', PathWayDialogController);
 
-    PathWayDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'PathWay', 'UserNotification', 'PathStep'];
+    PathWayDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'PathWay', 'PathStep', 'UserNotification'];
 
-    function PathWayDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, PathWay, UserNotification, PathStep) {
+    function PathWayDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, PathWay, PathStep, UserNotification) {
         var vm = this;
 
         vm.pathWay = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.usernotifications = UserNotification.query();
         vm.pathsteps = PathStep.query();
+        vm.usernotifications = UserNotification.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

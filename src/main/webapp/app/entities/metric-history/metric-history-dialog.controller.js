@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('MetricHistoryDialogController', MetricHistoryDialogController);
 
-    MetricHistoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'MetricHistory', 'UserInfo', 'TrackMetric', 'TrackMetricQuestion'];
+    MetricHistoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'MetricHistory', 'TrackMetric', 'TrackMetricQuestion', 'UserInfo'];
 
-    function MetricHistoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, MetricHistory, UserInfo, TrackMetric, TrackMetricQuestion) {
+    function MetricHistoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, MetricHistory, TrackMetric, TrackMetricQuestion, UserInfo) {
         var vm = this;
 
         vm.metricHistory = entity;
@@ -15,7 +15,6 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.userinfos = UserInfo.query();
         vm.trackmetrics = TrackMetric.query({filter: 'metrichistory-is-null'});
         $q.all([vm.metricHistory.$promise, vm.trackmetrics.$promise]).then(function() {
             if (!vm.metricHistory.trackMetric || !vm.metricHistory.trackMetric.id) {
@@ -34,6 +33,7 @@
         }).then(function(metricQuestion) {
             vm.metricquestions.push(metricQuestion);
         });
+        vm.userinfos = UserInfo.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
