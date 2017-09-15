@@ -33,13 +33,11 @@ jobs:
 
       - run: ./gradlew dependencies
 
-      # run tests!
-      - run: sudo npm i -g yarn
-      - run: ./gradlew clean build
-      - run: ./gradlew bootRepackage
-
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      # run tests!
+      - run: ./gradlew bootRepackage
 
