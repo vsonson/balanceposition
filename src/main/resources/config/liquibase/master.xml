@@ -21,7 +21,7 @@
     <include file="config/liquibase/changelog/20170824163014_added_entity_Resources.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163016_added_entity_WellnessHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163019_added_entity_IncentiveAction.xml" relativeToChangelogFile="false"/>
-    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <!-- jhipster-needle-liquibase-add-changelog - Stack Stack will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20170824162954_added_entity_constraints_UserInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824162959_added_entity_constraints_TrackMetricQuestion.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163000_added_entity_constraints_MetricHistory.xml" relativeToChangelogFile="false"/>
@@ -34,5 +34,5 @@
     <include file="config/liquibase/changelog/20170824163011_added_entity_constraints_PathAction.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163016_added_entity_constraints_WellnessHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163019_added_entity_constraints_IncentiveAction.xml" relativeToChangelogFile="false"/>
-    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - Stack Stack will add liquibase constraints changelogs here -->
 </databaseChangeLog>

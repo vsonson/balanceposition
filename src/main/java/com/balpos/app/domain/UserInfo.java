@@ -15,9 +15,9 @@ import com.balpos.app.domain.enumeration.UserStatus;
 import com.balpos.app.domain.enumeration.UserType;
 
 /**
- * User is a default entity in a JHipster monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity
+ * User is a default entity in a Stack Stack monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity
  */
-@ApiModel(description = "User is a default entity in a JHipster monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity")
+@ApiModel(description = "User is a default entity in a Stack Stack monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity")
 @Entity
 @Table(name = "user_info")
 public class UserInfo implements Serializable {

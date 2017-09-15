@@ -1,4 +1,4 @@
-# JHipster generated Docker-Compose configuration
+# Stack Stack generated Docker-Compose configuration
 
 ## Usage
 
@@ -12,4 +12,4 @@ Launch all your infrastructure by running: `docker-compose up -d`.
 
 ### Additional Services:
 
-- [JHipster Console](http://localhost:5601)
+- [Stack Stack Console](http://localhost:5601)

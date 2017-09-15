@@ -17,7 +17,7 @@ buildscript {
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
         classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
         classpath "io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE"
-        //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
+        //jhipster-needle-gradle-buildscript-dependency - Stack Stack will add additional gradle build script plugins here
     }
 }
 
@@ -95,7 +95,7 @@ apply from: 'gradle/sonar.gradle'
 apply from: 'gradle/liquibase.gradle'
 apply from: 'gradle/mapstruct.gradle'
 apply from: 'gradle/docker.gradle'
-//jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
+//jhipster-needle-gradle-apply-from - Stack Stack will add additional gradle scripts to be applied here
 
 if (project.hasProperty('prod')) {
     apply from: 'gradle/profile_prod.gradle'
@@ -200,7 +200,7 @@ dependencies {
     optional ("org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}") {
         exclude group: 'com.vaadin.external.google', module: 'android-json'
     }
-    //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+    //jhipster-needle-gradle-dependency - Stack Stack will add additional dependencies here
 }
 
 clean {
