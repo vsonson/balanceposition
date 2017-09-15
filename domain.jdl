@@ -1,0 +1,281 @@
+// JDL definition for application 'balanceposition' generated with command 'jhipster export-jdl'
+
+/**
+ * User is a default entity in a JHipster monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity
+ */
+entity UserInfo (user_info) {
+  userstatus UserStatus,
+  userType UserType,
+  userName String required,
+  password String,
+  email String,
+  phone String,
+  fname String,
+  mname String,
+  lname String,
+  address String,
+  address2 String,
+  city String,
+  state String,
+  zip Integer,
+  country String,
+  profilePic Blob
+}
+entity ThoughtOfDay (thought_of_day) {
+  date LocalDate,
+  title String,
+  url String,
+  image Blob,
+  shortText String,
+  longText String
+}
+entity NetworkMember (network_member) {
+  isDataShared Boolean,
+  sendAlerts Boolean
+}
+entity KeyPair (key_pair) {
+  pairType String required,
+  keyName String required,
+  keyValue String required
+}
+entity TrackMetric (track_metric) {
+  name String required,
+  description String required,
+  trackIcon String,
+  infoBubble Blob
+}
+entity TrackMetricQuestion (track_metric_question) {
+  question String required,
+  isMandatory Boolean
+}
+entity MetricHistory (metric_history) {
+  date LocalDate,
+  metricValue String required
+}
+entity Program (program) {
+  name String required,
+  description String,
+  icon Blob,
+  isPaid Boolean
+}
+entity ProgramLevel (program_level) {
+  name String required,
+  isLocked Boolean required,
+  isPaid Boolean
+}
+entity ProgramStep (program_step) {
+  name String required,
+  descriptionF String,
+  mediaUrl String required,
+  isLocked Boolean required,
+  isPaid Boolean
+}
+entity ProgramHistory (program_history) {
+  date LocalDate,
+  rating String,
+  feeling String
+}
+entity Note (note) {
+  date LocalDate,
+  /**
+   * journalType Integer,
+   */
+  text Blob
+}
+entity UserNotification (user_notification) {
+  date LocalDate,
+  isVisable Boolean,
+  isRead Boolean,
+  isCompleted Boolean,
+  notificationType NotificationType
+}
+entity Trigger (trigger) {
+  name String required,
+  desc String,
+  triggerMetric String
+}
+entity NotifcationTrigger (notifcation_trigger) {
+  desc String
+}
+entity PathWay (path_way) {
+  name String required,
+  desc String
+}
+entity PathStep (path_step) {
+  name String required,
+  desc String
+}
+entity PathAction (path_action) {
+  name String required,
+  actionUrl String,
+  actionType ActionType
+}
+entity PathHistory (path_history) {
+  date LocalDate,
+  isCompleted Boolean
+}
+entity Alert (alert) {
+  name String,
+  desc String,
+  alertType AlertType
+}
+entity Resources (resources) {
+  name String required,
+  desc String,
+  icon Blob,
+  resourceUrl String,
+  resourceType ResourceType
+}
+entity Incentive (incentive) {
+  name String required,
+  desc String,
+  pointvalue Integer
+}
+entity WellnessHistory (wellness_history) {
+  date LocalDate,
+  wellnessscore Integer
+}
+entity WellnessItem (wellness_item) {
+  name String,
+  desc String,
+  wellnessvalue Integer
+}
+entity IncentiveHistory (incentive_history) {
+  date LocalDate,
+  points Integer
+}
+entity IncentiveAction (incentive_action) {
+  name String required
+}
+
+enum UserStatus {
+  ACTIVE,
+  INVITED,
+  DISABLED,
+  ACTIVEPAID
+}
+
+enum UserType {
+  STUDENTATHLETE,
+  ADMIN,
+  SUPPORTER
+}
+
+enum NotificationType {
+  SMS,
+  EMAIL,
+  PATHWAY,
+  ALERT
+}
+
+enum ActionType {
+  TRACKMETRIC,
+  NOTE,
+  CONTACT,
+  PROGRAM
+}
+
+enum AlertType {
+  SMS,
+  EMAIL,
+  CALL
+}
+
+enum ResourceType {
+  URL,
+  CALL,
+  SMS
+}
+
+relationship OneToOne {
+  UserInfo{user(email)} to User,
+  MetricHistory{trackMetric} to TrackMetric,
+  MetricHistory{metricQuestion} to TrackMetricQuestion,
+  Note{trackMetric} to TrackMetric,
+  Note{programStep} to ProgramStep,
+  PathAction{trackMetric} to TrackMetric,
+  PathAction{program} to Program,
+  PathHistory{pathway} to PathWay,
+  PathHistory{pathStep} to PathStep,
+  PathHistory{pathAction} to PathAction,
+  WellnessHistory{wellnessItem} to WellnessItem
+}
+relationship OneToMany {
+  UserInfo{networkMembers} to NetworkMember{networkOwner(email)},
+  TrackMetricQuestion{answerOptions} to KeyPair{trackMetricQuestion},
+  TrackMetric{questions} to TrackMetricQuestion{trackMetric},
+  UserInfo{metricHistory} to MetricHistory{userInfo},
+  Program{programLevels} to ProgramLevel{program},
+  ProgramHistory{programLevel} to ProgramLevel{programHistory},
+  ProgramLevel{programSteps} to ProgramStep{programLevel},
+  ProgramHistory{programSteps} to ProgramStep{programHistory},
+  UserInfo{programHistory} to ProgramHistory{userInfo},
+  UserInfo{notes} to Note{userInfo},
+  UserInfo{userNotifications} to UserNotification{userInfo},
+  NotifcationTrigger{trigger} to Trigger{notifcationTrigger},
+  WellnessItem{wellnessTriggers} to Trigger{wellnessItem},
+  IncentiveAction{triggers} to Trigger{incentiveAction},
+  UserNotification{pathways} to PathWay{userNotification},
+  PathWay{pathSteps} to PathStep{pathWay},
+  PathStep{pathActions} to PathAction{pathStep},
+  UserNotification{alerts} to Alert{userNotification},
+  UserInfo{wellnessHistory} to WellnessHistory{userInfo},
+  UserInfo{incentiveHistory} to IncentiveHistory{userInfo},
+  Incentive{incentiveActions} to IncentiveAction{incentive}
+}
+relationship ManyToOne {
+  NetworkMember{networkMemberUser(email)} to UserInfo
+}
+
+paginate UserInfo with pager
+service UserInfo with serviceImpl
+paginate ThoughtOfDay with pager
+service ThoughtOfDay with serviceImpl
+paginate NetworkMember with pager
+service NetworkMember with serviceImpl
+paginate KeyPair with pager
+service KeyPair with serviceImpl
+paginate TrackMetric with pager
+service TrackMetric with serviceImpl
+paginate TrackMetricQuestion with pager
+service TrackMetricQuestion with serviceImpl
+paginate MetricHistory with pager
+service MetricHistory with serviceImpl
+paginate Program with pager
+service Program with serviceImpl
+paginate ProgramLevel with pager
+service ProgramLevel with serviceImpl
+paginate ProgramStep with pager
+service ProgramStep with serviceImpl
+paginate ProgramHistory with pager
+service ProgramHistory with serviceImpl
+paginate Note with pager
+service Note with serviceImpl
+paginate UserNotification with pager
+service UserNotification with serviceImpl
+paginate Trigger with pager
+service Trigger with serviceImpl
+paginate NotifcationTrigger with pager
+service NotifcationTrigger with serviceImpl
+paginate PathWay with pager
+service PathWay with serviceImpl
+paginate PathStep with pager
+service PathStep with serviceImpl
+paginate PathAction with pager
+service PathAction with serviceImpl
+paginate PathHistory with pager
+service PathHistory with serviceImpl
+paginate Alert with pager
+service Alert with serviceImpl
+paginate Resources with pager
+service Resources with serviceImpl
+paginate Incentive with pager
+service Incentive with serviceImpl
+paginate WellnessHistory with pager
+service WellnessHistory with serviceImpl
+paginate WellnessItem with pager
+service WellnessItem with serviceImpl
+paginate IncentiveHistory with pager
+service IncentiveHistory with serviceImpl
+paginate IncentiveAction with pager
+service IncentiveAction with serviceImpl
