@@ -34,6 +34,7 @@ jobs:
       - run: ./gradlew dependencies
 
       # run tests!
+      - run: npm install
       - run: ./gradlew clean build
       - run: ./gradlew bootRepackage
 
