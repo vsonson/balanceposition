@@ -60,7 +60,7 @@ info:
         version: #project.version#
 
 # ===================================================================
-# JHipster specific properties
+# Stack Stack specific properties
 #
 # Full reference is available at: https://jhipster.github.io/common-application-properties/
 # ===================================================================

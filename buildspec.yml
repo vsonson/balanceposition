@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entering install phase...
+      - apt-get -y install zip unzip
+  pre_build:
+    commands:
+      - echo Entering pre_build phase...
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Entering build phase! ...
+      - echo Build started on `date`
+      - npm install
+      - chmod +x ./gradlew
+      - ./gradlew -Pprod clean bootRepackage
+
+  post_build:
+    commands:
+      - echo Entering post_build phase...
+      - echo Build completed on `date`
+      - mkdir balanceposition-0.0.1-SNAPSHOT
+      - mv build/libs/balanceposition-0.0.1-SNAPSHOT.war.original ./balanceposition-0.0.1-SNAPSHOT/balanceposition-0.0.1-SNAPSHOT.war
+      - cd ./balanceposition-0.0.1-SNAPSHOT && unzip balanceposition-0.0.1-SNAPSHOT.war && cd ..
+      - rm ./balanceposition-0.0.1-SNAPSHOT/balanceposition-0.0.1-SNAPSHOT.war
+artifacts:
+    files:
+        - ./**/*
+    discard-paths: no
+    base-directory: balanceposition-0.0.1-SNAPSHOT

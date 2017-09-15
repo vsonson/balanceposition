@@ -17,7 +17,7 @@
         $httpProvider.interceptors.push('authExpiredInterceptor');
         $httpProvider.interceptors.push('authInterceptor');
         $httpProvider.interceptors.push('notificationInterceptor');
-        // jhipster-needle-angularjs-add-interceptor JHipster will add new application http interceptor here
+        // jhipster-needle-angularjs-add-interceptor Stack Stack will add new application http interceptor here
 
         $urlMatcherFactoryProvider.type('boolean', {
             name : 'boolean',

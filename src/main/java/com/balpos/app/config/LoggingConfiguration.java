@@ -71,9 +71,9 @@ public class LoggingConfiguration {
 
         // More documentation is available at: https://github.com/logstash/logstash-logback-encoder
         LogstashEncoder logstashEncoder=new LogstashEncoder();
-        // Set the Logstash appender config from JHipster properties
+        // Set the Logstash appender config from Stack Stack properties
         logstashEncoder.setCustomFields(customFields);
-        // Set the Logstash appender config from JHipster properties
+        // Set the Logstash appender config from Stack Stack properties
         logstashAppender.addDestinations(new InetSocketAddress(jHipsterProperties.getLogging().getLogstash().getHost(),jHipsterProperties.getLogging().getLogstash().getPort()));
 
         ShortenedThrowableConverter throwableConverter = new ShortenedThrowableConverter();

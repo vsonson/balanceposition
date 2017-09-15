@@ -42,9 +42,9 @@
                 <constraints nullable="true" />
             </column>
 
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+            <!-- jhipster-needle-liquibase-add-column - Stack Stack will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    <!-- jhipster-needle-liquibase-add-changeset - Stack Stack will add changesets here, do not remove-->
 </databaseChangeLog>
