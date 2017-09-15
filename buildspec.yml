@@ -13,6 +13,7 @@ phases:
     commands:
       - echo Entering build phase! ...
       - echo Build started on `date`
+      - npm install
       - chmod +x ./gradlew
       - ./gradlew -Pprod clean bootRepackage
 
