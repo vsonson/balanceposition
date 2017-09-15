@@ -34,7 +34,7 @@ jobs:
       - run: ./gradlew dependencies
 
       # run tests!
-      - run: npm i -g yarn
+      - run: sudo npm i -g yarn
       - run: ./gradlew clean build
       - run: ./gradlew bootRepackage
 
