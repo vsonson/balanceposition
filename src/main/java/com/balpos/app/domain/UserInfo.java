@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -36,27 +36,8 @@ public class UserInfo implements Serializable {
     @Column(name = "user_type")
     private UserType userType;
 
-    @NotNull
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-
-    @Column(name = "jhi_password")
-    private String password;
-
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "phone")
     private String phone;
-
-    @Column(name = "fname")
-    private String fname;
-
-    @Column(name = "mname")
-    private String mname;
-
-    @Column(name = "lname")
-    private String lname;
 
     @Column(name = "address")
     private String address;
@@ -83,8 +64,27 @@ public class UserInfo implements Serializable {
     @Column(name = "profile_pic_content_type")
     private String profilePicContentType;
 
+    @Column(name = "date_of_birth")
+    private ZonedDateTime dateOfBirth;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "year_in_college")
+    private String yearInCollege;
+
+    @Column(name = "college_division")
+    private String collegeDivision;
+
+    @Column(name = "country_code")
+    private String countryCode;
+
+    @Column(name = "state_code")
+    private String stateCode;
+
     @OneToOne
     @JoinColumn(unique = true)
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "networkOwner")
@@ -150,45 +150,6 @@ public class UserInfo implements Serializable {
         this.userType = userType;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public UserInfo userName(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public UserInfo password(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public UserInfo email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -200,45 +161,6 @@ public class UserInfo implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getFname() {
-        return fname;
-    }
-
-    public UserInfo fname(String fname) {
-        this.fname = fname;
-        return this;
-    }
-
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public String getMname() {
-        return mname;
-    }
-
-    public UserInfo mname(String mname) {
-        this.mname = mname;
-        return this;
-    }
-
-    public void setMname(String mname) {
-        this.mname = mname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public UserInfo lname(String lname) {
-        this.lname = lname;
-        return this;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
     }
 
     public String getAddress() {
@@ -343,6 +265,84 @@ public class UserInfo implements Serializable {
 
     public void setProfilePicContentType(String profilePicContentType) {
         this.profilePicContentType = profilePicContentType;
+    }
+
+    public ZonedDateTime getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public UserInfo dateOfBirth(ZonedDateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+        return this;
+    }
+
+    public void setDateOfBirth(ZonedDateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public UserInfo gender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getYearInCollege() {
+        return yearInCollege;
+    }
+
+    public UserInfo yearInCollege(String yearInCollege) {
+        this.yearInCollege = yearInCollege;
+        return this;
+    }
+
+    public void setYearInCollege(String yearInCollege) {
+        this.yearInCollege = yearInCollege;
+    }
+
+    public String getCollegeDivision() {
+        return collegeDivision;
+    }
+
+    public UserInfo collegeDivision(String collegeDivision) {
+        this.collegeDivision = collegeDivision;
+        return this;
+    }
+
+    public void setCollegeDivision(String collegeDivision) {
+        this.collegeDivision = collegeDivision;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public UserInfo countryCode(String countryCode) {
+        this.countryCode = countryCode;
+        return this;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public UserInfo stateCode(String stateCode) {
+        this.stateCode = stateCode;
+        return this;
+    }
+
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
     }
 
     public User getUser() {
@@ -560,13 +560,7 @@ public class UserInfo implements Serializable {
             "id=" + getId() +
             ", userstatus='" + getUserstatus() + "'" +
             ", userType='" + getUserType() + "'" +
-            ", userName='" + getUserName() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", email='" + getEmail() + "'" +
             ", phone='" + getPhone() + "'" +
-            ", fname='" + getFname() + "'" +
-            ", mname='" + getMname() + "'" +
-            ", lname='" + getLname() + "'" +
             ", address='" + getAddress() + "'" +
             ", address2='" + getAddress2() + "'" +
             ", city='" + getCity() + "'" +
@@ -575,6 +569,12 @@ public class UserInfo implements Serializable {
             ", country='" + getCountry() + "'" +
             ", profilePic='" + getProfilePic() + "'" +
             ", profilePicContentType='" + profilePicContentType + "'" +
+            ", dateOfBirth='" + getDateOfBirth() + "'" +
+            ", gender='" + getGender() + "'" +
+            ", yearInCollege='" + getYearInCollege() + "'" +
+            ", collegeDivision='" + getCollegeDivision() + "'" +
+            ", countryCode='" + getCountryCode() + "'" +
+            ", stateCode='" + getStateCode() + "'" +
             "}";
     }
 }

@@ -4,9 +4,9 @@
         .module('balancepositionApp')
         .factory('UserInfo', UserInfo);
 
-    UserInfo.$inject = ['$resource'];
+    UserInfo.$inject = ['$resource', 'DateUtils'];
 
-    function UserInfo ($resource) {
+    function UserInfo ($resource, DateUtils) {
         var resourceUrl =  'api/user-infos/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,6 +16,7 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.dateOfBirth = DateUtils.convertDateTimeFromServer(data.dateOfBirth);
                     }
                     return data;
                 }

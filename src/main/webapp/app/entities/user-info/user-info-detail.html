@@ -12,33 +12,9 @@
         <dd>
             <span>{{vm.userInfo.userType}}</span>
         </dd>
-        <dt><span>User Name</span></dt>
-        <dd>
-            <span>{{vm.userInfo.userName}}</span>
-        </dd>
-        <dt><span>Password</span></dt>
-        <dd>
-            <span>{{vm.userInfo.password}}</span>
-        </dd>
-        <dt><span>Email</span></dt>
-        <dd>
-            <span>{{vm.userInfo.email}}</span>
-        </dd>
         <dt><span>Phone</span></dt>
         <dd>
             <span>{{vm.userInfo.phone}}</span>
-        </dd>
-        <dt><span>Fname</span></dt>
-        <dd>
-            <span>{{vm.userInfo.fname}}</span>
-        </dd>
-        <dt><span>Mname</span></dt>
-        <dd>
-            <span>{{vm.userInfo.mname}}</span>
-        </dd>
-        <dt><span>Lname</span></dt>
-        <dd>
-            <span>{{vm.userInfo.lname}}</span>
         </dd>
         <dt><span>Address</span></dt>
         <dd>
@@ -70,6 +46,30 @@
                 <a ng-click="vm.openFile(vm.userInfo.profilePicContentType, vm.userInfo.profilePic)">open</a>
                 {{vm.userInfo.profilePicContentType}}, {{vm.byteSize(vm.userInfo.profilePic)}}
             </div>
+        </dd>
+        <dt><span>Date Of Birth</span></dt>
+        <dd>
+            <span>{{vm.userInfo.dateOfBirth | date:'medium'}}</span>
+        </dd>
+        <dt><span>Gender</span></dt>
+        <dd>
+            <span>{{vm.userInfo.gender}}</span>
+        </dd>
+        <dt><span>Year In College</span></dt>
+        <dd>
+            <span>{{vm.userInfo.yearInCollege}}</span>
+        </dd>
+        <dt><span>College Division</span></dt>
+        <dd>
+            <span>{{vm.userInfo.collegeDivision}}</span>
+        </dd>
+        <dt><span>Country Code</span></dt>
+        <dd>
+            <span>{{vm.userInfo.countryCode}}</span>
+        </dd>
+        <dt><span>State Code</span></dt>
+        <dd>
+            <span>{{vm.userInfo.stateCode}}</span>
         </dd>
         <dt><span>User</span></dt>
         <dd>

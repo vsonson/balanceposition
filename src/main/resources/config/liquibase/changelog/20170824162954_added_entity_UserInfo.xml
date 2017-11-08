@@ -30,31 +30,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="user_name" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="jhi_password" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="email" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="phone" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="fname" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="mname" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="lname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -88,12 +64,37 @@
             <column name="profile_pic_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
+            <column name="date_of_birth" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="gender" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="year_in_college" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="college_division" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="country_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="state_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="user_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
-            <!-- jhipster-needle-liquibase-add-column - Stack Stack will add columns here, do not remove-->
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-
+        <dropDefaultValue tableName="user_info" columnName="date_of_birth" columnDataType="datetime"/>
+        
     </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - Stack Stack will add changesets here, do not remove-->
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

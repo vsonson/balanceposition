@@ -23,8 +23,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
+import static com.balpos.app.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -47,26 +52,8 @@ public class UserInfoResourceIntTest {
     private static final UserType DEFAULT_USER_TYPE = UserType.STUDENTATHLETE;
     private static final UserType UPDATED_USER_TYPE = UserType.ADMIN;
 
-    private static final String DEFAULT_USER_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_USER_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PASSWORD = "AAAAAAAAAA";
-    private static final String UPDATED_PASSWORD = "BBBBBBBBBB";
-
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
-
     private static final String DEFAULT_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_PHONE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_FNAME = "AAAAAAAAAA";
-    private static final String UPDATED_FNAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_MNAME = "AAAAAAAAAA";
-    private static final String UPDATED_MNAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_LNAME = "AAAAAAAAAA";
-    private static final String UPDATED_LNAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
@@ -90,6 +77,24 @@ public class UserInfoResourceIntTest {
     private static final byte[] UPDATED_PROFILE_PIC = TestUtil.createByteArray(2, "1");
     private static final String DEFAULT_PROFILE_PIC_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_PROFILE_PIC_CONTENT_TYPE = "image/png";
+
+    private static final ZonedDateTime DEFAULT_DATE_OF_BIRTH = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_DATE_OF_BIRTH = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+
+    private static final String DEFAULT_GENDER = "AAAAAAAAAA";
+    private static final String UPDATED_GENDER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_YEAR_IN_COLLEGE = "AAAAAAAAAA";
+    private static final String UPDATED_YEAR_IN_COLLEGE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COLLEGE_DIVISION = "AAAAAAAAAA";
+    private static final String UPDATED_COLLEGE_DIVISION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COUNTRY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_COUNTRY_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_STATE_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_STATE_CODE = "BBBBBBBBBB";
 
     @Autowired
     private UserInfoRepository userInfoRepository;
@@ -133,13 +138,7 @@ public class UserInfoResourceIntTest {
         UserInfo userInfo = new UserInfo()
             .userstatus(DEFAULT_USERSTATUS)
             .userType(DEFAULT_USER_TYPE)
-            .userName(DEFAULT_USER_NAME)
-            .password(DEFAULT_PASSWORD)
-            .email(DEFAULT_EMAIL)
             .phone(DEFAULT_PHONE)
-            .fname(DEFAULT_FNAME)
-            .mname(DEFAULT_MNAME)
-            .lname(DEFAULT_LNAME)
             .address(DEFAULT_ADDRESS)
             .address2(DEFAULT_ADDRESS_2)
             .city(DEFAULT_CITY)
@@ -147,7 +146,13 @@ public class UserInfoResourceIntTest {
             .zip(DEFAULT_ZIP)
             .country(DEFAULT_COUNTRY)
             .profilePic(DEFAULT_PROFILE_PIC)
-            .profilePicContentType(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
+            .profilePicContentType(DEFAULT_PROFILE_PIC_CONTENT_TYPE)
+            .dateOfBirth(DEFAULT_DATE_OF_BIRTH)
+            .gender(DEFAULT_GENDER)
+            .yearInCollege(DEFAULT_YEAR_IN_COLLEGE)
+            .collegeDivision(DEFAULT_COLLEGE_DIVISION)
+            .countryCode(DEFAULT_COUNTRY_CODE)
+            .stateCode(DEFAULT_STATE_CODE);
         return userInfo;
     }
 
@@ -173,13 +178,7 @@ public class UserInfoResourceIntTest {
         UserInfo testUserInfo = userInfoList.get(userInfoList.size() - 1);
         assertThat(testUserInfo.getUserstatus()).isEqualTo(DEFAULT_USERSTATUS);
         assertThat(testUserInfo.getUserType()).isEqualTo(DEFAULT_USER_TYPE);
-        assertThat(testUserInfo.getUserName()).isEqualTo(DEFAULT_USER_NAME);
-        assertThat(testUserInfo.getPassword()).isEqualTo(DEFAULT_PASSWORD);
-        assertThat(testUserInfo.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testUserInfo.getPhone()).isEqualTo(DEFAULT_PHONE);
-        assertThat(testUserInfo.getFname()).isEqualTo(DEFAULT_FNAME);
-        assertThat(testUserInfo.getMname()).isEqualTo(DEFAULT_MNAME);
-        assertThat(testUserInfo.getLname()).isEqualTo(DEFAULT_LNAME);
         assertThat(testUserInfo.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testUserInfo.getAddress2()).isEqualTo(DEFAULT_ADDRESS_2);
         assertThat(testUserInfo.getCity()).isEqualTo(DEFAULT_CITY);
@@ -188,6 +187,12 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getCountry()).isEqualTo(DEFAULT_COUNTRY);
         assertThat(testUserInfo.getProfilePic()).isEqualTo(DEFAULT_PROFILE_PIC);
         assertThat(testUserInfo.getProfilePicContentType()).isEqualTo(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
+        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(DEFAULT_DATE_OF_BIRTH);
+        assertThat(testUserInfo.getGender()).isEqualTo(DEFAULT_GENDER);
+        assertThat(testUserInfo.getYearInCollege()).isEqualTo(DEFAULT_YEAR_IN_COLLEGE);
+        assertThat(testUserInfo.getCollegeDivision()).isEqualTo(DEFAULT_COLLEGE_DIVISION);
+        assertThat(testUserInfo.getCountryCode()).isEqualTo(DEFAULT_COUNTRY_CODE);
+        assertThat(testUserInfo.getStateCode()).isEqualTo(DEFAULT_STATE_CODE);
     }
 
     @Test
@@ -211,24 +216,6 @@ public class UserInfoResourceIntTest {
 
     @Test
     @Transactional
-    public void checkUserNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = userInfoRepository.findAll().size();
-        // set the field null
-        userInfo.setUserName(null);
-
-        // Create the UserInfo, which fails.
-
-        restUserInfoMockMvc.perform(post("/api/user-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<UserInfo> userInfoList = userInfoRepository.findAll();
-        assertThat(userInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllUserInfos() throws Exception {
         // Initialize the database
         userInfoRepository.saveAndFlush(userInfo);
@@ -240,13 +227,7 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(userInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].userstatus").value(hasItem(DEFAULT_USERSTATUS.toString())))
             .andExpect(jsonPath("$.[*].userType").value(hasItem(DEFAULT_USER_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
-            .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
-            .andExpect(jsonPath("$.[*].fname").value(hasItem(DEFAULT_FNAME.toString())))
-            .andExpect(jsonPath("$.[*].mname").value(hasItem(DEFAULT_MNAME.toString())))
-            .andExpect(jsonPath("$.[*].lname").value(hasItem(DEFAULT_LNAME.toString())))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS.toString())))
             .andExpect(jsonPath("$.[*].address2").value(hasItem(DEFAULT_ADDRESS_2.toString())))
             .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
@@ -254,7 +235,13 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].zip").value(hasItem(DEFAULT_ZIP)))
             .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY.toString())))
             .andExpect(jsonPath("$.[*].profilePicContentType").value(hasItem(DEFAULT_PROFILE_PIC_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))));
+            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))))
+            .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(sameInstant(DEFAULT_DATE_OF_BIRTH))))
+            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER.toString())))
+            .andExpect(jsonPath("$.[*].yearInCollege").value(hasItem(DEFAULT_YEAR_IN_COLLEGE.toString())))
+            .andExpect(jsonPath("$.[*].collegeDivision").value(hasItem(DEFAULT_COLLEGE_DIVISION.toString())))
+            .andExpect(jsonPath("$.[*].countryCode").value(hasItem(DEFAULT_COUNTRY_CODE.toString())))
+            .andExpect(jsonPath("$.[*].stateCode").value(hasItem(DEFAULT_STATE_CODE.toString())));
     }
 
     @Test
@@ -270,13 +257,7 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.id").value(userInfo.getId().intValue()))
             .andExpect(jsonPath("$.userstatus").value(DEFAULT_USERSTATUS.toString()))
             .andExpect(jsonPath("$.userType").value(DEFAULT_USER_TYPE.toString()))
-            .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
-            .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD.toString()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
-            .andExpect(jsonPath("$.fname").value(DEFAULT_FNAME.toString()))
-            .andExpect(jsonPath("$.mname").value(DEFAULT_MNAME.toString()))
-            .andExpect(jsonPath("$.lname").value(DEFAULT_LNAME.toString()))
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS.toString()))
             .andExpect(jsonPath("$.address2").value(DEFAULT_ADDRESS_2.toString()))
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
@@ -284,7 +265,13 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.zip").value(DEFAULT_ZIP))
             .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY.toString()))
             .andExpect(jsonPath("$.profilePicContentType").value(DEFAULT_PROFILE_PIC_CONTENT_TYPE))
-            .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)));
+            .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)))
+            .andExpect(jsonPath("$.dateOfBirth").value(sameInstant(DEFAULT_DATE_OF_BIRTH)))
+            .andExpect(jsonPath("$.gender").value(DEFAULT_GENDER.toString()))
+            .andExpect(jsonPath("$.yearInCollege").value(DEFAULT_YEAR_IN_COLLEGE.toString()))
+            .andExpect(jsonPath("$.collegeDivision").value(DEFAULT_COLLEGE_DIVISION.toString()))
+            .andExpect(jsonPath("$.countryCode").value(DEFAULT_COUNTRY_CODE.toString()))
+            .andExpect(jsonPath("$.stateCode").value(DEFAULT_STATE_CODE.toString()));
     }
 
     @Test
@@ -308,13 +295,7 @@ public class UserInfoResourceIntTest {
         updatedUserInfo
             .userstatus(UPDATED_USERSTATUS)
             .userType(UPDATED_USER_TYPE)
-            .userName(UPDATED_USER_NAME)
-            .password(UPDATED_PASSWORD)
-            .email(UPDATED_EMAIL)
             .phone(UPDATED_PHONE)
-            .fname(UPDATED_FNAME)
-            .mname(UPDATED_MNAME)
-            .lname(UPDATED_LNAME)
             .address(UPDATED_ADDRESS)
             .address2(UPDATED_ADDRESS_2)
             .city(UPDATED_CITY)
@@ -322,7 +303,13 @@ public class UserInfoResourceIntTest {
             .zip(UPDATED_ZIP)
             .country(UPDATED_COUNTRY)
             .profilePic(UPDATED_PROFILE_PIC)
-            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE);
+            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE)
+            .dateOfBirth(UPDATED_DATE_OF_BIRTH)
+            .gender(UPDATED_GENDER)
+            .yearInCollege(UPDATED_YEAR_IN_COLLEGE)
+            .collegeDivision(UPDATED_COLLEGE_DIVISION)
+            .countryCode(UPDATED_COUNTRY_CODE)
+            .stateCode(UPDATED_STATE_CODE);
 
         restUserInfoMockMvc.perform(put("/api/user-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -335,13 +322,7 @@ public class UserInfoResourceIntTest {
         UserInfo testUserInfo = userInfoList.get(userInfoList.size() - 1);
         assertThat(testUserInfo.getUserstatus()).isEqualTo(UPDATED_USERSTATUS);
         assertThat(testUserInfo.getUserType()).isEqualTo(UPDATED_USER_TYPE);
-        assertThat(testUserInfo.getUserName()).isEqualTo(UPDATED_USER_NAME);
-        assertThat(testUserInfo.getPassword()).isEqualTo(UPDATED_PASSWORD);
-        assertThat(testUserInfo.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testUserInfo.getPhone()).isEqualTo(UPDATED_PHONE);
-        assertThat(testUserInfo.getFname()).isEqualTo(UPDATED_FNAME);
-        assertThat(testUserInfo.getMname()).isEqualTo(UPDATED_MNAME);
-        assertThat(testUserInfo.getLname()).isEqualTo(UPDATED_LNAME);
         assertThat(testUserInfo.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testUserInfo.getAddress2()).isEqualTo(UPDATED_ADDRESS_2);
         assertThat(testUserInfo.getCity()).isEqualTo(UPDATED_CITY);
@@ -350,6 +331,12 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getCountry()).isEqualTo(UPDATED_COUNTRY);
         assertThat(testUserInfo.getProfilePic()).isEqualTo(UPDATED_PROFILE_PIC);
         assertThat(testUserInfo.getProfilePicContentType()).isEqualTo(UPDATED_PROFILE_PIC_CONTENT_TYPE);
+        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
+        assertThat(testUserInfo.getGender()).isEqualTo(UPDATED_GENDER);
+        assertThat(testUserInfo.getYearInCollege()).isEqualTo(UPDATED_YEAR_IN_COLLEGE);
+        assertThat(testUserInfo.getCollegeDivision()).isEqualTo(UPDATED_COLLEGE_DIVISION);
+        assertThat(testUserInfo.getCountryCode()).isEqualTo(UPDATED_COUNTRY_CODE);
+        assertThat(testUserInfo.getStateCode()).isEqualTo(UPDATED_STATE_CODE);
     }
 
     @Test
