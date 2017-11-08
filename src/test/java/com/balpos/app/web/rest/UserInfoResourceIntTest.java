@@ -23,8 +23,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
+import static com.balpos.app.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -91,6 +96,24 @@ public class UserInfoResourceIntTest {
     private static final String DEFAULT_PROFILE_PIC_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_PROFILE_PIC_CONTENT_TYPE = "image/png";
 
+    private static final ZonedDateTime DEFAULT_DATE_OF_BIRTH = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_DATE_OF_BIRTH = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+
+    private static final String DEFAULT_GENDER = "AAAAAAAAAA";
+    private static final String UPDATED_GENDER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_YEAR_IN_COLLEGE = "AAAAAAAAAA";
+    private static final String UPDATED_YEAR_IN_COLLEGE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COLLEGE_DIVISION = "AAAAAAAAAA";
+    private static final String UPDATED_COLLEGE_DIVISION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COUNTRY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_COUNTRY_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_STATE_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_STATE_CODE = "BBBBBBBBBB";
+
     @Autowired
     private UserInfoRepository userInfoRepository;
 
@@ -147,7 +170,13 @@ public class UserInfoResourceIntTest {
             .zip(DEFAULT_ZIP)
             .country(DEFAULT_COUNTRY)
             .profilePic(DEFAULT_PROFILE_PIC)
-            .profilePicContentType(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
+            .profilePicContentType(DEFAULT_PROFILE_PIC_CONTENT_TYPE)
+            .dateOfBirth(DEFAULT_DATE_OF_BIRTH)
+            .gender(DEFAULT_GENDER)
+            .yearInCollege(DEFAULT_YEAR_IN_COLLEGE)
+            .collegeDivision(DEFAULT_COLLEGE_DIVISION)
+            .countryCode(DEFAULT_COUNTRY_CODE)
+            .stateCode(DEFAULT_STATE_CODE);
         return userInfo;
     }
 
@@ -188,6 +217,12 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getCountry()).isEqualTo(DEFAULT_COUNTRY);
         assertThat(testUserInfo.getProfilePic()).isEqualTo(DEFAULT_PROFILE_PIC);
         assertThat(testUserInfo.getProfilePicContentType()).isEqualTo(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
+        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(DEFAULT_DATE_OF_BIRTH);
+        assertThat(testUserInfo.getGender()).isEqualTo(DEFAULT_GENDER);
+        assertThat(testUserInfo.getYearInCollege()).isEqualTo(DEFAULT_YEAR_IN_COLLEGE);
+        assertThat(testUserInfo.getCollegeDivision()).isEqualTo(DEFAULT_COLLEGE_DIVISION);
+        assertThat(testUserInfo.getCountryCode()).isEqualTo(DEFAULT_COUNTRY_CODE);
+        assertThat(testUserInfo.getStateCode()).isEqualTo(DEFAULT_STATE_CODE);
     }
 
     @Test
@@ -254,7 +289,13 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].zip").value(hasItem(DEFAULT_ZIP)))
             .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY.toString())))
             .andExpect(jsonPath("$.[*].profilePicContentType").value(hasItem(DEFAULT_PROFILE_PIC_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))));
+            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))))
+            .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(sameInstant(DEFAULT_DATE_OF_BIRTH))))
+            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER.toString())))
+            .andExpect(jsonPath("$.[*].yearInCollege").value(hasItem(DEFAULT_YEAR_IN_COLLEGE.toString())))
+            .andExpect(jsonPath("$.[*].collegeDivision").value(hasItem(DEFAULT_COLLEGE_DIVISION.toString())))
+            .andExpect(jsonPath("$.[*].countryCode").value(hasItem(DEFAULT_COUNTRY_CODE.toString())))
+            .andExpect(jsonPath("$.[*].stateCode").value(hasItem(DEFAULT_STATE_CODE.toString())));
     }
 
     @Test
@@ -284,7 +325,13 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.zip").value(DEFAULT_ZIP))
             .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY.toString()))
             .andExpect(jsonPath("$.profilePicContentType").value(DEFAULT_PROFILE_PIC_CONTENT_TYPE))
-            .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)));
+            .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)))
+            .andExpect(jsonPath("$.dateOfBirth").value(sameInstant(DEFAULT_DATE_OF_BIRTH)))
+            .andExpect(jsonPath("$.gender").value(DEFAULT_GENDER.toString()))
+            .andExpect(jsonPath("$.yearInCollege").value(DEFAULT_YEAR_IN_COLLEGE.toString()))
+            .andExpect(jsonPath("$.collegeDivision").value(DEFAULT_COLLEGE_DIVISION.toString()))
+            .andExpect(jsonPath("$.countryCode").value(DEFAULT_COUNTRY_CODE.toString()))
+            .andExpect(jsonPath("$.stateCode").value(DEFAULT_STATE_CODE.toString()));
     }
 
     @Test
@@ -322,7 +369,13 @@ public class UserInfoResourceIntTest {
             .zip(UPDATED_ZIP)
             .country(UPDATED_COUNTRY)
             .profilePic(UPDATED_PROFILE_PIC)
-            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE);
+            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE)
+            .dateOfBirth(UPDATED_DATE_OF_BIRTH)
+            .gender(UPDATED_GENDER)
+            .yearInCollege(UPDATED_YEAR_IN_COLLEGE)
+            .collegeDivision(UPDATED_COLLEGE_DIVISION)
+            .countryCode(UPDATED_COUNTRY_CODE)
+            .stateCode(UPDATED_STATE_CODE);
 
         restUserInfoMockMvc.perform(put("/api/user-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -350,6 +403,12 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getCountry()).isEqualTo(UPDATED_COUNTRY);
         assertThat(testUserInfo.getProfilePic()).isEqualTo(UPDATED_PROFILE_PIC);
         assertThat(testUserInfo.getProfilePicContentType()).isEqualTo(UPDATED_PROFILE_PIC_CONTENT_TYPE);
+        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
+        assertThat(testUserInfo.getGender()).isEqualTo(UPDATED_GENDER);
+        assertThat(testUserInfo.getYearInCollege()).isEqualTo(UPDATED_YEAR_IN_COLLEGE);
+        assertThat(testUserInfo.getCollegeDivision()).isEqualTo(UPDATED_COLLEGE_DIVISION);
+        assertThat(testUserInfo.getCountryCode()).isEqualTo(UPDATED_COUNTRY_CODE);
+        assertThat(testUserInfo.getStateCode()).isEqualTo(UPDATED_STATE_CODE);
     }
 
     @Test

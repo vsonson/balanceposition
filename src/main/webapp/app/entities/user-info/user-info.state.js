@@ -132,6 +132,12 @@
                                 country: null,
                                 profilePic: null,
                                 profilePicContentType: null,
+                                dateOfBirth: null,
+                                gender: null,
+                                yearInCollege: null,
+                                collegeDivision: null,
+                                countryCode: null,
+                                stateCode: null,
                                 id: null
                             };
                         }

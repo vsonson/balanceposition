@@ -1,14 +1,19 @@
 package com.balpos.app.service.impl;
 
+import com.balpos.app.domain.User;
+import com.balpos.app.security.SecurityUtils;
 import com.balpos.app.service.UserInfoService;
 import com.balpos.app.domain.UserInfo;
 import com.balpos.app.repository.UserInfoRepository;
+import com.balpos.app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 /**
@@ -21,8 +26,11 @@ public class UserInfoServiceImpl implements UserInfoService{
     private final Logger log = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
     private final UserInfoRepository userInfoRepository;
-    public UserInfoServiceImpl(UserInfoRepository userInfoRepository) {
+    private final UserService userService;
+
+    public UserInfoServiceImpl(UserInfoRepository userInfoRepository, UserService userService) {
         this.userInfoRepository = userInfoRepository;
+        this.userService = userService;
     }
 
     /**
@@ -34,6 +42,11 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Override
     public UserInfo save(UserInfo userInfo) {
         log.debug("Request to save UserInfo : {}", userInfo);
+
+        String currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(currentUserLogin);
+        userInfo.setUser(user.get());
+
         return userInfoRepository.save(userInfo);
     }
 
@@ -47,7 +60,16 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Transactional(readOnly = true)
     public Page<UserInfo> findAll(Pageable pageable) {
         log.debug("Request to get all UserInfos");
-        return userInfoRepository.findAll(pageable);
+
+        Page<UserInfo> all;
+        if( SecurityUtils.isCurrentUserInRole("ADMIN") ) {
+            all = userInfoRepository.findAll(pageable);
+        }else{
+            User user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).get();
+            all = userInfoRepository.findByUser(pageable, user);
+
+        }
+        return all;
     }
 
     /**

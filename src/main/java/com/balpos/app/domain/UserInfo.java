@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -83,8 +84,27 @@ public class UserInfo implements Serializable {
     @Column(name = "profile_pic_content_type")
     private String profilePicContentType;
 
+    @Column(name = "date_of_birth")
+    private ZonedDateTime dateOfBirth;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "year_in_college")
+    private String yearInCollege;
+
+    @Column(name = "college_division")
+    private String collegeDivision;
+
+    @Column(name = "country_code")
+    private String countryCode;
+
+    @Column(name = "state_code")
+    private String stateCode;
+
     @OneToOne
     @JoinColumn(unique = true)
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "networkOwner")
@@ -345,6 +365,84 @@ public class UserInfo implements Serializable {
         this.profilePicContentType = profilePicContentType;
     }
 
+    public ZonedDateTime getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public UserInfo dateOfBirth(ZonedDateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+        return this;
+    }
+
+    public void setDateOfBirth(ZonedDateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public UserInfo gender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getYearInCollege() {
+        return yearInCollege;
+    }
+
+    public UserInfo yearInCollege(String yearInCollege) {
+        this.yearInCollege = yearInCollege;
+        return this;
+    }
+
+    public void setYearInCollege(String yearInCollege) {
+        this.yearInCollege = yearInCollege;
+    }
+
+    public String getCollegeDivision() {
+        return collegeDivision;
+    }
+
+    public UserInfo collegeDivision(String collegeDivision) {
+        this.collegeDivision = collegeDivision;
+        return this;
+    }
+
+    public void setCollegeDivision(String collegeDivision) {
+        this.collegeDivision = collegeDivision;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public UserInfo countryCode(String countryCode) {
+        this.countryCode = countryCode;
+        return this;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public UserInfo stateCode(String stateCode) {
+        this.stateCode = stateCode;
+        return this;
+    }
+
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
+    }
+
     public User getUser() {
         return user;
     }
@@ -575,6 +673,12 @@ public class UserInfo implements Serializable {
             ", country='" + getCountry() + "'" +
             ", profilePic='" + getProfilePic() + "'" +
             ", profilePicContentType='" + profilePicContentType + "'" +
+            ", dateOfBirth='" + getDateOfBirth() + "'" +
+            ", gender='" + getGender() + "'" +
+            ", yearInCollege='" + getYearInCollege() + "'" +
+            ", collegeDivision='" + getCollegeDivision() + "'" +
+            ", countryCode='" + getCountryCode() + "'" +
+            ", stateCode='" + getStateCode() + "'" +
             "}";
     }
 }

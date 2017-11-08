@@ -35,6 +35,12 @@
                     <th jh-sort-by="zip"><span>Zip</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="country"><span>Country</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="profilePic"><span>Profile Pic</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateOfBirth"><span>Date Of Birth</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="gender"><span>Gender</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="yearInCollege"><span>Year In College</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="collegeDivision"><span>College Division</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countryCode"><span>Country Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="stateCode"><span>State Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="user.email"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -61,6 +67,12 @@
                         <a ng-if="userInfo.profilePic" ng-click="vm.openFile(userInfo.profilePicContentType, userInfo.profilePic)">open</a>
                         <span ng-if="userInfo.profilePic">{{userInfo.profilePicContentType}}, {{vm.byteSize(userInfo.profilePic)}}</span>
                     </td>
+                    <td>{{userInfo.dateOfBirth | date:'medium'}}</td>
+                    <td>{{userInfo.gender}}</td>
+                    <td>{{userInfo.yearInCollege}}</td>
+                    <td>{{userInfo.collegeDivision}}</td>
+                    <td>{{userInfo.countryCode}}</td>
+                    <td>{{userInfo.stateCode}}</td>
                     <td>
                         {{userInfo.user.email}}
                     </td>

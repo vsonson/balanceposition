@@ -122,12 +122,37 @@
             "fieldName": "profilePic",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "dateOfBirth",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "yearInCollege",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "collegeDivision",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "countryCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "stateCode",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20170824162954",
-    "javadoc": "User is a default entity in a Stack Stack monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity",
-    "entityTableName": "user_info",
     "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "user_info",
+    "jpaMetamodelFiltering": false,
     "pagination": "pager",
-    "service": "serviceImpl"
+    "javadoc": "User is a default entity in a Stack Stack monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity"
 }

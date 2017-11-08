@@ -1,6 +1,9 @@
 package com.balpos.app.repository;
 
+import com.balpos.app.domain.User;
 import com.balpos.app.domain.UserInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -13,4 +16,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
 
+    Page<UserInfo> findByUser(Pageable pageable, User user);
 }

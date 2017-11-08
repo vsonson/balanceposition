@@ -136,6 +136,46 @@
             <input type="hidden" class="form-control" name="profilePicContentType" id="field_profilePicContentType"
                     ng-model="vm.userInfo.profilePicContentType" />
         </div>
+        <div class="form-group">
+            <label class="control-label" for="field_dateOfBirth">Date Of Birth</label>
+                <div class="input-group">
+                    <input id="field_dateOfBirth" type="text" class="form-control" name="dateOfBirth" datetime-picker="{{dateformat}}" ng-model="vm.userInfo.dateOfBirth" is-open="vm.datePickerOpenStatus.dateOfBirth"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateOfBirth')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_gender">Gender</label>
+            <input type="text" class="form-control" name="gender" id="field_gender"
+                    ng-model="vm.userInfo.gender"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_yearInCollege">Year In College</label>
+            <input type="text" class="form-control" name="yearInCollege" id="field_yearInCollege"
+                    ng-model="vm.userInfo.yearInCollege"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_collegeDivision">College Division</label>
+            <input type="text" class="form-control" name="collegeDivision" id="field_collegeDivision"
+                    ng-model="vm.userInfo.collegeDivision"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_countryCode">Country Code</label>
+            <input type="text" class="form-control" name="countryCode" id="field_countryCode"
+                    ng-model="vm.userInfo.countryCode"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_stateCode">State Code</label>
+            <input type="text" class="form-control" name="stateCode" id="field_stateCode"
+                    ng-model="vm.userInfo.stateCode"
+                    />
+        </div>
 
         <div class="form-group">
             <label for="field_user">User</label>
