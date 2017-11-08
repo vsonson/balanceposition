@@ -64,34 +64,7 @@
             "fieldValues": "STUDENTATHLETE,ADMIN,SUPPORTER"
         },
         {
-            "fieldName": "userName",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "password",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "email",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "phone",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "fname",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "mname",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "lname",
             "fieldType": "String"
         },
         {

@@ -117,13 +117,7 @@
                             return {
                                 userstatus: null,
                                 userType: null,
-                                userName: null,
-                                password: null,
-                                email: null,
                                 phone: null,
-                                fname: null,
-                                mname: null,
-                                lname: null,
                                 address: null,
                                 address2: null,
                                 city: null,

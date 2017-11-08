@@ -52,26 +52,8 @@ public class UserInfoResourceIntTest {
     private static final UserType DEFAULT_USER_TYPE = UserType.STUDENTATHLETE;
     private static final UserType UPDATED_USER_TYPE = UserType.ADMIN;
 
-    private static final String DEFAULT_USER_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_USER_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PASSWORD = "AAAAAAAAAA";
-    private static final String UPDATED_PASSWORD = "BBBBBBBBBB";
-
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
-
     private static final String DEFAULT_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_PHONE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_FNAME = "AAAAAAAAAA";
-    private static final String UPDATED_FNAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_MNAME = "AAAAAAAAAA";
-    private static final String UPDATED_MNAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_LNAME = "AAAAAAAAAA";
-    private static final String UPDATED_LNAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
@@ -156,13 +138,7 @@ public class UserInfoResourceIntTest {
         UserInfo userInfo = new UserInfo()
             .userstatus(DEFAULT_USERSTATUS)
             .userType(DEFAULT_USER_TYPE)
-            .userName(DEFAULT_USER_NAME)
-            .password(DEFAULT_PASSWORD)
-            .email(DEFAULT_EMAIL)
             .phone(DEFAULT_PHONE)
-            .fname(DEFAULT_FNAME)
-            .mname(DEFAULT_MNAME)
-            .lname(DEFAULT_LNAME)
             .address(DEFAULT_ADDRESS)
             .address2(DEFAULT_ADDRESS_2)
             .city(DEFAULT_CITY)
@@ -202,13 +178,7 @@ public class UserInfoResourceIntTest {
         UserInfo testUserInfo = userInfoList.get(userInfoList.size() - 1);
         assertThat(testUserInfo.getUserstatus()).isEqualTo(DEFAULT_USERSTATUS);
         assertThat(testUserInfo.getUserType()).isEqualTo(DEFAULT_USER_TYPE);
-        assertThat(testUserInfo.getUserName()).isEqualTo(DEFAULT_USER_NAME);
-        assertThat(testUserInfo.getPassword()).isEqualTo(DEFAULT_PASSWORD);
-        assertThat(testUserInfo.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testUserInfo.getPhone()).isEqualTo(DEFAULT_PHONE);
-        assertThat(testUserInfo.getFname()).isEqualTo(DEFAULT_FNAME);
-        assertThat(testUserInfo.getMname()).isEqualTo(DEFAULT_MNAME);
-        assertThat(testUserInfo.getLname()).isEqualTo(DEFAULT_LNAME);
         assertThat(testUserInfo.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testUserInfo.getAddress2()).isEqualTo(DEFAULT_ADDRESS_2);
         assertThat(testUserInfo.getCity()).isEqualTo(DEFAULT_CITY);
@@ -246,24 +216,6 @@ public class UserInfoResourceIntTest {
 
     @Test
     @Transactional
-    public void checkUserNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = userInfoRepository.findAll().size();
-        // set the field null
-        userInfo.setUserName(null);
-
-        // Create the UserInfo, which fails.
-
-        restUserInfoMockMvc.perform(post("/api/user-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<UserInfo> userInfoList = userInfoRepository.findAll();
-        assertThat(userInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllUserInfos() throws Exception {
         // Initialize the database
         userInfoRepository.saveAndFlush(userInfo);
@@ -275,13 +227,7 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(userInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].userstatus").value(hasItem(DEFAULT_USERSTATUS.toString())))
             .andExpect(jsonPath("$.[*].userType").value(hasItem(DEFAULT_USER_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
-            .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
-            .andExpect(jsonPath("$.[*].fname").value(hasItem(DEFAULT_FNAME.toString())))
-            .andExpect(jsonPath("$.[*].mname").value(hasItem(DEFAULT_MNAME.toString())))
-            .andExpect(jsonPath("$.[*].lname").value(hasItem(DEFAULT_LNAME.toString())))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS.toString())))
             .andExpect(jsonPath("$.[*].address2").value(hasItem(DEFAULT_ADDRESS_2.toString())))
             .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
@@ -311,13 +257,7 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.id").value(userInfo.getId().intValue()))
             .andExpect(jsonPath("$.userstatus").value(DEFAULT_USERSTATUS.toString()))
             .andExpect(jsonPath("$.userType").value(DEFAULT_USER_TYPE.toString()))
-            .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
-            .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD.toString()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
-            .andExpect(jsonPath("$.fname").value(DEFAULT_FNAME.toString()))
-            .andExpect(jsonPath("$.mname").value(DEFAULT_MNAME.toString()))
-            .andExpect(jsonPath("$.lname").value(DEFAULT_LNAME.toString()))
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS.toString()))
             .andExpect(jsonPath("$.address2").value(DEFAULT_ADDRESS_2.toString()))
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
@@ -355,13 +295,7 @@ public class UserInfoResourceIntTest {
         updatedUserInfo
             .userstatus(UPDATED_USERSTATUS)
             .userType(UPDATED_USER_TYPE)
-            .userName(UPDATED_USER_NAME)
-            .password(UPDATED_PASSWORD)
-            .email(UPDATED_EMAIL)
             .phone(UPDATED_PHONE)
-            .fname(UPDATED_FNAME)
-            .mname(UPDATED_MNAME)
-            .lname(UPDATED_LNAME)
             .address(UPDATED_ADDRESS)
             .address2(UPDATED_ADDRESS_2)
             .city(UPDATED_CITY)
@@ -388,13 +322,7 @@ public class UserInfoResourceIntTest {
         UserInfo testUserInfo = userInfoList.get(userInfoList.size() - 1);
         assertThat(testUserInfo.getUserstatus()).isEqualTo(UPDATED_USERSTATUS);
         assertThat(testUserInfo.getUserType()).isEqualTo(UPDATED_USER_TYPE);
-        assertThat(testUserInfo.getUserName()).isEqualTo(UPDATED_USER_NAME);
-        assertThat(testUserInfo.getPassword()).isEqualTo(UPDATED_PASSWORD);
-        assertThat(testUserInfo.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testUserInfo.getPhone()).isEqualTo(UPDATED_PHONE);
-        assertThat(testUserInfo.getFname()).isEqualTo(UPDATED_FNAME);
-        assertThat(testUserInfo.getMname()).isEqualTo(UPDATED_MNAME);
-        assertThat(testUserInfo.getLname()).isEqualTo(UPDATED_LNAME);
         assertThat(testUserInfo.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testUserInfo.getAddress2()).isEqualTo(UPDATED_ADDRESS_2);
         assertThat(testUserInfo.getCity()).isEqualTo(UPDATED_CITY);

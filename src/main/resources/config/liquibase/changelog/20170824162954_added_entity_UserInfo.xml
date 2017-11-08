@@ -30,31 +30,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="user_name" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="jhi_password" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="email" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="phone" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="fname" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="mname" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="lname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

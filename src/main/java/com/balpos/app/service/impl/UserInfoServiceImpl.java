@@ -43,9 +43,11 @@ public class UserInfoServiceImpl implements UserInfoService{
     public UserInfo save(UserInfo userInfo) {
         log.debug("Request to save UserInfo : {}", userInfo);
 
-        String currentUserLogin = SecurityUtils.getCurrentUserLogin();
-        Optional<User> user = userService.getUserWithAuthoritiesByLogin(currentUserLogin);
-        userInfo.setUser(user.get());
+        if( !SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
+            String currentUserLogin = SecurityUtils.getCurrentUserLogin();
+            Optional<User> user = userService.getUserWithAuthoritiesByLogin(currentUserLogin);
+            userInfo.setUser(user.get());
+        }
 
         return userInfoRepository.save(userInfo);
     }
@@ -62,12 +64,11 @@ public class UserInfoServiceImpl implements UserInfoService{
         log.debug("Request to get all UserInfos");
 
         Page<UserInfo> all;
-        if( SecurityUtils.isCurrentUserInRole("ADMIN") ) {
+        if( SecurityUtils.isCurrentUserInRole("ROLE_ADMIN") ) {
             all = userInfoRepository.findAll(pageable);
         }else{
             User user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).get();
             all = userInfoRepository.findByUser(pageable, user);
-
         }
         return all;
     }
@@ -82,7 +83,14 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Transactional(readOnly = true)
     public UserInfo findOne(Long id) {
         log.debug("Request to get UserInfo : {}", id);
-        return userInfoRepository.findOne(id);
+        UserInfo userInfo;
+        if( SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
+            userInfo = userInfoRepository.findOne(id);
+        }else{
+            User user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).get();
+            userInfo = userInfoRepository.findByIdAndUser(id, user);
+        }
+        return userInfo;
     }
 
     /**
@@ -93,6 +101,11 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Override
     public void delete(Long id) {
         log.debug("Request to delete UserInfo : {}", id);
-        userInfoRepository.delete(id);
+        if( SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
+            userInfoRepository.delete(id);
+        }else{
+            User user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).get();
+            userInfoRepository.deleteByIdAndUser(id, user);
+        }
     }
 }

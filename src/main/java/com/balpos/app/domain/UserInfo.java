@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
@@ -37,27 +36,8 @@ public class UserInfo implements Serializable {
     @Column(name = "user_type")
     private UserType userType;
 
-    @NotNull
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-
-    @Column(name = "jhi_password")
-    private String password;
-
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "phone")
     private String phone;
-
-    @Column(name = "fname")
-    private String fname;
-
-    @Column(name = "mname")
-    private String mname;
-
-    @Column(name = "lname")
-    private String lname;
 
     @Column(name = "address")
     private String address;
@@ -170,45 +150,6 @@ public class UserInfo implements Serializable {
         this.userType = userType;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public UserInfo userName(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public UserInfo password(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public UserInfo email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -220,45 +161,6 @@ public class UserInfo implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getFname() {
-        return fname;
-    }
-
-    public UserInfo fname(String fname) {
-        this.fname = fname;
-        return this;
-    }
-
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public String getMname() {
-        return mname;
-    }
-
-    public UserInfo mname(String mname) {
-        this.mname = mname;
-        return this;
-    }
-
-    public void setMname(String mname) {
-        this.mname = mname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public UserInfo lname(String lname) {
-        this.lname = lname;
-        return this;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
     }
 
     public String getAddress() {
@@ -658,13 +560,7 @@ public class UserInfo implements Serializable {
             "id=" + getId() +
             ", userstatus='" + getUserstatus() + "'" +
             ", userType='" + getUserType() + "'" +
-            ", userName='" + getUserName() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", email='" + getEmail() + "'" +
             ", phone='" + getPhone() + "'" +
-            ", fname='" + getFname() + "'" +
-            ", mname='" + getMname() + "'" +
-            ", lname='" + getLname() + "'" +
             ", address='" + getAddress() + "'" +
             ", address2='" + getAddress2() + "'" +
             ", city='" + getCity() + "'" +

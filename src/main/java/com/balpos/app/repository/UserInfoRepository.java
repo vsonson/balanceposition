@@ -17,4 +17,8 @@ import org.springframework.data.jpa.repository.*;
 public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
 
     Page<UserInfo> findByUser(Pageable pageable, User user);
+
+    UserInfo findByIdAndUser(Long id, User user);
+
+    void deleteByIdAndUser(Long id, User user);
 }
