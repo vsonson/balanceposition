@@ -84,7 +84,6 @@ public class UserInfo implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "networkOwner")
@@ -114,6 +113,10 @@ public class UserInfo implements Serializable {
     @OneToMany(mappedBy = "userInfo")
     @JsonIgnore
     private Set<IncentiveHistory> incentiveHistories = new HashSet<>();
+
+    @OneToMany(mappedBy = "userInfo")
+    @JsonIgnore
+    private Set<QuoteOfTheDayHistory> quoteOfTheDayHistories = new HashSet<>();
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -531,6 +534,31 @@ public class UserInfo implements Serializable {
 
     public void setIncentiveHistories(Set<IncentiveHistory> incentiveHistories) {
         this.incentiveHistories = incentiveHistories;
+    }
+
+    public Set<QuoteOfTheDayHistory> getQuoteOfTheDayHistories() {
+        return quoteOfTheDayHistories;
+    }
+
+    public UserInfo quoteOfTheDayHistories(Set<QuoteOfTheDayHistory> quoteOfTheDayHistories) {
+        this.quoteOfTheDayHistories = quoteOfTheDayHistories;
+        return this;
+    }
+
+    public UserInfo addQuoteOfTheDayHistory(QuoteOfTheDayHistory quoteOfTheDayHistory) {
+        this.quoteOfTheDayHistories.add(quoteOfTheDayHistory);
+        quoteOfTheDayHistory.setUserInfo(this);
+        return this;
+    }
+
+    public UserInfo removeQuoteOfTheDayHistory(QuoteOfTheDayHistory quoteOfTheDayHistory) {
+        this.quoteOfTheDayHistories.remove(quoteOfTheDayHistory);
+        quoteOfTheDayHistory.setUserInfo(null);
+        return this;
+    }
+
+    public void setQuoteOfTheDayHistories(Set<QuoteOfTheDayHistory> quoteOfTheDayHistories) {
+        this.quoteOfTheDayHistories = quoteOfTheDayHistories;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

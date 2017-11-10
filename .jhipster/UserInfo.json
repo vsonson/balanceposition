@@ -50,6 +50,12 @@
             "relationshipName": "incentiveHistory",
             "otherEntityName": "incentiveHistory",
             "otherEntityRelationshipName": "userInfo"
+        },
+        {
+            "relationshipName": "quoteOfTheDayHistory",
+            "otherEntityName": "quoteOfTheDayHistory",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "userInfo"
         }
     ],
     "fields": [
