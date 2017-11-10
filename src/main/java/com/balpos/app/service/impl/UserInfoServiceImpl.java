@@ -1,19 +1,14 @@
 package com.balpos.app.service.impl;
 
-import com.balpos.app.domain.User;
-import com.balpos.app.security.SecurityUtils;
 import com.balpos.app.service.UserInfoService;
 import com.balpos.app.domain.UserInfo;
 import com.balpos.app.repository.UserInfoRepository;
-import com.balpos.app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 
 /**
@@ -26,11 +21,8 @@ public class UserInfoServiceImpl implements UserInfoService{
     private final Logger log = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
     private final UserInfoRepository userInfoRepository;
-    private final UserService userService;
-
-    public UserInfoServiceImpl(UserInfoRepository userInfoRepository, UserService userService) {
+    public UserInfoServiceImpl(UserInfoRepository userInfoRepository) {
         this.userInfoRepository = userInfoRepository;
-        this.userService = userService;
     }
 
     /**
@@ -42,13 +34,6 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Override
     public UserInfo save(UserInfo userInfo) {
         log.debug("Request to save UserInfo : {}", userInfo);
-
-        if( !SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
-            String currentUserLogin = SecurityUtils.getCurrentUserLogin();
-            Optional<User> user = userService.getUserWithAuthoritiesByLogin(currentUserLogin);
-            userInfo.setUser(user.get());
-        }
-
         return userInfoRepository.save(userInfo);
     }
 
@@ -62,15 +47,7 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Transactional(readOnly = true)
     public Page<UserInfo> findAll(Pageable pageable) {
         log.debug("Request to get all UserInfos");
-
-        Page<UserInfo> all;
-        if( SecurityUtils.isCurrentUserInRole("ROLE_ADMIN") ) {
-            all = userInfoRepository.findAll(pageable);
-        }else{
-            User user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).get();
-            all = userInfoRepository.findByUser(pageable, user);
-        }
-        return all;
+        return userInfoRepository.findAll(pageable);
     }
 
     /**
@@ -83,14 +60,7 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Transactional(readOnly = true)
     public UserInfo findOne(Long id) {
         log.debug("Request to get UserInfo : {}", id);
-        UserInfo userInfo;
-        if( SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
-            userInfo = userInfoRepository.findOne(id);
-        }else{
-            User user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).get();
-            userInfo = userInfoRepository.findByIdAndUser(id, user);
-        }
-        return userInfo;
+        return userInfoRepository.findOne(id);
     }
 
     /**
@@ -101,11 +71,6 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Override
     public void delete(Long id) {
         log.debug("Request to delete UserInfo : {}", id);
-        if( SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
-            userInfoRepository.delete(id);
-        }else{
-            User user = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).get();
-            userInfoRepository.deleteByIdAndUser(id, user);
-        }
+        userInfoRepository.delete(id);
     }
 }

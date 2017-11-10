@@ -21,6 +21,8 @@
     <include file="config/liquibase/changelog/20170824163014_added_entity_Resources.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163016_added_entity_WellnessHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163019_added_entity_IncentiveAction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171110011552_added_entity_QuoteOfTheDay.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171110011810_added_entity_QuoteOfTheDayHistory.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - Stack Stack will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20170824162954_added_entity_constraints_UserInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824162959_added_entity_constraints_TrackMetricQuestion.xml" relativeToChangelogFile="false"/>
@@ -34,5 +36,7 @@
     <include file="config/liquibase/changelog/20170824163011_added_entity_constraints_PathAction.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163016_added_entity_constraints_WellnessHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163019_added_entity_constraints_IncentiveAction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171110011810_added_entity_constraints_QuoteOfTheDayHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171110011552_added_entity_constraints_QuoteOfTheDay.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - Stack Stack will add liquibase constraints changelogs here -->
 </databaseChangeLog>

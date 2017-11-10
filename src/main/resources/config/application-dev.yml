@@ -55,6 +55,7 @@ spring:
 
 liquibase:
     contexts: dev
+    enabled: false
 
 # ===================================================================
 # To enable SSL, generate a certificate using:

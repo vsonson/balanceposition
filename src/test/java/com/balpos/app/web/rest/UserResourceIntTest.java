@@ -13,6 +13,7 @@ import com.balpos.app.web.rest.errors.ExceptionTranslator;
 import com.balpos.app.web.rest.vm.ManagedUserVM;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -48,6 +49,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BalancepositionApp.class)
+@Ignore
 public class UserResourceIntTest {
 
     private static final Long DEFAULT_ID = 1L;

@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('UserInfoDialogController', UserInfoDialogController);
 
-    UserInfoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'DataUtils', 'entity', 'UserInfo', 'User', 'NetworkMember', 'MetricHistory', 'ProgramHistory', 'Note', 'UserNotification', 'WellnessHistory', 'IncentiveHistory'];
+    UserInfoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'DataUtils', 'entity', 'UserInfo', 'User', 'NetworkMember', 'MetricHistory', 'ProgramHistory', 'Note', 'UserNotification', 'WellnessHistory', 'IncentiveHistory', 'QuoteOfTheDayHistory'];
 
-    function UserInfoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, DataUtils, entity, UserInfo, User, NetworkMember, MetricHistory, ProgramHistory, Note, UserNotification, WellnessHistory, IncentiveHistory) {
+    function UserInfoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, DataUtils, entity, UserInfo, User, NetworkMember, MetricHistory, ProgramHistory, Note, UserNotification, WellnessHistory, IncentiveHistory, QuoteOfTheDayHistory) {
         var vm = this;
 
         vm.userInfo = entity;
@@ -25,6 +25,7 @@
         vm.usernotifications = UserNotification.query();
         vm.wellnesshistories = WellnessHistory.query();
         vm.incentivehistories = IncentiveHistory.query();
+        vm.quoteofthedayhistories = QuoteOfTheDayHistory.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
