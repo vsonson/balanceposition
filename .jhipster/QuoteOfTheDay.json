@@ -1,0 +1,16 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "quoteText",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171110011552",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "quote_of_the_day",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}
