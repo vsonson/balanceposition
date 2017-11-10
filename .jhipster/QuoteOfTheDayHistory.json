@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "quoteOfTheDay",
+            "otherEntityName": "quoteOfTheDay",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "quoteOfTheDayHistory"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20171110011810",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "quote_of_the_day_history",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

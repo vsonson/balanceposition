@@ -21,6 +21,9 @@ public class QuoteOfTheDay implements Serializable {
     @Column(name = "quote_text")
     private String quoteText;
 
+    @ManyToOne
+    private QuoteOfTheDayHistory quoteOfTheDayHistory;
+
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -41,6 +44,19 @@ public class QuoteOfTheDay implements Serializable {
 
     public void setQuoteText(String quoteText) {
         this.quoteText = quoteText;
+    }
+
+    public QuoteOfTheDayHistory getQuoteOfTheDayHistory() {
+        return quoteOfTheDayHistory;
+    }
+
+    public QuoteOfTheDay quoteOfTheDayHistory(QuoteOfTheDayHistory quoteOfTheDayHistory) {
+        this.quoteOfTheDayHistory = quoteOfTheDayHistory;
+        return this;
+    }
+
+    public void setQuoteOfTheDayHistory(QuoteOfTheDayHistory quoteOfTheDayHistory) {
+        this.quoteOfTheDayHistory = quoteOfTheDayHistory;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

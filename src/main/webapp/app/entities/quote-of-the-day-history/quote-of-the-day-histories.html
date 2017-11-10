@@ -1,13 +1,13 @@
 <div>
-    <h2>Quote Of The Days</h2>
+    <h2>Quote Of The Day Histories</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="quote-of-the-day.new" >
+                <button class="btn btn-primary" ui-sref="quote-of-the-day-history.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span >
-                        Create new Quote Of The Day
+                        Create new Quote Of The Day History
                     </span>
                 </button>
             </div>
@@ -19,34 +19,32 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="quoteText"><span>Quote Text</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="quoteOfTheDayHistory.id"><span>Quote Of The Day History</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userInfo.id"><span>User Info</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="quoteOfTheDay in vm.quoteOfTheDays track by quoteOfTheDay.id">
-                    <td><a ui-sref="quote-of-the-day-detail({id:quoteOfTheDay.id})">{{quoteOfTheDay.id}}</a></td>
-                    <td>{{quoteOfTheDay.quoteText}}</td>
+                <tr ng-repeat="quoteOfTheDayHistory in vm.quoteOfTheDayHistories track by quoteOfTheDayHistory.id">
+                    <td><a ui-sref="quote-of-the-day-history-detail({id:quoteOfTheDayHistory.id})">{{quoteOfTheDayHistory.id}}</a></td>
                     <td>
-                        <a ui-sref="quote-of-the-day-history-detail({id:quoteOfTheDay.quoteOfTheDayHistory.id})">{{quoteOfTheDay.quoteOfTheDayHistory.id}}</a>
+                        <a ui-sref="user-info-detail({id:quoteOfTheDayHistory.userInfo.id})">{{quoteOfTheDayHistory.userInfo.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="quote-of-the-day-detail({id:quoteOfTheDay.id})"
+                                    ui-sref="quote-of-the-day-history-detail({id:quoteOfTheDayHistory.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="quote-of-the-day.edit({id:quoteOfTheDay.id})"
+                                    ui-sref="quote-of-the-day-history.edit({id:quoteOfTheDayHistory.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="quote-of-the-day.delete({id:quoteOfTheDay.id})"
+                                    ui-sref="quote-of-the-day-history.delete({id:quoteOfTheDayHistory.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-sm-down"></span>

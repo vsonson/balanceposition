@@ -2,9 +2,9 @@
 
 describe('Controller Tests', function() {
 
-    describe('QuoteOfTheDay Management Detail Controller', function() {
+    describe('QuoteOfTheDayHistory Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockQuoteOfTheDay, MockQuoteOfTheDayHistory;
+        var MockEntity, MockPreviousState, MockQuoteOfTheDayHistory, MockUserInfo, MockQuoteOfTheDay;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,8 +12,9 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
-            MockQuoteOfTheDay = jasmine.createSpy('MockQuoteOfTheDay');
             MockQuoteOfTheDayHistory = jasmine.createSpy('MockQuoteOfTheDayHistory');
+            MockUserInfo = jasmine.createSpy('MockUserInfo');
+            MockQuoteOfTheDay = jasmine.createSpy('MockQuoteOfTheDay');
             
 
             var locals = {
@@ -21,18 +22,19 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'QuoteOfTheDay': MockQuoteOfTheDay,
-                'QuoteOfTheDayHistory': MockQuoteOfTheDayHistory
+                'QuoteOfTheDayHistory': MockQuoteOfTheDayHistory,
+                'UserInfo': MockUserInfo,
+                'QuoteOfTheDay': MockQuoteOfTheDay
             };
             createController = function() {
-                $injector.get('$controller')("QuoteOfTheDayDetailController", locals);
+                $injector.get('$controller')("QuoteOfTheDayHistoryDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'balancepositionApp:quoteOfTheDayUpdate';
+                var eventType = 'balancepositionApp:quoteOfTheDayHistoryUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

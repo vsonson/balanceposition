@@ -5,14 +5,15 @@
         .module('balancepositionApp')
         .controller('QuoteOfTheDayDialogController', QuoteOfTheDayDialogController);
 
-    QuoteOfTheDayDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'QuoteOfTheDay'];
+    QuoteOfTheDayDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'QuoteOfTheDay', 'QuoteOfTheDayHistory'];
 
-    function QuoteOfTheDayDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, QuoteOfTheDay) {
+    function QuoteOfTheDayDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, QuoteOfTheDay, QuoteOfTheDayHistory) {
         var vm = this;
 
         vm.quoteOfTheDay = entity;
         vm.clear = clear;
         vm.save = save;
+        vm.quoteofthedayhistories = QuoteOfTheDayHistory.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
