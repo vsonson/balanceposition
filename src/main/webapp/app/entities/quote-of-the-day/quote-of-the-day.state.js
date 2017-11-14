@@ -116,6 +116,7 @@
                         entity: function () {
                             return {
                                 quoteText: null,
+                                author: null,
                                 id: null
                             };
                         }

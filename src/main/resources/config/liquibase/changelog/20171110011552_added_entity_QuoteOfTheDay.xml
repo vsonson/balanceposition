@@ -26,6 +26,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="author" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="quote_of_the_day_history_id" type="bigint">
                 <constraints nullable="true" />
             </column>

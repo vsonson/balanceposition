@@ -21,6 +21,9 @@ public class QuoteOfTheDay implements Serializable {
     @Column(name = "quote_text")
     private String quoteText;
 
+    @Column(name = "author")
+    private String author;
+
     @ManyToOne
     private QuoteOfTheDayHistory quoteOfTheDayHistory;
 
@@ -44,6 +47,19 @@ public class QuoteOfTheDay implements Serializable {
 
     public void setQuoteText(String quoteText) {
         this.quoteText = quoteText;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public QuoteOfTheDay author(String author) {
+        this.author = author;
+        return this;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public QuoteOfTheDayHistory getQuoteOfTheDayHistory() {
@@ -85,6 +101,7 @@ public class QuoteOfTheDay implements Serializable {
         return "QuoteOfTheDay{" +
             "id=" + getId() +
             ", quoteText='" + getQuoteText() + "'" +
+            ", author='" + getAuthor() + "'" +
             "}";
     }
 }

@@ -33,6 +33,12 @@ public class QuoteOfTheDayLoaderTest {
                 if( index > -1 ){
                     String quote = line.substring(index, line.length());
                     System.out.println(quote);
+
+                    String quoteText = line.substring(line.indexOf("\"")+1, line.lastIndexOf("\"")-1).trim();
+                    String author = line.substring(line.lastIndexOf("-")+1, line.length()).trim();
+
+                    quoteText = quoteText;
+                    author = author;
                 }
 
             }

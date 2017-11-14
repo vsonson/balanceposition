@@ -12,6 +12,10 @@
         {
             "fieldName": "quoteText",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "author",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171110011552",
