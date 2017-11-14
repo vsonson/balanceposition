@@ -34,7 +34,7 @@ spring:
     jpa:
         open-in-view: false
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
             naming:
                 physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
                 implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
@@ -105,4 +105,4 @@ jhipster:
 
 application:
 liquibase:
-  enabled: false
+  enabled: true

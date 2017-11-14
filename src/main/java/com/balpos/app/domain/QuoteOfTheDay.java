@@ -18,14 +18,24 @@ public class QuoteOfTheDay implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "quote_text")
-    private String quoteText;
-
     @Column(name = "author")
     private String author;
 
+    @Column(name = "quote_text")
+    private String quoteText;
+
     @ManyToOne
     private QuoteOfTheDayHistory quoteOfTheDayHistory;
+
+    public QuoteOfTheDay(String quoteText, String author) {
+        this();
+        this.quoteText = quoteText;
+        this.author = author;
+    }
+
+    public QuoteOfTheDay() {
+
+    }
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -34,19 +44,6 @@ public class QuoteOfTheDay implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getQuoteText() {
-        return quoteText;
-    }
-
-    public QuoteOfTheDay quoteText(String quoteText) {
-        this.quoteText = quoteText;
-        return this;
-    }
-
-    public void setQuoteText(String quoteText) {
-        this.quoteText = quoteText;
     }
 
     public String getAuthor() {
@@ -60,6 +57,19 @@ public class QuoteOfTheDay implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getQuoteText() {
+        return quoteText;
+    }
+
+    public QuoteOfTheDay quoteText(String quoteText) {
+        this.quoteText = quoteText;
+        return this;
+    }
+
+    public void setQuoteText(String quoteText) {
+        this.quoteText = quoteText;
     }
 
     public QuoteOfTheDayHistory getQuoteOfTheDayHistory() {
@@ -100,8 +110,8 @@ public class QuoteOfTheDay implements Serializable {
     public String toString() {
         return "QuoteOfTheDay{" +
             "id=" + getId() +
-            ", quoteText='" + getQuoteText() + "'" +
             ", author='" + getAuthor() + "'" +
+            ", quoteText='" + getQuoteText() + "'" +
             "}";
     }
 }

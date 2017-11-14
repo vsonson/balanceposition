@@ -38,11 +38,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BalancepositionApp.class)
 public class QuoteOfTheDayResourceIntTest {
 
-    private static final String DEFAULT_QUOTE_TEXT = "AAAAAAAAAA";
-    private static final String UPDATED_QUOTE_TEXT = "BBBBBBBBBB";
-
     private static final String DEFAULT_AUTHOR = "AAAAAAAAAA";
     private static final String UPDATED_AUTHOR = "BBBBBBBBBB";
+
+    private static final String DEFAULT_QUOTE_TEXT = "AAAAAAAAAA";
+    private static final String UPDATED_QUOTE_TEXT = "BBBBBBBBBB";
 
     @Autowired
     private QuoteOfTheDayRepository quoteOfTheDayRepository;
@@ -84,8 +84,8 @@ public class QuoteOfTheDayResourceIntTest {
      */
     public static QuoteOfTheDay createEntity(EntityManager em) {
         QuoteOfTheDay quoteOfTheDay = new QuoteOfTheDay()
-            .quoteText(DEFAULT_QUOTE_TEXT)
-            .author(DEFAULT_AUTHOR);
+            .author(DEFAULT_AUTHOR)
+            .quoteText(DEFAULT_QUOTE_TEXT);
         return quoteOfTheDay;
     }
 
@@ -109,8 +109,8 @@ public class QuoteOfTheDayResourceIntTest {
         List<QuoteOfTheDay> quoteOfTheDayList = quoteOfTheDayRepository.findAll();
         assertThat(quoteOfTheDayList).hasSize(databaseSizeBeforeCreate + 1);
         QuoteOfTheDay testQuoteOfTheDay = quoteOfTheDayList.get(quoteOfTheDayList.size() - 1);
-        assertThat(testQuoteOfTheDay.getQuoteText()).isEqualTo(DEFAULT_QUOTE_TEXT);
         assertThat(testQuoteOfTheDay.getAuthor()).isEqualTo(DEFAULT_AUTHOR);
+        assertThat(testQuoteOfTheDay.getQuoteText()).isEqualTo(DEFAULT_QUOTE_TEXT);
     }
 
     @Test
@@ -143,8 +143,8 @@ public class QuoteOfTheDayResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(quoteOfTheDay.getId().intValue())))
-            .andExpect(jsonPath("$.[*].quoteText").value(hasItem(DEFAULT_QUOTE_TEXT.toString())))
-            .andExpect(jsonPath("$.[*].author").value(hasItem(DEFAULT_AUTHOR.toString())));
+            .andExpect(jsonPath("$.[*].author").value(hasItem(DEFAULT_AUTHOR.toString())))
+            .andExpect(jsonPath("$.[*].quoteText").value(hasItem(DEFAULT_QUOTE_TEXT.toString())));
     }
 
     @Test
@@ -158,8 +158,8 @@ public class QuoteOfTheDayResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(quoteOfTheDay.getId().intValue()))
-            .andExpect(jsonPath("$.quoteText").value(DEFAULT_QUOTE_TEXT.toString()))
-            .andExpect(jsonPath("$.author").value(DEFAULT_AUTHOR.toString()));
+            .andExpect(jsonPath("$.author").value(DEFAULT_AUTHOR.toString()))
+            .andExpect(jsonPath("$.quoteText").value(DEFAULT_QUOTE_TEXT.toString()));
     }
 
     @Test
@@ -181,8 +181,8 @@ public class QuoteOfTheDayResourceIntTest {
         // Update the quoteOfTheDay
         QuoteOfTheDay updatedQuoteOfTheDay = quoteOfTheDayRepository.findOne(quoteOfTheDay.getId());
         updatedQuoteOfTheDay
-            .quoteText(UPDATED_QUOTE_TEXT)
-            .author(UPDATED_AUTHOR);
+            .author(UPDATED_AUTHOR)
+            .quoteText(UPDATED_QUOTE_TEXT);
 
         restQuoteOfTheDayMockMvc.perform(put("/api/quote-of-the-days")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -193,8 +193,8 @@ public class QuoteOfTheDayResourceIntTest {
         List<QuoteOfTheDay> quoteOfTheDayList = quoteOfTheDayRepository.findAll();
         assertThat(quoteOfTheDayList).hasSize(databaseSizeBeforeUpdate);
         QuoteOfTheDay testQuoteOfTheDay = quoteOfTheDayList.get(quoteOfTheDayList.size() - 1);
-        assertThat(testQuoteOfTheDay.getQuoteText()).isEqualTo(UPDATED_QUOTE_TEXT);
         assertThat(testQuoteOfTheDay.getAuthor()).isEqualTo(UPDATED_AUTHOR);
+        assertThat(testQuoteOfTheDay.getQuoteText()).isEqualTo(UPDATED_QUOTE_TEXT);
     }
 
     @Test

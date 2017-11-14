@@ -19,8 +19,8 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="quoteText"><span>Quote Text</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="author"><span>Author</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quoteText"><span>Quote Text</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="quoteOfTheDayHistory.id"><span>Quote Of The Day History</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -28,8 +28,8 @@
             <tbody>
                 <tr ng-repeat="quoteOfTheDay in vm.quoteOfTheDays track by quoteOfTheDay.id">
                     <td><a ui-sref="quote-of-the-day-detail({id:quoteOfTheDay.id})">{{quoteOfTheDay.id}}</a></td>
-                    <td>{{quoteOfTheDay.quoteText}}</td>
                     <td>{{quoteOfTheDay.author}}</td>
+                    <td>{{quoteOfTheDay.quoteText}}</td>
                     <td>
                         <a ui-sref="quote-of-the-day-history-detail({id:quoteOfTheDay.quoteOfTheDayHistory.id})">{{quoteOfTheDay.quoteOfTheDayHistory.id}}</a>
                     </td>

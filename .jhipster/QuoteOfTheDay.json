@@ -10,11 +10,11 @@
     ],
     "fields": [
         {
-            "fieldName": "quoteText",
+            "fieldName": "author",
             "fieldType": "String"
         },
         {
-            "fieldName": "author",
+            "fieldName": "quoteText",
             "fieldType": "String"
         }
     ],
