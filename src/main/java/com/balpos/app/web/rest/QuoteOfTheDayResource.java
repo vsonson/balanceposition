@@ -111,6 +111,19 @@ public class QuoteOfTheDayResource {
     }
 
     /**
+     * GET  /quote-of-the-days/current : get the current quoteOfTheDay.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the quoteOfTheDay, or with status 404 (Not Found)
+     */
+    @GetMapping("/quote-of-the-days/current")
+    @Timed
+    public ResponseEntity<QuoteOfTheDay> getCurrentQuoteOfTheDay() {
+        log.debug("REST request to get QuoteOfTheDay : {}");
+        QuoteOfTheDay quoteOfTheDay = quoteOfTheDayService.getCurrent();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(quoteOfTheDay));
+    }
+
+    /**
      * DELETE  /quote-of-the-days/:id : delete the "id" quoteOfTheDay.
      *
      * @param id the id of the quoteOfTheDay to delete

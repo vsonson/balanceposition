@@ -68,4 +68,8 @@ public class QuoteOfTheDayService {
         log.debug("Request to delete QuoteOfTheDay : {}", id);
         quoteOfTheDayRepository.delete(id);
     }
+
+    public QuoteOfTheDay getCurrent() {
+        return null;
+    }
 }

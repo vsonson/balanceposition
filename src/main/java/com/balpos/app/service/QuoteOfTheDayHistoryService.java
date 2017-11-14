@@ -2,6 +2,7 @@ package com.balpos.app.service;
 
 import com.balpos.app.domain.QuoteOfTheDayHistory;
 import com.balpos.app.repository.QuoteOfTheDayHistoryRepository;
+import com.balpos.app.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -32,7 +33,11 @@ public class QuoteOfTheDayHistoryService {
      */
     public QuoteOfTheDayHistory save(QuoteOfTheDayHistory quoteOfTheDayHistory) {
         log.debug("Request to save QuoteOfTheDayHistory : {}", quoteOfTheDayHistory);
-        return quoteOfTheDayHistoryRepository.save(quoteOfTheDayHistory);
+        if(SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
+            return quoteOfTheDayHistoryRepository.save(quoteOfTheDayHistory);
+        }else{
+            return quoteOfTheDayHistoryRepository.findOne(1L);
+        }
     }
 
     /**
@@ -66,6 +71,8 @@ public class QuoteOfTheDayHistoryService {
      */
     public void delete(Long id) {
         log.debug("Request to delete QuoteOfTheDayHistory : {}", id);
-        quoteOfTheDayHistoryRepository.delete(id);
+        if(SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
+            quoteOfTheDayHistoryRepository.delete(id);
+        }
     }
 }
