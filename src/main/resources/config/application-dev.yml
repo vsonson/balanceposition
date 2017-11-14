@@ -42,7 +42,7 @@ spring:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
     mail:
         host: localhost
         port: 25

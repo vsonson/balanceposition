@@ -115,6 +115,7 @@
                     resolve: {
                         entity: function () {
                             return {
+                                author: null,
                                 quoteText: null,
                                 id: null
                             };
