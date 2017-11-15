@@ -7,18 +7,12 @@
         Added the constraints for entity Note.
     -->
     <changeSet id="20170824163005-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="track_metric_id"
                                  baseTableName="note"
                                  constraintName="fk_note_track_metric_id"
                                  referencedColumnNames="id"
                                  referencedTableName="track_metric"/>
-
-        <addForeignKeyConstraint baseColumnNames="program_step_id"
-                                 baseTableName="note"
-                                 constraintName="fk_note_program_step_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="program_step"/>
 
         <addForeignKeyConstraint baseColumnNames="user_info_id"
                                  baseTableName="note"
