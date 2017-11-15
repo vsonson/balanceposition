@@ -7,19 +7,23 @@ import com.balpos.app.repository.QuoteOfTheDayRepository;
 import com.balpos.app.repository.UserInfoRepository;
 import com.balpos.app.repository.UserRepository;
 import com.balpos.app.security.SecurityUtils;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 
 /**
@@ -53,7 +57,13 @@ public class QuoteOfTheDayService {
      */
     public QuoteOfTheDay save(QuoteOfTheDay quoteOfTheDay) {
         log.debug("Request to save QuoteOfTheDay : {}", quoteOfTheDay);
-        return quoteOfTheDayRepository.save(quoteOfTheDay);
+        QuoteOfTheDay quote;
+        if( SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
+            quote = quoteOfTheDayRepository.save(quoteOfTheDay);
+        }else{
+            quote = quoteOfTheDay;
+        }
+        return quote;
     }
 
     /**
@@ -87,7 +97,9 @@ public class QuoteOfTheDayService {
      */
     public void delete(Long id) {
         log.debug("Request to delete QuoteOfTheDay : {}", id);
-        quoteOfTheDayRepository.delete(id);
+        if(SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")){
+            quoteOfTheDayRepository.delete(id);
+        }
     }
 
     public QuoteOfTheDay getCurrent() {
@@ -126,4 +138,46 @@ public class QuoteOfTheDayService {
 
         return quoteOfTheDay;
     }
+
+    @PostConstruct
+    @Profile("dev")
+    private void loadQuotes() throws IOException {
+        if( quoteOfTheDayRepository.count() == 0 ){
+
+            URL url = this.getClass().getResource("/quote-of-the-day-list.txt");
+
+            File file = new File(url.getFile());
+
+            List<String> lines = FileUtils.readLines(file, "UTF-8");
+
+            lines.forEach(line -> {
+
+                int index = line.indexOf("\"");
+
+                if( index > -1 ){
+
+                    try{
+
+                        int openQuote = line.indexOf("\"");
+                        int closeQuote = line.lastIndexOf("\"");
+                        String quoteText = line.substring(openQuote +1, closeQuote -1).trim();
+                        int startAuthor = line.lastIndexOf("-");
+                        String author = line.substring(startAuthor +1, line.length()).trim();
+
+                        quoteOfTheDayRepository.save(new QuoteOfTheDay(
+                            quoteText,
+                            author
+                        ));
+
+                    }catch (StringIndexOutOfBoundsException e){
+                        System.err.println(line);
+                    }
+
+                }
+
+            });
+
+        }
+    }
+
 }

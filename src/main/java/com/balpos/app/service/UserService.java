@@ -2,8 +2,10 @@ package com.balpos.app.service;
 
 import com.balpos.app.domain.Authority;
 import com.balpos.app.domain.User;
+import com.balpos.app.domain.UserInfo;
 import com.balpos.app.repository.AuthorityRepository;
 import com.balpos.app.config.Constants;
+import com.balpos.app.repository.UserInfoRepository;
 import com.balpos.app.repository.UserRepository;
 import com.balpos.app.security.AuthoritiesConstants;
 import com.balpos.app.security.SecurityUtils;
@@ -12,6 +14,7 @@ import com.balpos.app.service.dto.UserDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -38,11 +42,13 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
+    private final UserInfoRepository userInfoRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, UserInfoRepository userInfoRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
+        this.userInfoRepository = userInfoRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -239,4 +245,28 @@ public class UserService {
     public List<String> getAuthorities() {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
     }
+
+    @PostConstruct
+    @Profile("dev")
+    private void loadUserInfo() {
+        Optional<User> optional = userRepository.findOneByLogin("user");
+        if( optional.isPresent()){
+            User user = optional.get();
+            UserInfo userInfo = userInfoRepository.findOneByUser(user);
+            if( userInfo == null){
+                userInfo = new UserInfo();
+                userInfo.setUser(user);
+                userInfoRepository.save(userInfo);
+            }
+
+            User admin = userRepository.findOneByLogin("admin").get();
+            UserInfo adminInfo = userInfoRepository.findOneByUser(admin);
+            if( adminInfo == null){
+                adminInfo = new UserInfo();
+                adminInfo.setUser(admin);
+                userInfoRepository.save(adminInfo);
+            }
+        }
+    }
+
 }

@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -96,6 +97,7 @@ public class QuoteOfTheDayResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser(value = "admin", roles = "ADMIN")
     public void createQuoteOfTheDay() throws Exception {
         int databaseSizeBeforeCreate = quoteOfTheDayRepository.findAll().size();
 
@@ -172,6 +174,7 @@ public class QuoteOfTheDayResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser(value = "admin", roles = "ADMIN")
     public void updateQuoteOfTheDay() throws Exception {
         // Initialize the database
         quoteOfTheDayService.save(quoteOfTheDay);
@@ -199,6 +202,7 @@ public class QuoteOfTheDayResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser(value = "admin", roles = "ADMIN")
     public void updateNonExistingQuoteOfTheDay() throws Exception {
         int databaseSizeBeforeUpdate = quoteOfTheDayRepository.findAll().size();
 
@@ -217,6 +221,7 @@ public class QuoteOfTheDayResourceIntTest {
 
     @Test
     @Transactional
+    @WithMockUser(value = "admin", roles = "ADMIN")
     public void deleteQuoteOfTheDay() throws Exception {
         // Initialize the database
         quoteOfTheDayService.save(quoteOfTheDay);

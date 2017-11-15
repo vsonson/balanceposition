@@ -34,9 +34,6 @@
     <include file="config/liquibase/changelog/20170824163009_added_entity_constraints_PathWay.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163010_added_entity_constraints_PathStep.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163011_added_entity_constraints_PathAction.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163016_added_entity_constraints_WellnessHistory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163019_added_entity_constraints_IncentiveAction.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171110011810_added_entity_constraints_QuoteOfTheDayHistory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20171110011552_added_entity_constraints_QuoteOfTheDay.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - Stack Stack will add liquibase constraints changelogs here -->
 </databaseChangeLog>
