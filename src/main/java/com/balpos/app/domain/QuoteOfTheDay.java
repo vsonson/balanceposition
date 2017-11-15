@@ -1,8 +1,11 @@
 package com.balpos.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -21,11 +24,12 @@ public class QuoteOfTheDay implements Serializable {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "quote_text")
+    @Column(name = "quote_text", length = 5000)
     private String quoteText;
 
-    @ManyToOne
-    private QuoteOfTheDayHistory quoteOfTheDayHistory;
+    @ManyToMany(mappedBy = "quoteOfTheDays")
+    @JsonIgnore
+    private Set<UserInfo> userInfos = new HashSet<>();
 
     public QuoteOfTheDay(String quoteText, String author) {
         this();
@@ -72,17 +76,29 @@ public class QuoteOfTheDay implements Serializable {
         this.quoteText = quoteText;
     }
 
-    public QuoteOfTheDayHistory getQuoteOfTheDayHistory() {
-        return quoteOfTheDayHistory;
+    public Set<UserInfo> getUserInfos() {
+        return userInfos;
     }
 
-    public QuoteOfTheDay quoteOfTheDayHistory(QuoteOfTheDayHistory quoteOfTheDayHistory) {
-        this.quoteOfTheDayHistory = quoteOfTheDayHistory;
+    public QuoteOfTheDay userInfos(Set<UserInfo> userInfos) {
+        this.userInfos = userInfos;
         return this;
     }
 
-    public void setQuoteOfTheDayHistory(QuoteOfTheDayHistory quoteOfTheDayHistory) {
-        this.quoteOfTheDayHistory = quoteOfTheDayHistory;
+    public QuoteOfTheDay addUserInfo(UserInfo userInfo) {
+        this.userInfos.add(userInfo);
+        userInfo.getQuoteOfTheDays().add(this);
+        return this;
+    }
+
+    public QuoteOfTheDay removeUserInfo(UserInfo userInfo) {
+        this.userInfos.remove(userInfo);
+        userInfo.getQuoteOfTheDays().remove(this);
+        return this;
+    }
+
+    public void setUserInfos(Set<UserInfo> userInfos) {
+        this.userInfos = userInfos;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

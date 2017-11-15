@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.ZoneOffset;
@@ -96,6 +97,12 @@ public class UserInfoResourceIntTest {
     private static final String DEFAULT_STATE_CODE = "AAAAAAAAAA";
     private static final String UPDATED_STATE_CODE = "BBBBBBBBBB";
 
+    private static final LocalDate DEFAULT_LAST_QUOTE_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_LAST_QUOTE_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Long DEFAULT_LAST_QUOTE_ID = 1L;
+    private static final Long UPDATED_LAST_QUOTE_ID = 2L;
+
     @Autowired
     private UserInfoRepository userInfoRepository;
 
@@ -152,7 +159,9 @@ public class UserInfoResourceIntTest {
             .yearInCollege(DEFAULT_YEAR_IN_COLLEGE)
             .collegeDivision(DEFAULT_COLLEGE_DIVISION)
             .countryCode(DEFAULT_COUNTRY_CODE)
-            .stateCode(DEFAULT_STATE_CODE);
+            .stateCode(DEFAULT_STATE_CODE)
+            .lastQuoteDate(DEFAULT_LAST_QUOTE_DATE)
+            .lastQuoteId(DEFAULT_LAST_QUOTE_ID);
         return userInfo;
     }
 
@@ -193,6 +202,8 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getCollegeDivision()).isEqualTo(DEFAULT_COLLEGE_DIVISION);
         assertThat(testUserInfo.getCountryCode()).isEqualTo(DEFAULT_COUNTRY_CODE);
         assertThat(testUserInfo.getStateCode()).isEqualTo(DEFAULT_STATE_CODE);
+        assertThat(testUserInfo.getLastQuoteDate()).isEqualTo(DEFAULT_LAST_QUOTE_DATE);
+        assertThat(testUserInfo.getLastQuoteId()).isEqualTo(DEFAULT_LAST_QUOTE_ID);
     }
 
     @Test
@@ -241,7 +252,9 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].yearInCollege").value(hasItem(DEFAULT_YEAR_IN_COLLEGE.toString())))
             .andExpect(jsonPath("$.[*].collegeDivision").value(hasItem(DEFAULT_COLLEGE_DIVISION.toString())))
             .andExpect(jsonPath("$.[*].countryCode").value(hasItem(DEFAULT_COUNTRY_CODE.toString())))
-            .andExpect(jsonPath("$.[*].stateCode").value(hasItem(DEFAULT_STATE_CODE.toString())));
+            .andExpect(jsonPath("$.[*].stateCode").value(hasItem(DEFAULT_STATE_CODE.toString())))
+            .andExpect(jsonPath("$.[*].lastQuoteDate").value(hasItem(DEFAULT_LAST_QUOTE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastQuoteId").value(hasItem(DEFAULT_LAST_QUOTE_ID.intValue())));
     }
 
     @Test
@@ -271,7 +284,9 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.yearInCollege").value(DEFAULT_YEAR_IN_COLLEGE.toString()))
             .andExpect(jsonPath("$.collegeDivision").value(DEFAULT_COLLEGE_DIVISION.toString()))
             .andExpect(jsonPath("$.countryCode").value(DEFAULT_COUNTRY_CODE.toString()))
-            .andExpect(jsonPath("$.stateCode").value(DEFAULT_STATE_CODE.toString()));
+            .andExpect(jsonPath("$.stateCode").value(DEFAULT_STATE_CODE.toString()))
+            .andExpect(jsonPath("$.lastQuoteDate").value(DEFAULT_LAST_QUOTE_DATE.toString()))
+            .andExpect(jsonPath("$.lastQuoteId").value(DEFAULT_LAST_QUOTE_ID.intValue()));
     }
 
     @Test
@@ -309,7 +324,9 @@ public class UserInfoResourceIntTest {
             .yearInCollege(UPDATED_YEAR_IN_COLLEGE)
             .collegeDivision(UPDATED_COLLEGE_DIVISION)
             .countryCode(UPDATED_COUNTRY_CODE)
-            .stateCode(UPDATED_STATE_CODE);
+            .stateCode(UPDATED_STATE_CODE)
+            .lastQuoteDate(UPDATED_LAST_QUOTE_DATE)
+            .lastQuoteId(UPDATED_LAST_QUOTE_ID);
 
         restUserInfoMockMvc.perform(put("/api/user-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -337,6 +354,8 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getCollegeDivision()).isEqualTo(UPDATED_COLLEGE_DIVISION);
         assertThat(testUserInfo.getCountryCode()).isEqualTo(UPDATED_COUNTRY_CODE);
         assertThat(testUserInfo.getStateCode()).isEqualTo(UPDATED_STATE_CODE);
+        assertThat(testUserInfo.getLastQuoteDate()).isEqualTo(UPDATED_LAST_QUOTE_DATE);
+        assertThat(testUserInfo.getLastQuoteId()).isEqualTo(UPDATED_LAST_QUOTE_ID);
     }
 
     @Test

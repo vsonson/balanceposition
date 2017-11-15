@@ -52,9 +52,11 @@
             "otherEntityRelationshipName": "userInfo"
         },
         {
-            "relationshipName": "quoteOfTheDayHistory",
-            "otherEntityName": "quoteOfTheDayHistory",
-            "relationshipType": "one-to-many",
+            "relationshipName": "quoteOfTheDay",
+            "otherEntityName": "quoteOfTheDay",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "ownerSide": true,
             "otherEntityRelationshipName": "userInfo"
         }
     ],
@@ -125,6 +127,14 @@
         {
             "fieldName": "stateCode",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "lastQuoteDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "lastQuoteId",
+            "fieldType": "Long"
         }
     ],
     "changelogDate": "20170824162954",

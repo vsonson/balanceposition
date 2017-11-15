@@ -26,12 +26,6 @@
                     />
         </div>
 
-        <div class="form-group">
-            <label for="field_quoteOfTheDayHistory">Quote Of The Day History</label>
-            <select class="form-control" id="field_quoteOfTheDayHistory" name="quoteOfTheDayHistory" ng-model="vm.quoteOfTheDay.quoteOfTheDayHistory" ng-options="quoteOfTheDayHistory as quoteOfTheDayHistory.id for quoteOfTheDayHistory in vm.quoteofthedayhistories track by quoteOfTheDayHistory.id">
-                <option value=""></option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

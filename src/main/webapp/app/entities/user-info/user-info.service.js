@@ -17,11 +17,27 @@
                     if (data) {
                         data = angular.fromJson(data);
                         data.dateOfBirth = DateUtils.convertDateTimeFromServer(data.dateOfBirth);
+                        data.lastQuoteDate = DateUtils.convertLocalDateFromServer(data.lastQuoteDate);
                     }
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': {
+                method: 'PUT',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                    copy.lastQuoteDate = DateUtils.convertLocalDateToServer(copy.lastQuoteDate);
+                    return angular.toJson(copy);
+                }
+            },
+            'save': {
+                method: 'POST',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                    copy.lastQuoteDate = DateUtils.convertLocalDateToServer(copy.lastQuoteDate);
+                    return angular.toJson(copy);
+                }
+            }
         });
     }
 })();

@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('UserInfoDetailController', UserInfoDetailController);
 
-    UserInfoDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'UserInfo', 'User', 'NetworkMember', 'MetricHistory', 'ProgramHistory', 'Note', 'UserNotification', 'WellnessHistory', 'IncentiveHistory', 'QuoteOfTheDayHistory'];
+    UserInfoDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'UserInfo', 'User', 'NetworkMember', 'MetricHistory', 'ProgramHistory', 'Note', 'UserNotification', 'WellnessHistory', 'IncentiveHistory', 'QuoteOfTheDay'];
 
-    function UserInfoDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, UserInfo, User, NetworkMember, MetricHistory, ProgramHistory, Note, UserNotification, WellnessHistory, IncentiveHistory, QuoteOfTheDayHistory) {
+    function UserInfoDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, UserInfo, User, NetworkMember, MetricHistory, ProgramHistory, Note, UserNotification, WellnessHistory, IncentiveHistory, QuoteOfTheDay) {
         var vm = this;
 
         vm.userInfo = entity;

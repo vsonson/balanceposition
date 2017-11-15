@@ -134,12 +134,32 @@
                     ng-model="vm.userInfo.stateCode"
                     />
         </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastQuoteDate">Last Quote Date</label>
+                <div class="input-group">
+                    <input id="field_lastQuoteDate" type="text" class="form-control" name="lastQuoteDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.userInfo.lastQuoteDate" is-open="vm.datePickerOpenStatus.lastQuoteDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastQuoteDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastQuoteId">Last Quote Id</label>
+            <input type="number" class="form-control" name="lastQuoteId" id="field_lastQuoteId"
+                    ng-model="vm.userInfo.lastQuoteId"
+                    />
+        </div>
 
         <div class="form-group">
             <label for="field_user">User</label>
             <select class="form-control" id="field_user" name="user" ng-model="vm.userInfo.user" ng-options="user as user.email for user in vm.users track by user.id">
                 <option value=""></option>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="field_quoteOfTheDay">Quote Of The Day</label>
+            <select class="form-control" id="field_quoteOfTheDay" multiple name="quoteOfTheDay" ng-model="vm.userInfo.quoteOfTheDays" ng-options="quoteOfTheDay as quoteOfTheDay.id for quoteOfTheDay in vm.quoteofthedays track by quoteOfTheDay.id"></select>
         </div>
     </div>
     <div class="modal-footer">

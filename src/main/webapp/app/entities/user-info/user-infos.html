@@ -35,6 +35,8 @@
                     <th jh-sort-by="collegeDivision"><span>College Division</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="countryCode"><span>Country Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="stateCode"><span>State Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastQuoteDate"><span>Last Quote Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastQuoteId"><span>Last Quote Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="user.email"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -61,6 +63,8 @@
                     <td>{{userInfo.collegeDivision}}</td>
                     <td>{{userInfo.countryCode}}</td>
                     <td>{{userInfo.stateCode}}</td>
+                        <td>{{userInfo.lastQuoteDate | date:'mediumDate'}}</td>
+                    <td>{{userInfo.lastQuoteId}}</td>
                     <td>
                         {{userInfo.user.email}}
                     </td>

@@ -14,5 +14,16 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="user_infos_id"
+                                 baseTableName="user_info_quote_of_the_day"
+                                 constraintName="fk_user_info_quote_of_the_day_user_infos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_info"/>
+        <addForeignKeyConstraint baseColumnNames="quote_of_the_days_id"
+                                 baseTableName="user_info_quote_of_the_day"
+                                 constraintName="fk_user_info_quote_of_the_day_quote_of_the_days_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="quote_of_the_day"/>
+        
     </changeSet>
 </databaseChangeLog>

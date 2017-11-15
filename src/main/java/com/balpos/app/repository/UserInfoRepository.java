@@ -1,5 +1,6 @@
 package com.balpos.app.repository;
 
+import com.balpos.app.domain.User;
 import com.balpos.app.domain.UserInfo;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
 
+    UserInfo findOneByUser(User user);
 }
