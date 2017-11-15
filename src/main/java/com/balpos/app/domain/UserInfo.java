@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -82,6 +83,12 @@ public class UserInfo implements Serializable {
     @Column(name = "state_code")
     private String stateCode;
 
+    @Column(name = "last_quote_date")
+    private LocalDate lastQuoteDate;
+
+    @Column(name = "last_quote_id")
+    private Long lastQuoteId;
+
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
@@ -114,9 +121,11 @@ public class UserInfo implements Serializable {
     @JsonIgnore
     private Set<IncentiveHistory> incentiveHistories = new HashSet<>();
 
-    @OneToMany(mappedBy = "userInfo")
-    @JsonIgnore
-    private Set<QuoteOfTheDayHistory> quoteOfTheDayHistories = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "user_info_quote_of_the_day",
+               joinColumns = @JoinColumn(name="user_infos_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="quote_of_the_days_id", referencedColumnName="id"))
+    private Set<QuoteOfTheDay> quoteOfTheDays = new HashSet<>();
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -348,6 +357,32 @@ public class UserInfo implements Serializable {
         this.stateCode = stateCode;
     }
 
+    public LocalDate getLastQuoteDate() {
+        return lastQuoteDate;
+    }
+
+    public UserInfo lastQuoteDate(LocalDate lastQuoteDate) {
+        this.lastQuoteDate = lastQuoteDate;
+        return this;
+    }
+
+    public void setLastQuoteDate(LocalDate lastQuoteDate) {
+        this.lastQuoteDate = lastQuoteDate;
+    }
+
+    public Long getLastQuoteId() {
+        return lastQuoteId;
+    }
+
+    public UserInfo lastQuoteId(Long lastQuoteId) {
+        this.lastQuoteId = lastQuoteId;
+        return this;
+    }
+
+    public void setLastQuoteId(Long lastQuoteId) {
+        this.lastQuoteId = lastQuoteId;
+    }
+
     public User getUser() {
         return user;
     }
@@ -536,29 +571,29 @@ public class UserInfo implements Serializable {
         this.incentiveHistories = incentiveHistories;
     }
 
-    public Set<QuoteOfTheDayHistory> getQuoteOfTheDayHistories() {
-        return quoteOfTheDayHistories;
+    public Set<QuoteOfTheDay> getQuoteOfTheDays() {
+        return quoteOfTheDays;
     }
 
-    public UserInfo quoteOfTheDayHistories(Set<QuoteOfTheDayHistory> quoteOfTheDayHistories) {
-        this.quoteOfTheDayHistories = quoteOfTheDayHistories;
+    public UserInfo quoteOfTheDays(Set<QuoteOfTheDay> quoteOfTheDays) {
+        this.quoteOfTheDays = quoteOfTheDays;
         return this;
     }
 
-    public UserInfo addQuoteOfTheDayHistory(QuoteOfTheDayHistory quoteOfTheDayHistory) {
-        this.quoteOfTheDayHistories.add(quoteOfTheDayHistory);
-        quoteOfTheDayHistory.setUserInfo(this);
+    public UserInfo addQuoteOfTheDay(QuoteOfTheDay quoteOfTheDay) {
+        this.quoteOfTheDays.add(quoteOfTheDay);
+        quoteOfTheDay.getUserInfos().add(this);
         return this;
     }
 
-    public UserInfo removeQuoteOfTheDayHistory(QuoteOfTheDayHistory quoteOfTheDayHistory) {
-        this.quoteOfTheDayHistories.remove(quoteOfTheDayHistory);
-        quoteOfTheDayHistory.setUserInfo(null);
+    public UserInfo removeQuoteOfTheDay(QuoteOfTheDay quoteOfTheDay) {
+        this.quoteOfTheDays.remove(quoteOfTheDay);
+        quoteOfTheDay.getUserInfos().remove(this);
         return this;
     }
 
-    public void setQuoteOfTheDayHistories(Set<QuoteOfTheDayHistory> quoteOfTheDayHistories) {
-        this.quoteOfTheDayHistories = quoteOfTheDayHistories;
+    public void setQuoteOfTheDays(Set<QuoteOfTheDay> quoteOfTheDays) {
+        this.quoteOfTheDays = quoteOfTheDays;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
@@ -603,6 +638,8 @@ public class UserInfo implements Serializable {
             ", collegeDivision='" + getCollegeDivision() + "'" +
             ", countryCode='" + getCountryCode() + "'" +
             ", stateCode='" + getStateCode() + "'" +
+            ", lastQuoteDate='" + getLastQuoteDate() + "'" +
+            ", lastQuoteId='" + getLastQuoteId() + "'" +
             "}";
     }
 }

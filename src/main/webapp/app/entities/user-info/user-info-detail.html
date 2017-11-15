@@ -71,9 +71,23 @@
         <dd>
             <span>{{vm.userInfo.stateCode}}</span>
         </dd>
+        <dt><span>Last Quote Date</span></dt>
+        <dd>
+            <span>{{vm.userInfo.lastQuoteDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Last Quote Id</span></dt>
+        <dd>
+            <span>{{vm.userInfo.lastQuoteId}}</span>
+        </dd>
         <dt><span>User</span></dt>
         <dd>
             {{vm.userInfo.user.email}}
+        </dd>
+        <dt><span>Quote Of The Day</span></dt>
+        <dd>
+            <span ng-repeat="quoteOfTheDay in vm.userInfo.quoteOfTheDays">
+                <a ui-sref="quote-of-the-day-detail({id: quoteOfTheDay.id})">{{quoteOfTheDay.id}}</a>{{$last ? '' : ', '}}
+            </span>
         </dd>
     </dl>
 

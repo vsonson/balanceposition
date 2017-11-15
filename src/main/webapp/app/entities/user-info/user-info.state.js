@@ -132,6 +132,8 @@
                                 collegeDivision: null,
                                 countryCode: null,
                                 stateCode: null,
+                                lastQuoteDate: null,
+                                lastQuoteId: null,
                                 id: null
                             };
                         }

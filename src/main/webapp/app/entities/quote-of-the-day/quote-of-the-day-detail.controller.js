@@ -5,9 +5,9 @@
         .module('balancepositionApp')
         .controller('QuoteOfTheDayDetailController', QuoteOfTheDayDetailController);
 
-    QuoteOfTheDayDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'QuoteOfTheDay', 'QuoteOfTheDayHistory'];
+    QuoteOfTheDayDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'QuoteOfTheDay', 'UserInfo'];
 
-    function QuoteOfTheDayDetailController($scope, $rootScope, $stateParams, previousState, entity, QuoteOfTheDay, QuoteOfTheDayHistory) {
+    function QuoteOfTheDayDetailController($scope, $rootScope, $stateParams, previousState, entity, QuoteOfTheDay, UserInfo) {
         var vm = this;
 
         vm.quoteOfTheDay = entity;

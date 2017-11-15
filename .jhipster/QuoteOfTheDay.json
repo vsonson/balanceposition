@@ -2,10 +2,11 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "quoteOfTheDayHistory",
-            "otherEntityName": "quoteOfTheDayHistory",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "quoteOfTheDay"
         }
     ],
     "fields": [
