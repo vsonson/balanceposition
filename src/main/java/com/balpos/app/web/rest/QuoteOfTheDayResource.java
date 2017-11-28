@@ -123,6 +123,13 @@ public class QuoteOfTheDayResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(quoteOfTheDay));
     }
 
+    @GetMapping("/quote-of-the-days/new")
+    @Timed
+    public Boolean newQuote() {
+        log.debug("REST request to get QuoteOfTheDay : {}");
+        return quoteOfTheDayService.newQuote();
+    }
+
     /**
      * DELETE  /quote-of-the-days/:id : delete the "id" quoteOfTheDay.
      *

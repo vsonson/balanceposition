@@ -180,4 +180,28 @@ public class QuoteOfTheDayService {
         }
     }
 
+    public Boolean newQuote() {
+
+        Boolean hasNewQuote;
+
+        String login = SecurityUtils.getCurrentUserLogin();
+        User user = userRepository.findOneByLogin(login).get();
+        UserInfo userInfo = userInfoRepository.findOneByUser(user);
+        LocalDate lastQuoteDate = userInfo.getLastQuoteDate();
+
+        if( lastQuoteDate != null && lastQuoteDate.plusDays(1).isBefore(LocalDate.now()) ){
+
+            hasNewQuote = true;
+
+        }else if( lastQuoteDate != null && lastQuoteDate.plusDays(1).isAfter(LocalDate.now()) ){
+
+            hasNewQuote = false;
+
+        }else{
+
+            hasNewQuote = true;
+        }
+
+        return hasNewQuote;
+    }
 }
