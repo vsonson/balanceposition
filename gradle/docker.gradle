@@ -8,6 +8,11 @@ task buildDocker(type: Exec) {
             include "*"
         }
         copy {
+            from "src/main/resources"
+            into "build/docker/"
+            include "*quote-of-the-day-list.txt"
+        }
+        copy {
             from "build/libs"
             into "build/docker/"
             include "*.war*"

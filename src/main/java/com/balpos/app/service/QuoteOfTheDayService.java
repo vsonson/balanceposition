@@ -144,9 +144,9 @@ public class QuoteOfTheDayService {
     private void loadQuotes() throws IOException {
         if( quoteOfTheDayRepository.count() == 0 ){
 
-            URL url = this.getClass().getResource("/quote-of-the-day-list.txt");
+//            URL url = this.getClass().getResource("/quote-of-the-day-list.txt");
 
-            File file = new File(url.getFile());
+            File file = new File("/quote-of-the-day-list.txt");
 
             List<String> lines = FileUtils.readLines(file, "UTF-8");
 
