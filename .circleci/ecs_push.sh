@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-TAG=3
+TAG=5
 ./gradlew bootRepackage buildDocker --no-daemon
 aws ecr get-login --no-include-email --region us-east-1 --profile balanceposition | bash
 docker build -t balanceposition .

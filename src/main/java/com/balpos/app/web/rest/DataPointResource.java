@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -48,6 +49,7 @@ public class DataPointResource {
      */
     @PostMapping("/data-points")
     @Timed
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<DataPoint> createDataPoint(@RequestBody DataPoint dataPoint) throws URISyntaxException {
         log.debug("REST request to save DataPoint : {}", dataPoint);
         if (dataPoint.getId() != null) {
@@ -70,6 +72,7 @@ public class DataPointResource {
      */
     @PutMapping("/data-points")
     @Timed
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<DataPoint> updateDataPoint(@RequestBody DataPoint dataPoint) throws URISyntaxException {
         log.debug("REST request to update DataPoint : {}", dataPoint);
         if (dataPoint.getId() == null) {
@@ -118,6 +121,7 @@ public class DataPointResource {
      */
     @DeleteMapping("/data-points/{id}")
     @Timed
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> deleteDataPoint(@PathVariable Long id) {
         log.debug("REST request to delete DataPoint : {}", id);
         dataPointService.delete(id);
