@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -144,9 +145,15 @@ public class QuoteOfTheDayService {
     private void loadQuotes() throws IOException {
         if( quoteOfTheDayRepository.count() == 0 ){
 
-//            URL url = this.getClass().getResource("/quote-of-the-day-list.txt");
+            File file;
 
-            File file = new File("/quote-of-the-day-list.txt");
+
+            file = new File("/quote-of-the-day-list.txt");
+
+            if( !file.exists()){
+                URL url = this.getClass().getResource("/quote-of-the-day-list.txt");
+                file = new File(url.getFile());
+            }
 
             List<String> lines = FileUtils.readLines(file, "UTF-8");
 
