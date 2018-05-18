@@ -111,6 +111,12 @@ public class QuoteOfTheDayService {
 
         UserInfo userInfo = userInfoRepository.findOneByUser(user);
 
+        if( userInfo == null){
+            userInfo = new UserInfo();
+            userInfo.setUser(user);
+            userInfoRepository.save(userInfo);
+        }
+
         LocalDate lastQuoteDate = userInfo.getLastQuoteDate();
         QuoteOfTheDay quoteOfTheDay;
         // has 24 hours elapsed?
