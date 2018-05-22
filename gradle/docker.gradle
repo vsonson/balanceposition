@@ -13,6 +13,11 @@ task buildDocker(type: Exec) {
             include "*quote-of-the-day-list.txt"
         }
         copy {
+            from "src/main/resources/csv"
+            into "build/docker/"
+            include "*"
+        }
+        copy {
             from "build/libs"
             into "build/docker/"
             include "*.war*"

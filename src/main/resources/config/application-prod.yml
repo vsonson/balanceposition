@@ -54,6 +54,7 @@ spring:
             ssl.enable: true
         properties.mail.smtps:
             auth: true
+
     thymeleaf:
         cache: true
 

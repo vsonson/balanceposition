@@ -82,8 +82,12 @@ public class DataPointService {
 
         if( dataPointRepository.count() == 0){
 
-            URL resource = this.getClass().getResource("/csv/data_points.csv");
-            File file = new File(resource.getFile());
+            File file = new File("data_points.csv");
+
+            if(!file.exists()){
+                URL resource = this.getClass().getResource("/csv/data_points.csv");
+                file = new File(resource.getFile());
+            }
 
             BufferedReader reader = new BufferedReader(
                 new FileReader(file)
