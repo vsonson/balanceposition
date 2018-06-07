@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +64,13 @@ public class ExceptionTranslator {
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ErrorVM processMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
         return new ErrorVM(ErrorConstants.ERR_METHOD_NOT_SUPPORTED, exception.getMessage());
+    }
+
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorVM processHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException exception) {
+        return new ErrorVM(ErrorConstants.ERR_VALIDATION, exception.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
