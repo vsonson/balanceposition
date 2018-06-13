@@ -14,6 +14,10 @@ import java.util.Objects;
 import com.balpos.app.domain.enumeration.UserStatus;
 
 import com.balpos.app.domain.enumeration.UserType;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * User is a default entity in a Stack Stack monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity
@@ -23,7 +27,7 @@ import com.balpos.app.domain.enumeration.UserType;
 @Table(name = "user_info")
 public class UserInfo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1644158041216286959L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +62,18 @@ public class UserInfo implements Serializable {
     @Column(name = "country")
     private String country;
 
+    @Column(name = "education_level")
+    @Getter
+    @Setter
+    @Accessors(chain = true)
+    private String educationLevel;
+
+    @Column(name = "primary_sport")
+    @Getter
+    @Setter
+    @Accessors(chain = true)
+    private String primarySport;
+
     @Lob
     @Column(name = "profile_pic")
     private byte[] profilePic;
@@ -66,7 +82,7 @@ public class UserInfo implements Serializable {
     private String profilePicContentType;
 
     @Column(name = "date_of_birth")
-    private ZonedDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "gender")
     private String gender;
@@ -279,16 +295,16 @@ public class UserInfo implements Serializable {
         this.profilePicContentType = profilePicContentType;
     }
 
-    public ZonedDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public UserInfo dateOfBirth(ZonedDateTime dateOfBirth) {
+    public UserInfo dateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
         return this;
     }
 
-    public void setDateOfBirth(ZonedDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

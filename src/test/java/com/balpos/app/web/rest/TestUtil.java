@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -61,25 +62,25 @@ public class TestUtil {
     /**
      * A matcher that tests that the examined string represents the same instant as the reference datetime.
      */
-    public static class ZonedDateTimeMatcher extends TypeSafeDiagnosingMatcher<String> {
+    public static class LocalDateMatcher extends TypeSafeDiagnosingMatcher<String> {
 
-        private final ZonedDateTime date;
+        private final LocalDate date;
 
-        public ZonedDateTimeMatcher(ZonedDateTime date) {
+        public LocalDateMatcher(LocalDate date) {
             this.date = date;
         }
 
         @Override
         protected boolean matchesSafely(String item, Description mismatchDescription) {
             try {
-                if (!date.isEqual(ZonedDateTime.parse(item))) {
+                if (!date.isEqual(LocalDate.parse(item))) {
                     mismatchDescription.appendText("was ").appendValue(item);
                     return false;
                 }
                 return true;
             } catch (DateTimeParseException e) {
                 mismatchDescription.appendText("was ").appendValue(item)
-                    .appendText(", which could not be parsed as a ZonedDateTime");
+                    .appendText(", which could not be parsed as a LocalDate");
                 return false;
             }
 
@@ -95,8 +96,8 @@ public class TestUtil {
      * Creates a matcher that matches when the examined string reprensents the same instant as the reference datetime
      * @param date the reference datetime against which the examined string is checked
      */
-    public static ZonedDateTimeMatcher sameInstant(ZonedDateTime date) {
-        return new ZonedDateTimeMatcher(date);
+    public static LocalDateMatcher sameInstant(LocalDate date) {
+        return new LocalDateMatcher(date);
     }
 
     /**

@@ -6,28 +6,24 @@
 entity UserInfo (user_info) {
   userstatus UserStatus,
   userType UserType,
-  userName String required,
-  password String,
-  email String,
   phone String,
-  fname String,
-  mname String,
-  lname String,
   address String,
   address2 String,
   city String,
   state String,
   zip Integer,
   country String,
-  profilePic Blob
-}
-entity ThoughtOfDay (thought_of_day) {
-  date LocalDate,
-  title String,
-  url String,
-  image Blob,
-  shortText String,
-  longText String
+  educationLevel String,
+  primarySport String,
+  profilePic Blob,
+  dateOfBirth LocalDate,
+  gender String,
+  yearInCollege String,
+  collegeDivision String,
+  countryCode String,
+  stateCode String,
+  lastQuoteDate LocalDate,
+  lastQuoteId Long
 }
 entity NetworkMember (network_member) {
   isDataShared Boolean,
@@ -147,6 +143,15 @@ entity IncentiveHistory (incentive_history) {
 entity IncentiveAction (incentive_action) {
   name String required
 }
+entity QuoteOfTheDay (quote_of_the_day) {
+  author String,
+  quoteText String
+}
+entity DataPoint (data_point) {
+  name String,
+  type String,
+  order Integer
+}
 
 enum UserStatus {
   ACTIVE,
@@ -226,11 +231,12 @@ relationship OneToMany {
 relationship ManyToOne {
   NetworkMember{networkMemberUser(email)} to UserInfo
 }
+relationship ManyToMany {
+  UserInfo{quoteOfTheDay} to QuoteOfTheDay{userInfo}
+}
 
 paginate UserInfo with pager
 service UserInfo with serviceImpl
-paginate ThoughtOfDay with pager
-service ThoughtOfDay with serviceImpl
 paginate NetworkMember with pager
 service NetworkMember with serviceImpl
 paginate KeyPair with pager
@@ -279,3 +285,7 @@ paginate IncentiveHistory with pager
 service IncentiveHistory with serviceImpl
 paginate IncentiveAction with pager
 service IncentiveAction with serviceImpl
+paginate QuoteOfTheDay with pagination
+service QuoteOfTheDay with serviceClass
+paginate DataPoint with pagination
+service DataPoint with serviceClass

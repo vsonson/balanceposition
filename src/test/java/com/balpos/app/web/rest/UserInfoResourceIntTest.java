@@ -1,12 +1,15 @@
 package com.balpos.app.web.rest;
 
 import com.balpos.app.BalancepositionApp;
-
 import com.balpos.app.domain.UserInfo;
+import com.balpos.app.domain.enumeration.UserStatus;
+import com.balpos.app.domain.enumeration.UserType;
 import com.balpos.app.repository.UserInfoRepository;
 import com.balpos.app.service.UserInfoService;
 import com.balpos.app.web.rest.errors.ExceptionTranslator;
-
+import com.balpos.app.web.rest.mapper.UserInfoUserMapper;
+import com.balpos.app.web.rest.mapper.YearToLocalDateMapper;
+import com.balpos.app.web.rest.vm.UserInfoUserVM;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,9 +27,6 @@ import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -36,8 +36,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.balpos.app.domain.enumeration.UserStatus;
-import com.balpos.app.domain.enumeration.UserType;
 /**
  * Test class for the UserInfoResource REST controller.
  *
@@ -74,13 +72,19 @@ public class UserInfoResourceIntTest {
     private static final String DEFAULT_COUNTRY = "AAAAAAAAAA";
     private static final String UPDATED_COUNTRY = "BBBBBBBBBB";
 
+    private static final String DEFAULT_EDUCATIONLEVEL = "AAAAAAAAAA";
+    private static final String UPDATED_EDUCATIONLEVEL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PRIMARYSPORT = "AAAAAAAAAA";
+    private static final String UPDATED_PRIMARYSPORT = "BBBBBBBBBB";
+
     private static final byte[] DEFAULT_PROFILE_PIC = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_PROFILE_PIC = TestUtil.createByteArray(2, "1");
     private static final String DEFAULT_PROFILE_PIC_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_PROFILE_PIC_CONTENT_TYPE = "image/png";
 
-    private static final ZonedDateTime DEFAULT_DATE_OF_BIRTH = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_OF_BIRTH = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_OF_BIRTH = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_OF_BIRTH = LocalDate.now();
 
     private static final String DEFAULT_GENDER = "AAAAAAAAAA";
     private static final String UPDATED_GENDER = "BBBBBBBBBB";
@@ -104,10 +108,16 @@ public class UserInfoResourceIntTest {
     private static final Long UPDATED_LAST_QUOTE_ID = 2L;
 
     @Autowired
+    private YearToLocalDateMapper yearToZonedDateTimeMapper;
+
+    @Autowired
     private UserInfoRepository userInfoRepository;
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private UserInfoUserMapper userInfoUserMapper;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -125,19 +135,9 @@ public class UserInfoResourceIntTest {
 
     private UserInfo userInfo;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final UserInfoResource userInfoResource = new UserInfoResource(userInfoService);
-        this.restUserInfoMockMvc = MockMvcBuilders.standaloneSetup(userInfoResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
-
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -152,6 +152,8 @@ public class UserInfoResourceIntTest {
             .state(DEFAULT_STATE)
             .zip(DEFAULT_ZIP)
             .country(DEFAULT_COUNTRY)
+            .setEducationLevel(DEFAULT_EDUCATIONLEVEL)
+            .setPrimarySport(DEFAULT_PRIMARYSPORT)
             .profilePic(DEFAULT_PROFILE_PIC)
             .profilePicContentType(DEFAULT_PROFILE_PIC_CONTENT_TYPE)
             .dateOfBirth(DEFAULT_DATE_OF_BIRTH)
@@ -166,6 +168,16 @@ public class UserInfoResourceIntTest {
     }
 
     @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        final UserInfoResource userInfoResource = new UserInfoResource(userInfoService, userInfoUserMapper);
+        this.restUserInfoMockMvc = MockMvcBuilders.standaloneSetup(userInfoResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setMessageConverters(jacksonMessageConverter).build();
+    }
+
+    @Before
     public void initTest() {
         userInfo = createEntity(em);
     }
@@ -175,10 +187,12 @@ public class UserInfoResourceIntTest {
     public void createUserInfo() throws Exception {
         int databaseSizeBeforeCreate = userInfoRepository.findAll().size();
 
+        UserInfoUserVM userInfoVM = userInfoUserMapper.toVm(userInfo);
+
         // Create the UserInfo
         restUserInfoMockMvc.perform(post("/api/user-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(userInfoVM)))
             .andExpect(status().isCreated());
 
         // Validate the UserInfo in the database
@@ -194,9 +208,11 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getState()).isEqualTo(DEFAULT_STATE);
         assertThat(testUserInfo.getZip()).isEqualTo(DEFAULT_ZIP);
         assertThat(testUserInfo.getCountry()).isEqualTo(DEFAULT_COUNTRY);
+        assertThat(testUserInfo.getPrimarySport()).isEqualTo(DEFAULT_PRIMARYSPORT);
+        assertThat(testUserInfo.getEducationLevel()).isEqualTo(DEFAULT_EDUCATIONLEVEL);
         assertThat(testUserInfo.getProfilePic()).isEqualTo(DEFAULT_PROFILE_PIC);
         assertThat(testUserInfo.getProfilePicContentType()).isEqualTo(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
-        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(DEFAULT_DATE_OF_BIRTH);
+        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(yearToZonedDateTimeMapper.yearToDate(yearToZonedDateTimeMapper.dateToYear(DEFAULT_DATE_OF_BIRTH)));
         assertThat(testUserInfo.getGender()).isEqualTo(DEFAULT_GENDER);
         assertThat(testUserInfo.getYearInCollege()).isEqualTo(DEFAULT_YEAR_IN_COLLEGE);
         assertThat(testUserInfo.getCollegeDivision()).isEqualTo(DEFAULT_COLLEGE_DIVISION);
@@ -245,9 +261,11 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].zip").value(hasItem(DEFAULT_ZIP)))
             .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY.toString())))
+            .andExpect(jsonPath("$.[*].primarySport").value(hasItem(DEFAULT_PRIMARYSPORT.toString())))
+            .andExpect(jsonPath("$.[*].educationLevel").value(hasItem(DEFAULT_EDUCATIONLEVEL.toString())))
             .andExpect(jsonPath("$.[*].profilePicContentType").value(hasItem(DEFAULT_PROFILE_PIC_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))))
-            .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(sameInstant(DEFAULT_DATE_OF_BIRTH))))
+            .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(sameInstant(yearToZonedDateTimeMapper.yearToDate(yearToZonedDateTimeMapper.dateToYear(DEFAULT_DATE_OF_BIRTH))))))
             .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER.toString())))
             .andExpect(jsonPath("$.[*].yearInCollege").value(hasItem(DEFAULT_YEAR_IN_COLLEGE.toString())))
             .andExpect(jsonPath("$.[*].collegeDivision").value(hasItem(DEFAULT_COLLEGE_DIVISION.toString())))
@@ -277,9 +295,11 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
             .andExpect(jsonPath("$.zip").value(DEFAULT_ZIP))
             .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY.toString()))
+            .andExpect(jsonPath("$.primarySport").value(DEFAULT_PRIMARYSPORT.toString()))
+            .andExpect(jsonPath("$.educationLevel").value(DEFAULT_EDUCATIONLEVEL.toString()))
             .andExpect(jsonPath("$.profilePicContentType").value(DEFAULT_PROFILE_PIC_CONTENT_TYPE))
             .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)))
-            .andExpect(jsonPath("$.dateOfBirth").value(sameInstant(DEFAULT_DATE_OF_BIRTH)))
+            .andExpect(jsonPath("$.dateOfBirth").value(sameInstant(yearToZonedDateTimeMapper.yearToDate(yearToZonedDateTimeMapper.dateToYear(DEFAULT_DATE_OF_BIRTH)))))
             .andExpect(jsonPath("$.gender").value(DEFAULT_GENDER.toString()))
             .andExpect(jsonPath("$.yearInCollege").value(DEFAULT_YEAR_IN_COLLEGE.toString()))
             .andExpect(jsonPath("$.collegeDivision").value(DEFAULT_COLLEGE_DIVISION.toString()))
@@ -317,6 +337,8 @@ public class UserInfoResourceIntTest {
             .state(UPDATED_STATE)
             .zip(UPDATED_ZIP)
             .country(UPDATED_COUNTRY)
+            .setPrimarySport(UPDATED_PRIMARYSPORT)
+            .setEducationLevel(UPDATED_EDUCATIONLEVEL)
             .profilePic(UPDATED_PROFILE_PIC)
             .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE)
             .dateOfBirth(UPDATED_DATE_OF_BIRTH)
@@ -328,9 +350,11 @@ public class UserInfoResourceIntTest {
             .lastQuoteDate(UPDATED_LAST_QUOTE_DATE)
             .lastQuoteId(UPDATED_LAST_QUOTE_ID);
 
+        UserInfoUserVM updatedUserInfoVM = userInfoUserMapper.toVm(updatedUserInfo);
+
         restUserInfoMockMvc.perform(put("/api/user-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedUserInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(updatedUserInfoVM)))
             .andExpect(status().isOk());
 
         // Validate the UserInfo in the database
@@ -346,9 +370,11 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getState()).isEqualTo(UPDATED_STATE);
         assertThat(testUserInfo.getZip()).isEqualTo(UPDATED_ZIP);
         assertThat(testUserInfo.getCountry()).isEqualTo(UPDATED_COUNTRY);
+        assertThat(testUserInfo.getEducationLevel()).isEqualTo(UPDATED_EDUCATIONLEVEL);
+        assertThat(testUserInfo.getPrimarySport()).isEqualTo(UPDATED_PRIMARYSPORT);
         assertThat(testUserInfo.getProfilePic()).isEqualTo(UPDATED_PROFILE_PIC);
         assertThat(testUserInfo.getProfilePicContentType()).isEqualTo(UPDATED_PROFILE_PIC_CONTENT_TYPE);
-        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
+        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(yearToZonedDateTimeMapper.yearToDate(yearToZonedDateTimeMapper.dateToYear(UPDATED_DATE_OF_BIRTH)));
         assertThat(testUserInfo.getGender()).isEqualTo(UPDATED_GENDER);
         assertThat(testUserInfo.getYearInCollege()).isEqualTo(UPDATED_YEAR_IN_COLLEGE);
         assertThat(testUserInfo.getCollegeDivision()).isEqualTo(UPDATED_COLLEGE_DIVISION);
