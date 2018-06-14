@@ -1,5 +1,7 @@
 package com.balpos.app.web.rest;
 
+import com.balpos.app.web.rest.mapper.UserInfoUserMapper;
+import com.balpos.app.web.rest.vm.UserInfoUserVM;
 import com.codahale.metrics.annotation.Timed;
 import com.balpos.app.domain.UserInfo;
 import com.balpos.app.service.UserInfoService;
@@ -35,8 +37,11 @@ public class UserInfoResource {
 
     private final UserInfoService userInfoService;
 
-    public UserInfoResource(UserInfoService userInfoService) {
+    private final UserInfoUserMapper userInfoUserMapper;
+
+    public UserInfoResource(UserInfoService userInfoService, UserInfoUserMapper userInfoUserMapper) {
         this.userInfoService = userInfoService;
+        this.userInfoUserMapper = userInfoUserMapper;
     }
 
     /**
@@ -48,12 +53,13 @@ public class UserInfoResource {
      */
     @PostMapping("/user-infos")
     @Timed
-    public ResponseEntity<UserInfo> createUserInfo(@RequestBody UserInfo userInfo) throws URISyntaxException {
+    public ResponseEntity<UserInfo> createUserInfo(@RequestBody UserInfoUserVM userInfo) throws URISyntaxException {
         log.debug("REST request to save UserInfo : {}", userInfo);
         if (userInfo.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new userInfo cannot already have an ID")).body(null);
         }
-        UserInfo result = userInfoService.save(userInfo);
+        UserInfo userInfoPost = userInfoUserMapper.toEntity(userInfo);
+        UserInfo result = userInfoService.save(userInfoPost);
         return ResponseEntity.created(new URI("/api/user-infos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -70,12 +76,13 @@ public class UserInfoResource {
      */
     @PutMapping("/user-infos")
     @Timed
-    public ResponseEntity<UserInfo> updateUserInfo(@RequestBody UserInfo userInfo) throws URISyntaxException {
+    public ResponseEntity<UserInfo> updateUserInfo(@RequestBody UserInfoUserVM userInfo) throws URISyntaxException {
         log.debug("REST request to update UserInfo : {}", userInfo);
         if (userInfo.getId() == null) {
             return createUserInfo(userInfo);
         }
-        UserInfo result = userInfoService.save(userInfo);
+        UserInfo userInfoPut = userInfoUserMapper.toEntity(userInfo);
+        UserInfo result = userInfoService.save(userInfoPut);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, userInfo.getId().toString()))
             .body(result);

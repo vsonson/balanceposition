@@ -100,13 +100,21 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "educationLevel",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "primarySport",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "profilePic",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "any"
         },
         {
             "fieldName": "dateOfBirth",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "gender",

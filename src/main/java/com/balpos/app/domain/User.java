@@ -26,7 +26,7 @@ import java.time.Instant;
 
 public class User extends AbstractAuditingEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -3363670259562490450L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
