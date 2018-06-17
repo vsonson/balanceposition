@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <property name="now" value="now()" dbms="h2"/>
 
@@ -17,17 +15,33 @@
     <!--
         Update the entity UserInfo.
     -->
-    <changeSet id="20180614162954_update_entity_UserInfo" author="asegner">
+    <changeSet id="20180614162954_add_column_primary_sport_UserInfo" author="asegner">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="user_info" columnName="primary_sport" />
+            </not>
+        </preConditions>
         <addColumn tableName="user_info">
             <column name="primary_sport" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="true"/>
             </column>
         </addColumn>
+    </changeSet>
+
+    <changeSet id="20180614162954_add_column_education_level_UserInfo" author="asegner">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="user_info" columnName="education_level" />
+            </not>
+        </preConditions>
         <addColumn tableName="user_info">
             <column name="education_level" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="true"/>
             </column>
         </addColumn>
+    </changeSet>
+
+    <changeSet id="20180614162954_modify_data_type_UserInfo" author="asegner">
         <modifyDataType columnName="date_of_birth"
                         newDataType="date"
                         tableName="user_info"/>

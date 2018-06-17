@@ -106,7 +106,7 @@ public class UserInfo implements Serializable {
     private Long lastQuoteId;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = true, insertable = false, updatable = false)
     private User user;
 
     @OneToMany(mappedBy = "networkOwner")
