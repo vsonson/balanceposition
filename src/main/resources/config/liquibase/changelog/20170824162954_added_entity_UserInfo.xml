@@ -58,14 +58,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="primary_sport" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="education_level" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="profile_pic" type="longblob">
                 <constraints nullable="true" />
             </column>
@@ -73,7 +65,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="date_of_birth" type="date">
+            <column name="date_of_birth" type="timestamp">
                 <constraints nullable="true" />
             </column>
 
@@ -110,7 +102,7 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="user_info" columnName="date_of_birth" columnDataType="datetime"/>
-
+        
         <createTable tableName="user_info_quote_of_the_day">
             <column name="quote_of_the_days_id" type="bigint">
                 <constraints nullable="false"/>
@@ -121,7 +113,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="user_infos_id, quote_of_the_days_id" tableName="user_info_quote_of_the_day"/>
-
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>
