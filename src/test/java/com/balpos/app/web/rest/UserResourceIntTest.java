@@ -54,7 +54,7 @@ public class UserResourceIntTest {
 
     private static final Long DEFAULT_ID = 1L;
 
-    private static final String DEFAULT_LOGIN = "johndoe";
+    private static final String DEFAULT_LOGIN = "user";
     private static final String UPDATED_LOGIN = "jhipster";
 
     private static final String DEFAULT_PASSWORD = "passjohndoe";
