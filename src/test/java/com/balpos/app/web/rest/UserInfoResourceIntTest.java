@@ -8,7 +8,6 @@ import com.balpos.app.repository.UserInfoRepository;
 import com.balpos.app.service.UserInfoService;
 import com.balpos.app.web.rest.errors.ExceptionTranslator;
 import com.balpos.app.web.rest.mapper.UserInfoUserMapper;
-import com.balpos.app.web.rest.mapper.YearToLocalDateMapper;
 import com.balpos.app.web.rest.vm.UserInfoUserVM;
 import org.junit.Before;
 import org.junit.Test;
@@ -106,9 +105,6 @@ public class UserInfoResourceIntTest {
 
     private static final Long DEFAULT_LAST_QUOTE_ID = 1L;
     private static final Long UPDATED_LAST_QUOTE_ID = 2L;
-
-    @Autowired
-    private YearToLocalDateMapper yearToZonedDateTimeMapper;
 
     @Autowired
     private UserInfoRepository userInfoRepository;
@@ -212,7 +208,6 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getEducationLevel()).isEqualTo(DEFAULT_EDUCATIONLEVEL);
         assertThat(testUserInfo.getProfilePic()).isEqualTo(DEFAULT_PROFILE_PIC);
         assertThat(testUserInfo.getProfilePicContentType()).isEqualTo(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
-        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(yearToZonedDateTimeMapper.yearToDate(yearToZonedDateTimeMapper.dateToYear(DEFAULT_DATE_OF_BIRTH)));
         assertThat(testUserInfo.getGender()).isEqualTo(DEFAULT_GENDER);
         assertThat(testUserInfo.getYearInCollege()).isEqualTo(DEFAULT_YEAR_IN_COLLEGE);
         assertThat(testUserInfo.getCollegeDivision()).isEqualTo(DEFAULT_COLLEGE_DIVISION);
@@ -265,7 +260,6 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].educationLevel").value(hasItem(DEFAULT_EDUCATIONLEVEL.toString())))
             .andExpect(jsonPath("$.[*].profilePicContentType").value(hasItem(DEFAULT_PROFILE_PIC_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))))
-            .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(sameInstant(yearToZonedDateTimeMapper.yearToDate(yearToZonedDateTimeMapper.dateToYear(DEFAULT_DATE_OF_BIRTH))))))
             .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER.toString())))
             .andExpect(jsonPath("$.[*].yearInCollege").value(hasItem(DEFAULT_YEAR_IN_COLLEGE.toString())))
             .andExpect(jsonPath("$.[*].collegeDivision").value(hasItem(DEFAULT_COLLEGE_DIVISION.toString())))
@@ -299,7 +293,6 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.educationLevel").value(DEFAULT_EDUCATIONLEVEL.toString()))
             .andExpect(jsonPath("$.profilePicContentType").value(DEFAULT_PROFILE_PIC_CONTENT_TYPE))
             .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)))
-            .andExpect(jsonPath("$.dateOfBirth").value(sameInstant(yearToZonedDateTimeMapper.yearToDate(yearToZonedDateTimeMapper.dateToYear(DEFAULT_DATE_OF_BIRTH)))))
             .andExpect(jsonPath("$.gender").value(DEFAULT_GENDER.toString()))
             .andExpect(jsonPath("$.yearInCollege").value(DEFAULT_YEAR_IN_COLLEGE.toString()))
             .andExpect(jsonPath("$.collegeDivision").value(DEFAULT_COLLEGE_DIVISION.toString()))
@@ -374,7 +367,6 @@ public class UserInfoResourceIntTest {
         assertThat(testUserInfo.getPrimarySport()).isEqualTo(UPDATED_PRIMARYSPORT);
         assertThat(testUserInfo.getProfilePic()).isEqualTo(UPDATED_PROFILE_PIC);
         assertThat(testUserInfo.getProfilePicContentType()).isEqualTo(UPDATED_PROFILE_PIC_CONTENT_TYPE);
-        assertThat(testUserInfo.getDateOfBirth()).isEqualTo(yearToZonedDateTimeMapper.yearToDate(yearToZonedDateTimeMapper.dateToYear(UPDATED_DATE_OF_BIRTH)));
         assertThat(testUserInfo.getGender()).isEqualTo(UPDATED_GENDER);
         assertThat(testUserInfo.getYearInCollege()).isEqualTo(UPDATED_YEAR_IN_COLLEGE);
         assertThat(testUserInfo.getCollegeDivision()).isEqualTo(UPDATED_COLLEGE_DIVISION);
@@ -400,24 +392,6 @@ public class UserInfoResourceIntTest {
         // Validate the UserInfo in the database
         List<UserInfo> userInfoList = userInfoRepository.findAll();
         assertThat(userInfoList).hasSize(databaseSizeBeforeUpdate + 1);
-    }
-
-    @Test
-    @Transactional
-    public void deleteUserInfo() throws Exception {
-        // Initialize the database
-        userInfoService.save(userInfo);
-
-        int databaseSizeBeforeDelete = userInfoRepository.findAll().size();
-
-        // Get the userInfo
-        restUserInfoMockMvc.perform(delete("/api/user-infos/{id}", userInfo.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
-            .andExpect(status().isOk());
-
-        // Validate the database is empty
-        List<UserInfo> userInfoList = userInfoRepository.findAll();
-        assertThat(userInfoList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
     @Test

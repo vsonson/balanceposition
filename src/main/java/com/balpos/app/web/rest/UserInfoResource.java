@@ -1,16 +1,15 @@
 package com.balpos.app.web.rest;
 
-import com.balpos.app.web.rest.mapper.UserInfoUserMapper;
-import com.balpos.app.web.rest.vm.UserInfoUserVM;
-import com.codahale.metrics.annotation.Timed;
 import com.balpos.app.domain.UserInfo;
 import com.balpos.app.service.UserInfoService;
+import com.balpos.app.web.rest.mapper.UserInfoUserMapper;
 import com.balpos.app.web.rest.util.HeaderUtil;
 import com.balpos.app.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
+import com.balpos.app.web.rest.vm.UserInfoUserVM;
+import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -29,14 +27,11 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class UserInfoResource {
 
-    private final Logger log = LoggerFactory.getLogger(UserInfoResource.class);
-
     private static final String ENTITY_NAME = "userInfo";
-
     private final UserInfoService userInfoService;
-
     private final UserInfoUserMapper userInfoUserMapper;
 
     public UserInfoResource(UserInfoService userInfoService, UserInfoUserMapper userInfoUserMapper) {
@@ -58,6 +53,7 @@ public class UserInfoResource {
         if (userInfo.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new userInfo cannot already have an ID")).body(null);
         }
+        //TODO filter out UserStatus updates through this API
         UserInfo userInfoPost = userInfoUserMapper.toEntity(userInfo);
         UserInfo result = userInfoService.save(userInfoPost);
         return ResponseEntity.created(new URI("/api/user-infos/" + result.getId()))
@@ -81,6 +77,7 @@ public class UserInfoResource {
         if (userInfo.getId() == null) {
             return createUserInfo(userInfo);
         }
+        //TODO filter out UserStatus updates through this API
         UserInfo userInfoPut = userInfoUserMapper.toEntity(userInfo);
         UserInfo result = userInfoService.save(userInfoPut);
         return ResponseEntity.ok()
@@ -115,19 +112,5 @@ public class UserInfoResource {
         log.debug("REST request to get UserInfo : {}", id);
         UserInfo userInfo = userInfoService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userInfo));
-    }
-
-    /**
-     * DELETE  /user-infos/:id : delete the "id" userInfo.
-     *
-     * @param id the id of the userInfo to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
-    @DeleteMapping("/user-infos/{id}")
-    @Timed
-    public ResponseEntity<Void> deleteUserInfo(@PathVariable Long id) {
-        log.debug("REST request to delete UserInfo : {}", id);
-        userInfoService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }
