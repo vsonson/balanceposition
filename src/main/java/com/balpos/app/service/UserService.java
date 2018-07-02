@@ -189,6 +189,10 @@ public class UserService {
             .map(UserDTO::new);
     }
 
+    public Optional<User> getUserByLogin(String name){
+        return userRepository.findOneByLogin(name);
+    }
+
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
             userRepository.delete(user);
