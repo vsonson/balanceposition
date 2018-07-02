@@ -9,6 +9,7 @@ import com.balpos.app.service.StressDatumService;
 import com.balpos.app.service.UserService;
 import com.balpos.app.service.dto.StressDatumDTO;
 import com.balpos.app.service.mapper.StressDatumMapper;
+import com.balpos.app.service.util.UserResourceUtil;
 import com.balpos.app.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -77,7 +78,7 @@ public class StressDatumResourceIntTest {
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
-    private UserService userService;
+    private UserResourceUtil userResourceUtil;
 
     @Autowired
     private EntityManager em;
@@ -107,7 +108,7 @@ public class StressDatumResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final StressDatumResource stressDatumResource = new StressDatumResource(stressDatumService, stressDatumQueryService, stressDatumRepository, userService);
+        final StressDatumResource stressDatumResource = new StressDatumResource(stressDatumService, stressDatumQueryService, userResourceUtil);
         this.restStressDatumMockMvc = MockMvcBuilders.standaloneSetup(stressDatumResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -364,7 +365,6 @@ public class StressDatumResourceIntTest {
     @Test
     @Transactional
     public void equalsVerifier() throws Exception {
-        TestUtil.equalsVerifier(StressDatum.class);
         StressDatum stressDatum1 = new StressDatum();
         stressDatum1.setId(1L);
         StressDatum stressDatum2 = new StressDatum();

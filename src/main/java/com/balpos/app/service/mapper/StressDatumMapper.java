@@ -22,7 +22,6 @@ public interface StressDatumMapper extends EntityMapper<StressDatumDTO, StressDa
         if (id == null) {
             return null;
         }
-
         StressDatum stressDatum = new StressDatum();
         stressDatum.setId(id);
         return stressDatum;
