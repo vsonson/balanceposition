@@ -4,7 +4,6 @@ import com.balpos.app.domain.StressDatum;
 import com.balpos.app.domain.User;
 import com.balpos.app.repository.StressDatumRepository;
 import com.balpos.app.service.StressDatumService;
-import com.balpos.app.service.UserService;
 import com.balpos.app.service.dto.StressDatumDTO;
 import com.balpos.app.service.mapper.StressDatumMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +25,11 @@ import java.util.List;
 public class StressDatumServiceImpl implements StressDatumService {
 
     private final StressDatumRepository stressDatumRepository;
-    private final UserService userService;
 
     private final StressDatumMapper stressDatumMapper;
 
-    public StressDatumServiceImpl(StressDatumRepository stressDatumRepository, UserService userService, StressDatumMapper stressDatumMapper) {
+    public StressDatumServiceImpl(StressDatumRepository stressDatumRepository, StressDatumMapper stressDatumMapper) {
         this.stressDatumRepository = stressDatumRepository;
-        this.userService = userService;
         this.stressDatumMapper = stressDatumMapper;
     }
 
