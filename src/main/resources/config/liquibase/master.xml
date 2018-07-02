@@ -26,6 +26,7 @@
     <include file="config/liquibase/changelog/20171221021853_added_entity_DataPoint.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180614162954_update_entity_UserInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180626015147_added_entity_StressDatum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180702005658_added_entity_MoodDatum.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - Stack Stack will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20170824162954_added_entity_constraints_UserInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824162959_added_entity_constraints_TrackMetricQuestion.xml" relativeToChangelogFile="false"/>
@@ -39,5 +40,7 @@
     <include file="config/liquibase/changelog/20170824163011_added_entity_constraints_PathAction.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171110011810_added_entity_constraints_QuoteOfTheDayHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180626015147_added_entity_constraints_StressDatum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180702005658_added_entity_constraints_MoodDatum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180702006458_additional_constraints_MoodDatum.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - Stack Stack will add liquibase constraints changelogs here -->
 </databaseChangeLog>

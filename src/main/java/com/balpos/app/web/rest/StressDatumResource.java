@@ -1,17 +1,13 @@
 package com.balpos.app.web.rest;
 
-import com.balpos.app.domain.User;
-import com.balpos.app.repository.StressDatumRepository;
 import com.balpos.app.service.StressDatumQueryService;
 import com.balpos.app.service.StressDatumService;
-import com.balpos.app.service.UserService;
 import com.balpos.app.service.dto.StressDatumCriteria;
 import com.balpos.app.service.dto.StressDatumDTO;
+import com.balpos.app.service.util.UserResourceUtil;
 import com.balpos.app.web.rest.util.HeaderUtil;
 import com.balpos.app.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
-import io.github.jhipster.service.filter.LongFilter;
-import io.github.jhipster.service.filter.ZonedDateTimeFilter;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -39,12 +35,12 @@ public class StressDatumResource {
 
     private final StressDatumService stressDatumService;
     private final StressDatumQueryService stressDatumQueryService;
-    private final UserService userService;
+    private final UserResourceUtil userResourceUtil;
 
-    public StressDatumResource(StressDatumService stressDatumService, StressDatumQueryService stressDatumQueryService, UserService userService) {
+    public StressDatumResource(StressDatumService stressDatumService, StressDatumQueryService stressDatumQueryService, UserResourceUtil userResourceUtil) {
         this.stressDatumService = stressDatumService;
         this.stressDatumQueryService = stressDatumQueryService;
-        this.userService = userService;
+        this.userResourceUtil = userResourceUtil;
     }
 
     /**
@@ -59,7 +55,7 @@ public class StressDatumResource {
     public ResponseEntity<StressDatumDTO> createStressDatum(@Valid @RequestBody StressDatumDTO stressDatumDTO, Principal principal) throws URISyntaxException {
         log.debug("REST request to save StressDatum : {}", stressDatumDTO);
 
-        StressDatumDTO result = stressDatumService.save(stressDatumDTO, userService.getUserByLogin(principal.getName()).get());
+        StressDatumDTO result = stressDatumService.save(stressDatumDTO, userResourceUtil.getUserFromLogin(principal.getName()).get());
 
         return ResponseEntity.created(new URI("/api/stress-data/"))
             .headers(HeaderUtil.createAlert(CREATE_SUCCESS_MESSAGE, null))
@@ -77,10 +73,7 @@ public class StressDatumResource {
     @Timed
     public ResponseEntity<List<StressDatumDTO>> getAllStressData(StressDatumCriteria criteria, @ApiParam Pageable pageable, Principal principal) {
         log.debug("REST request to get StressData by criteria: {}", criteria);
-        User user = userService.getUserByLogin(principal.getName()).get();
-        LongFilter userFilter = new LongFilter();
-        userFilter.setEquals(user.getId());
-        criteria.setUserId(userFilter);
+        criteria.setUserId(userResourceUtil.createUserFilterFromLogin(principal.getName()));
 
         Page<StressDatumDTO> page = stressDatumQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/stress-data");
