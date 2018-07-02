@@ -5,22 +5,21 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
- * A StressDatum.
+ * A FocusDatum.
  */
 @Entity
-@Table(name = "stress_data")
+@Table(name = "focus_data")
 @Data
 @Accessors(chain = true)
-public class StressDatum implements Serializable {
+public class FocusDatum implements Serializable {
 
-    private static final long serialVersionUID = -5452173236512697642L;
+    private static final long serialVersionUID = 7606288675405045766L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +27,8 @@ public class StressDatum implements Serializable {
 
     @NotNull
     @Size(min = 1)
-    @Column(name = "jhi_value", nullable = false)
-    private String value;
+    @Column(name = "jhi_level", nullable = false)
+    private String level;
 
     @NotNull
     @Column(name = "jhi_timestamp", nullable = false)
