@@ -24,7 +24,7 @@ public class UserInfoUserVM {
     public String phone;
     public String address;
     public String address2;
-    public String yearOfBirth;
+    public LocalDate dateOfBirth;
     public String collegeDivision;
     public String yearInCollege;
     public String profilePicContentType;
