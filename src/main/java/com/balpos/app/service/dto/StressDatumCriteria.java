@@ -16,11 +16,7 @@ import lombok.Data;
  */
 @Data
 public class StressDatumCriteria {
-
     private StringFilter value;
-
     private ZonedDateTimeFilter timestamp;
-
     private LongFilter userId;
-
 }
