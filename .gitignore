@@ -125,6 +125,7 @@ Desktop.ini
 *.*~
 *~
 .merge_file*
+/src/main/webapp/app/app.constants.js
 
 ######################
 # Gradle Wrapper
