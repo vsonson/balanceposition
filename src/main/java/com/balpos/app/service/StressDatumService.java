@@ -34,11 +34,4 @@ public interface StressDatumService {
      * @return the entity
      */
     StressDatumDTO findOne(Long id);
-
-    /**
-     * Delete the "id" stressDatum.
-     *
-     * @param id the id of the entity
-     */
-    void delete(Long id);
 }
