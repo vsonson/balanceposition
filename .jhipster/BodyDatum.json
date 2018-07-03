@@ -1,0 +1,47 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "bodyDatum"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "headache",
+            "fieldType": "HeadacheLevel",
+            "fieldValues": "NO,MILD,SEVERE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "digestive",
+            "fieldType": "DigestiveLevel",
+            "fieldValues": "NO,MILD,SEVERE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "timestamp",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180703052041",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "body_data",
+    "jpaMetamodelFiltering": true,
+    "pagination": "infinite-scroll"
+}
