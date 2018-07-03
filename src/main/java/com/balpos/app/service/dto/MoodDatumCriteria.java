@@ -1,17 +1,10 @@
 package com.balpos.app.service.dto;
 
-import java.io.Serializable;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
-
-
-
 import io.github.jhipster.service.filter.ZonedDateTimeFilter;
+import lombok.Data;
 
 
 /**
@@ -22,9 +15,8 @@ import io.github.jhipster.service.filter.ZonedDateTimeFilter;
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class MoodDatumCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+@Data
+public class MoodDatumCriteria {
 
     private LongFilter id;
 
@@ -33,50 +25,5 @@ public class MoodDatumCriteria implements Serializable {
     private ZonedDateTimeFilter timestamp;
 
     private LongFilter userId;
-
-    public MoodDatumCriteria() {
-    }
-
-    public LongFilter getId() {
-        return id;
-    }
-
-    public void setId(LongFilter id) {
-        this.id = id;
-    }
-
-    public StringFilter getValue() {
-        return value;
-    }
-
-    public void setValue(StringFilter value) {
-        this.value = value;
-    }
-
-    public ZonedDateTimeFilter getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(ZonedDateTimeFilter timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public LongFilter getUserId() {
-        return userId;
-    }
-
-    public void setUserId(LongFilter userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        return "MoodDatumCriteria{" +
-                (id != null ? "id=" + id + ", " : "") +
-                (value != null ? "value=" + value + ", " : "") +
-                (timestamp != null ? "timestamp=" + timestamp + ", " : "") +
-                (userId != null ? "userId=" + userId + ", " : "") +
-            "}";
-    }
 
 }
