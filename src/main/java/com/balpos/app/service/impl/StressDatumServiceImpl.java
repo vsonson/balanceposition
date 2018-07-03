@@ -87,15 +87,4 @@ public class StressDatumServiceImpl implements StressDatumService {
         StressDatum stressDatum = stressDatumRepository.findOne(id);
         return stressDatumMapper.toDto(stressDatum);
     }
-
-    /**
-     * Delete the  stressDatum by id.
-     *
-     * @param id the id of the entity
-     */
-    @Override
-    public void delete(Long id) {
-        log.debug("Request to delete StressDatum : {}", id);
-        stressDatumRepository.delete(id);
-    }
 }
