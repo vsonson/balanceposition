@@ -1,6 +1,5 @@
 package com.balpos.app.domain;
 
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -17,13 +16,13 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @Slf4j
 public class DataPoint implements Serializable {
-
     private static final long serialVersionUID = -4196394526385197751L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @Column(name = "jhi_type")
@@ -31,5 +30,8 @@ public class DataPoint implements Serializable {
 
     @Column(name = "jhi_order")
     private Integer order;
+
+    @Column(name = "one_per_day")
+    private Boolean onePerDay;
 
 }

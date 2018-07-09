@@ -10,14 +10,6 @@ import org.springframework.data.domain.Pageable;
 public interface DataPointService {
 
     /**
-     * Save a dataPoint.
-     *
-     * @param dataPointDTO the entity to save
-     * @return the persisted entity
-     */
-    DataPointDTO save(DataPointDTO dataPointDTO);
-
-    /**
      *  Get all the dataPoints.
      *
      *  @param pageable the pagination information
@@ -33,10 +25,4 @@ public interface DataPointService {
      */
     DataPointDTO findOne(Long id);
 
-    /**
-     *  Delete the "id" dataPoint.
-     *
-     *  @param id the id of the entity
-     */
-    void delete(Long id);
 }

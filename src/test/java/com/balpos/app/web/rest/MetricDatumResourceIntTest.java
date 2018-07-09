@@ -9,6 +9,7 @@ import com.balpos.app.service.MetricDatumQueryService;
 import com.balpos.app.service.MetricDatumService;
 import com.balpos.app.service.dto.MetricDatumDTO;
 import com.balpos.app.service.mapper.MetricDatumMapper;
+import com.balpos.app.service.util.UserResourceUtil;
 import com.balpos.app.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -26,8 +27,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,8 +48,11 @@ public class MetricDatumResourceIntTest {
     private static final String DEFAULT_METRIC_VALUE = "AAAAAAAAAA";
     private static final String UPDATED_METRIC_VALUE = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_TIMESTAMP = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_TIMESTAMP = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDateTime DEFAULT_TIMESTAMP = LocalDateTime.now();
+    private static final LocalDateTime UPDATED_TIMESTAMP = LocalDateTime.now().plusDays(1);
+
+    @Autowired
+    private UserResourceUtil userResourceUtil;
 
     @Autowired
     private MetricDatumRepository metricDatumRepository;
@@ -87,7 +90,7 @@ public class MetricDatumResourceIntTest {
      */
     public static MetricDatum createEntity(EntityManager em) {
         MetricDatum metricDatum = new MetricDatum()
-            .setMetricValue(DEFAULT_METRIC_VALUE)
+            .setDatumValue(DEFAULT_METRIC_VALUE)
             .setTimestamp(DEFAULT_TIMESTAMP);
         // Add required entity
         DataPoint dataPoint = DataPointResourceIntTest.createEntity(em);
@@ -105,7 +108,7 @@ public class MetricDatumResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final MetricDatumResource metricDatumResource = new MetricDatumResource(metricDatumService, metricDatumQueryService);
+        final MetricDatumResource metricDatumResource = new MetricDatumResource(metricDatumService, metricDatumQueryService, userResourceUtil);
         this.restMetricDatumMockMvc = MockMvcBuilders.standaloneSetup(metricDatumResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -133,7 +136,7 @@ public class MetricDatumResourceIntTest {
         List<MetricDatum> metricDatumList = metricDatumRepository.findAll();
         assertThat(metricDatumList).hasSize(databaseSizeBeforeCreate + 1);
         MetricDatum testMetricDatum = metricDatumList.get(metricDatumList.size() - 1);
-        assertThat(testMetricDatum.getMetricValue()).isEqualTo(DEFAULT_METRIC_VALUE);
+        assertThat(testMetricDatum.getDatumValue()).isEqualTo(DEFAULT_METRIC_VALUE);
         assertThat(testMetricDatum.getTimestamp()).isEqualTo(DEFAULT_TIMESTAMP);
     }
 
@@ -162,7 +165,7 @@ public class MetricDatumResourceIntTest {
     public void checkMetricValueIsRequired() throws Exception {
         int databaseSizeBeforeTest = metricDatumRepository.findAll().size();
         // set the field null
-        metricDatum.setMetricValue(null);
+        metricDatum.setDatumValue(null);
 
         // Create the MetricDatum, which fails.
         MetricDatumDTO metricDatumDTO = metricDatumMapper.toDto(metricDatum);
@@ -345,7 +348,7 @@ public class MetricDatumResourceIntTest {
         // Update the metricDatum
         MetricDatum updatedMetricDatum = metricDatumRepository.findOne(metricDatum.getId());
         updatedMetricDatum
-            .setMetricValue(UPDATED_METRIC_VALUE)
+            .setDatumValue(UPDATED_METRIC_VALUE)
             .setTimestamp(UPDATED_TIMESTAMP);
         MetricDatumDTO metricDatumDTO = metricDatumMapper.toDto(updatedMetricDatum);
 
@@ -358,7 +361,7 @@ public class MetricDatumResourceIntTest {
         List<MetricDatum> metricDatumList = metricDatumRepository.findAll();
         assertThat(metricDatumList).hasSize(databaseSizeBeforeUpdate);
         MetricDatum testMetricDatum = metricDatumList.get(metricDatumList.size() - 1);
-        assertThat(testMetricDatum.getMetricValue()).isEqualTo(UPDATED_METRIC_VALUE);
+        assertThat(testMetricDatum.getDatumValue()).isEqualTo(UPDATED_METRIC_VALUE);
         assertThat(testMetricDatum.getTimestamp()).isEqualTo(UPDATED_TIMESTAMP);
     }
 

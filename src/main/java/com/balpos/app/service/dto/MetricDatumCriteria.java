@@ -1,7 +1,7 @@
 package com.balpos.app.service.dto;
 
+import com.balpos.app.service.filter.LocalDateTimeFilter;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 import lombok.Data;
@@ -20,11 +20,11 @@ public class MetricDatumCriteria {
 
     private LongFilter id;
 
-    private StringFilter metricValue;
-
-    private InstantFilter timestamp;
-
     private StringFilter dataPointName;
+
+    private LocalDateTimeFilter timestamp;
+
+    private StringFilter datumValue;
 
     private LongFilter userId;
 }

@@ -8,15 +8,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 /**
  * A MetricDatum - generic base class defining a single data point for a metric
  */
 @Entity
 @Table(name = "metric_data")
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "data_point_name", discriminatorType = DiscriminatorType.STRING)
 @Data
 @Accessors(chain = true)
 public class MetricDatum implements Serializable {
@@ -29,14 +27,15 @@ public class MetricDatum implements Serializable {
 
     @NotNull
     @Size(min = 1)
-    @Column(name = "metric_value", nullable = false)
-    private String metricValue;
+    @Column(name = "datum_value", nullable = false)
+    private String datumValue;
 
     @NotNull
     @Column(name = "jhi_timestamp", nullable = false)
-    private Instant timestamp;
+    private LocalDateTime timestamp;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "data_point_name", referencedColumnName = "name")
     @NotNull
     private DataPoint dataPoint;
 

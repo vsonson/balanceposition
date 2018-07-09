@@ -75,8 +75,8 @@ public class MetricDatumQueryService extends QueryService<MetricDatum> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), MetricDatum_.id));
             }
-            if (criteria.getMetricValue() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getMetricValue(), MetricDatum_.metricValue));
+            if (criteria.getDatumValue() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getDatumValue(), MetricDatum_.datumValue));
             }
             if (criteria.getTimestamp() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getTimestamp(), MetricDatum_.timestamp));

@@ -40,20 +40,6 @@ public class DataPointServiceImpl implements DataPointService {
     }
 
     /**
-     * Save a dataPoint.
-     *
-     * @param dataPointDTO the entity to save
-     * @return the persisted entity
-     */
-    @Override
-    public DataPointDTO save(DataPointDTO dataPointDTO) {
-        log.debug("Request to save DataPoint : {}", dataPointDTO);
-        DataPoint dataPoint = dataPointMapper.toEntity(dataPointDTO);
-        dataPoint = dataPointRepository.save(dataPoint);
-        return dataPointMapper.toDto(dataPoint);
-    }
-
-    /**
      * Get all the dataPoints.
      *
      * @param pageable the pagination information
@@ -80,18 +66,6 @@ public class DataPointServiceImpl implements DataPointService {
         DataPoint dataPoint = dataPointRepository.findOne(id);
         return dataPointMapper.toDto(dataPoint);
     }
-
-    /**
-     * Delete the  dataPoint by id.
-     *
-     * @param id the id of the entity
-     */
-    @Override
-    public void delete(Long id) {
-        log.debug("Request to delete DataPoint : {}", id);
-        dataPointRepository.delete(id);
-    }
-
 
     @PostConstruct
     @Profile("dev")
@@ -121,6 +95,7 @@ public class DataPointServiceImpl implements DataPointService {
                 dp.setName(values[1]);
                 dp.setOrder(Integer.valueOf(values[2]));
                 dp.setType(values[3]);
+                dp.setOnePerDay("1".equals(values[4]));
                 dataPoints.add(dp);
 
                 line = reader.readLine();

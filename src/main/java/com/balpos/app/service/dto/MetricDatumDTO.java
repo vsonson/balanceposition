@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 /**
  * A DTO for the MetricDatum entity.
@@ -14,16 +15,13 @@ import java.time.Instant;
 @Data
 public class MetricDatumDTO implements Serializable {
 
-    private Long id;
-
     @NotNull
     @Size(min = 1)
-    private String metricValue;
+    private String datumValue;
 
     @NotNull
-    private Instant timestamp;
+    private LocalDateTime timestamp;
 
     private String dataPointName;
 
-    private String userLogin;
 }

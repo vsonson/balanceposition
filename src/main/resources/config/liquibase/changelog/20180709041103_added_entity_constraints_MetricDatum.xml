@@ -6,7 +6,17 @@
     <!--
         Added the constraints for entity MetricDatum.
     -->
-    <changeSet id="20180709041103-2" author="jhipster">
+    <changeSet id="20180709041103-2" author="asegner">
+
+        <createIndex tableName="data_point" indexName="nameindex">
+            <column name="name"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="data_point" columnNames="name"/>
+
+        <addNotNullConstraint tableName="data_point"
+                              columnName="name"
+                              columnDataType="varchar(255)"/>
 
         <addForeignKeyConstraint baseColumnNames="data_point_name"
                                  baseTableName="metric_data"

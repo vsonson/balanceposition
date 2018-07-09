@@ -1,6 +1,8 @@
 package com.balpos.app.service.impl;
 
+import com.balpos.app.domain.DataPoint;
 import com.balpos.app.domain.MetricDatum;
+import com.balpos.app.domain.User;
 import com.balpos.app.repository.MetricDatumRepository;
 import com.balpos.app.service.MetricDatumService;
 import com.balpos.app.service.dto.MetricDatumDTO;
@@ -11,6 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Service Implementation for managing MetricDatum.
@@ -30,20 +35,6 @@ public class MetricDatumServiceImpl implements MetricDatumService {
     }
 
     /**
-     * Save a metricDatum.
-     *
-     * @param metricDatumDTO the entity to save
-     * @return the persisted entity
-     */
-    @Override
-    public MetricDatumDTO save(MetricDatumDTO metricDatumDTO) {
-        log.debug("Request to save MetricDatum : {}", metricDatumDTO);
-        MetricDatum metricDatum = metricDatumMapper.toEntity(metricDatumDTO);
-        metricDatum = metricDatumRepository.save(metricDatum);
-        return metricDatumMapper.toDto(metricDatum);
-    }
-
-    /**
      * Get all the metricData.
      *
      * @param pageable the pagination information
@@ -58,27 +49,38 @@ public class MetricDatumServiceImpl implements MetricDatumService {
     }
 
     /**
-     * Get one metricDatum by id.
+     * Save a metricDatum.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param metricDatumDTO the entity to save
+     * @return the persisted entity
      */
     @Override
-    @Transactional(readOnly = true)
-    public MetricDatumDTO findOne(Long id) {
-        log.debug("Request to get MetricDatum : {}", id);
-        MetricDatum metricDatum = metricDatumRepository.findOne(id);
+    public MetricDatumDTO save(MetricDatumDTO metricDatumDTO, User user) {
+        log.debug("Request to save MetricDatum : {}", metricDatumDTO);
+        MetricDatum metricDatum = metricDatumMapper.toEntity(metricDatumDTO);
+
+        // if this should only insert one record per day then get the current record, if exists, and update it
+        if (metricDatum.getDataPoint().getOnePerDay()) {
+            MetricDatum metricDatumUpdate = getDatumForDay(metricDatumDTO.getTimestamp().toLocalDate(), metricDatum.getDataPoint(), user);
+            if (metricDatumUpdate != null) {
+                metricDatum = metricDatumUpdate;
+                metricDatum.setDatumValue(metricDatumDTO.getDatumValue());
+                metricDatum.setTimestamp(metricDatumDTO.getTimestamp());
+            }
+        }
+
+        metricDatum.setUser(user);
+        metricDatum = metricDatumRepository.save(metricDatum);
         return metricDatumMapper.toDto(metricDatum);
     }
 
-    /**
-     * Delete the  metricDatum by id.
-     *
-     * @param id the id of the entity
-     */
-    @Override
-    public void delete(Long id) {
-        log.debug("Request to delete MetricDatum : {}", id);
-        metricDatumRepository.delete(id);
+
+    private MetricDatum getDatumForDay(LocalDate day, DataPoint dataPoint, User user) {
+        //check for a record from today and update it if it exists
+        LocalDateTime firstMomentOfDay = day.atStartOfDay();
+        List<MetricDatum> metricDatumList = metricDatumRepository.findByUserAndDataPointAndTimestampBetween(user, dataPoint, firstMomentOfDay, firstMomentOfDay.plusDays(1));
+        return (metricDatumList == null || metricDatumList.isEmpty()) ? null : metricDatumList.get(0);
     }
+
+
 }

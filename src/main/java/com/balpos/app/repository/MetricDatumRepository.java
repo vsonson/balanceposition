@@ -1,9 +1,14 @@
 package com.balpos.app.repository;
 
+import com.balpos.app.domain.DataPoint;
 import com.balpos.app.domain.MetricDatum;
+import com.balpos.app.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -15,5 +20,7 @@ public interface MetricDatumRepository extends JpaRepository<MetricDatum, Long>,
 
     @Query("select metric_data from MetricDatum metric_data where metric_data.user.login = ?#{principal.username}")
     List<MetricDatum> findByUserIsCurrentUser();
+
+    List<MetricDatum> findByUserAndDataPointAndTimestampBetween(User user, DataPoint dataPoint, LocalDateTime start, LocalDateTime end);
 
 }
