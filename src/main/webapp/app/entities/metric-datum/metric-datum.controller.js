@@ -3,15 +3,15 @@
 
     angular
         .module('balancepositionApp')
-        .controller('DataPointController', DataPointController);
+        .controller('MetricDatumController', MetricDatumController);
 
-    DataPointController.$inject = ['DataPoint', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    MetricDatumController.$inject = ['MetricDatum', 'ParseLinks', 'AlertService', 'paginationConstants'];
 
-    function DataPointController(DataPoint, ParseLinks, AlertService, paginationConstants) {
+    function MetricDatumController(MetricDatum, ParseLinks, AlertService, paginationConstants) {
 
         var vm = this;
 
-        vm.dataPoints = [];
+        vm.metricData = [];
         vm.loadPage = loadPage;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.page = 0;
@@ -25,7 +25,7 @@
         loadAll();
 
         function loadAll () {
-            DataPoint.query({
+            MetricDatum.query({
                 page: vm.page,
                 size: vm.itemsPerPage,
                 sort: sort()
@@ -42,7 +42,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 for (var i = 0; i < data.length; i++) {
-                    vm.dataPoints.push(data[i]);
+                    vm.metricData.push(data[i]);
                 }
             }
 
@@ -53,7 +53,7 @@
 
         function reset () {
             vm.page = 0;
-            vm.dataPoints = [];
+            vm.metricData = [];
             loadAll();
         }
 

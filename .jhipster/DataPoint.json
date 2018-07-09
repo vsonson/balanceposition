@@ -16,9 +16,9 @@
         }
     ],
     "changelogDate": "20171221021853",
-    "dto": "no",
-    "service": "serviceClass",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
     "entityTableName": "data_point",
-    "jpaMetamodelFiltering": false,
-    "pagination": "pagination"
+    "jpaMetamodelFiltering": true,
+    "pagination": "infinite-scroll"
 }

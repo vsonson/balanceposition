@@ -1,13 +1,13 @@
 <div>
-    <h2>Data Points</h2>
+    <h2>Metric Data</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="data-point.new" >
+                <button class="btn btn-primary" ui-sref="metric-datum.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span >
-                        Create new Data Point
+                        Create new Metric Datum
                     </span>
                 </button>
             </div>
@@ -19,34 +19,40 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="type"><span>Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="order"><span>Order</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metricValue"><span>Metric Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="timestamp"><span>Timestamp</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dataPointName"><span>Data Point</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userLogin"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="dataPoint in vm.dataPoints track by dataPoint.id">
-                    <td><a ui-sref="data-point-detail({id:dataPoint.id})">{{dataPoint.id}}</a></td>
-                    <td>{{dataPoint.name}}</td>
-                    <td>{{dataPoint.type}}</td>
-                    <td>{{dataPoint.order}}</td>
+                <tr ng-repeat="metricDatum in vm.metricData track by metricDatum.id">
+                    <td><a ui-sref="metric-datum-detail({id:metricDatum.id})">{{metricDatum.id}}</a></td>
+                    <td>{{metricDatum.metricValue}}</td>
+                    <td>{{metricDatum.timestamp | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="data-point-detail({id:metricDatum.dataPointId})">{{metricDatum.dataPointName}}</a>
+                    </td>
+                    <td>
+                        {{metricDatum.userLogin}}
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="data-point-detail({id:dataPoint.id})"
+                                    ui-sref="metric-datum-detail({id:metricDatum.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="data-point.edit({id:dataPoint.id})"
+                                    ui-sref="metric-datum.edit({id:metricDatum.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="data-point.delete({id:dataPoint.id})"
+                                    ui-sref="metric-datum.delete({id:metricDatum.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-sm-down"></span>

@@ -9,44 +9,44 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('data-point', {
+        .state('metric-datum', {
             parent: 'entity',
-            url: '/data-point',
+            url: '/metric-datum',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'DataPoints'
+                pageTitle: 'MetricData'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/data-point/data-points.html',
-                    controller: 'DataPointController',
+                    templateUrl: 'app/entities/metric-datum/metric-data.html',
+                    controller: 'MetricDatumController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
             }
         })
-        .state('data-point-detail', {
-            parent: 'data-point',
-            url: '/data-point/{id}',
+        .state('metric-datum-detail', {
+            parent: 'metric-datum',
+            url: '/metric-datum/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'DataPoint'
+                pageTitle: 'MetricDatum'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/data-point/data-point-detail.html',
-                    controller: 'DataPointDetailController',
+                    templateUrl: 'app/entities/metric-datum/metric-datum-detail.html',
+                    controller: 'MetricDatumDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
-                entity: ['$stateParams', 'DataPoint', function($stateParams, DataPoint) {
-                    return DataPoint.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'MetricDatum', function($stateParams, MetricDatum) {
+                    return MetricDatum.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'data-point',
+                        name: $state.current.name || 'metric-datum',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -54,22 +54,22 @@
                 }]
             }
         })
-        .state('data-point-detail.edit', {
-            parent: 'data-point-detail',
+        .state('metric-datum-detail.edit', {
+            parent: 'metric-datum-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/data-point/data-point-dialog.html',
-                    controller: 'DataPointDialogController',
+                    templateUrl: 'app/entities/metric-datum/metric-datum-dialog.html',
+                    controller: 'MetricDatumDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['DataPoint', function(DataPoint) {
-                            return DataPoint.get({id : $stateParams.id}).$promise;
+                        entity: ['MetricDatum', function(MetricDatum) {
+                            return MetricDatum.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -79,80 +79,79 @@
                 });
             }]
         })
-        .state('data-point.new', {
-            parent: 'data-point',
+        .state('metric-datum.new', {
+            parent: 'metric-datum',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/data-point/data-point-dialog.html',
-                    controller: 'DataPointDialogController',
+                    templateUrl: 'app/entities/metric-datum/metric-datum-dialog.html',
+                    controller: 'MetricDatumDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                name: null,
-                                type: null,
-                                order: null,
+                                metricValue: null,
+                                timestamp: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('data-point', null, { reload: 'data-point' });
+                    $state.go('metric-datum', null, { reload: 'metric-datum' });
                 }, function() {
-                    $state.go('data-point');
+                    $state.go('metric-datum');
                 });
             }]
         })
-        .state('data-point.edit', {
-            parent: 'data-point',
+        .state('metric-datum.edit', {
+            parent: 'metric-datum',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/data-point/data-point-dialog.html',
-                    controller: 'DataPointDialogController',
+                    templateUrl: 'app/entities/metric-datum/metric-datum-dialog.html',
+                    controller: 'MetricDatumDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['DataPoint', function(DataPoint) {
-                            return DataPoint.get({id : $stateParams.id}).$promise;
+                        entity: ['MetricDatum', function(MetricDatum) {
+                            return MetricDatum.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('data-point', null, { reload: 'data-point' });
+                    $state.go('metric-datum', null, { reload: 'metric-datum' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('data-point.delete', {
-            parent: 'data-point',
+        .state('metric-datum.delete', {
+            parent: 'metric-datum',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/data-point/data-point-delete-dialog.html',
-                    controller: 'DataPointDeleteController',
+                    templateUrl: 'app/entities/metric-datum/metric-datum-delete-dialog.html',
+                    controller: 'MetricDatumDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['DataPoint', function(DataPoint) {
-                            return DataPoint.get({id : $stateParams.id}).$promise;
+                        entity: ['MetricDatum', function(MetricDatum) {
+                            return MetricDatum.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('data-point', null, { reload: 'data-point' });
+                    $state.go('metric-datum', null, { reload: 'metric-datum' });
                 }, function() {
                     $state.go('^');
                 });

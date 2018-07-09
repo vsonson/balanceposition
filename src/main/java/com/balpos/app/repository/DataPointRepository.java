@@ -1,8 +1,6 @@
 package com.balpos.app.repository;
 
 import com.balpos.app.domain.DataPoint;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -13,6 +11,6 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface DataPointRepository extends JpaRepository<DataPoint, Long> {
+public interface DataPointRepository extends JpaRepository<DataPoint, Long>, JpaSpecificationExecutor<DataPoint> {
 
 }

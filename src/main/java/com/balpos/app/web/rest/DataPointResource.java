@@ -1,10 +1,12 @@
 package com.balpos.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.balpos.app.domain.DataPoint;
 import com.balpos.app.service.DataPointService;
 import com.balpos.app.web.rest.util.HeaderUtil;
 import com.balpos.app.web.rest.util.PaginationUtil;
+import com.balpos.app.service.dto.DataPointDTO;
+import com.balpos.app.service.dto.DataPointCriteria;
+import com.balpos.app.service.DataPointQueryService;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -35,27 +37,29 @@ public class DataPointResource {
     private static final String ENTITY_NAME = "dataPoint";
 
     private final DataPointService dataPointService;
+    private final DataPointQueryService dataPointQueryService;
 
-    public DataPointResource(DataPointService dataPointService) {
+    public DataPointResource(DataPointService dataPointService, DataPointQueryService dataPointQueryService) {
         this.dataPointService = dataPointService;
+        this.dataPointQueryService = dataPointQueryService;
     }
 
     /**
      * POST  /data-points : Create a new dataPoint.
      *
-     * @param dataPoint the dataPoint to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new dataPoint, or with status 400 (Bad Request) if the dataPoint has already an ID
+     * @param dataPointDTO the dataPointDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new dataPointDTO, or with status 400 (Bad Request) if the dataPoint has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/data-points")
     @Timed
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<DataPoint> createDataPoint(@RequestBody DataPoint dataPoint) throws URISyntaxException {
-        log.debug("REST request to save DataPoint : {}", dataPoint);
-        if (dataPoint.getId() != null) {
+    public ResponseEntity<DataPointDTO> createDataPoint(@RequestBody DataPointDTO dataPointDTO) throws URISyntaxException {
+        log.debug("REST request to save DataPoint : {}", dataPointDTO);
+        if (dataPointDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new dataPoint cannot already have an ID")).body(null);
         }
-        DataPoint result = dataPointService.save(dataPoint);
+        DataPointDTO result = dataPointService.save(dataPointDTO);
         return ResponseEntity.created(new URI("/api/data-points/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -64,23 +68,23 @@ public class DataPointResource {
     /**
      * PUT  /data-points : Updates an existing dataPoint.
      *
-     * @param dataPoint the dataPoint to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated dataPoint,
-     * or with status 400 (Bad Request) if the dataPoint is not valid,
-     * or with status 500 (Internal Server Error) if the dataPoint couldn't be updated
+     * @param dataPointDTO the dataPointDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated dataPointDTO,
+     * or with status 400 (Bad Request) if the dataPointDTO is not valid,
+     * or with status 500 (Internal Server Error) if the dataPointDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/data-points")
     @Timed
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<DataPoint> updateDataPoint(@RequestBody DataPoint dataPoint) throws URISyntaxException {
-        log.debug("REST request to update DataPoint : {}", dataPoint);
-        if (dataPoint.getId() == null) {
-            return createDataPoint(dataPoint);
+    public ResponseEntity<DataPointDTO> updateDataPoint(@RequestBody DataPointDTO dataPointDTO) throws URISyntaxException {
+        log.debug("REST request to update DataPoint : {}", dataPointDTO);
+        if (dataPointDTO.getId() == null) {
+            return createDataPoint(dataPointDTO);
         }
-        DataPoint result = dataPointService.save(dataPoint);
+        DataPointDTO result = dataPointService.save(dataPointDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, dataPoint.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, dataPointDTO.getId().toString()))
             .body(result);
     }
 
@@ -88,13 +92,14 @@ public class DataPointResource {
      * GET  /data-points : get all the dataPoints.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of dataPoints in body
      */
     @GetMapping("/data-points")
     @Timed
-    public ResponseEntity<List<DataPoint>> getAllDataPoints(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of DataPoints");
-        Page<DataPoint> page = dataPointService.findAll(pageable);
+    public ResponseEntity<List<DataPointDTO>> getAllDataPoints(DataPointCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get DataPoints by criteria: {}", criteria);
+        Page<DataPointDTO> page = dataPointQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/data-points");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -102,21 +107,21 @@ public class DataPointResource {
     /**
      * GET  /data-points/:id : get the "id" dataPoint.
      *
-     * @param id the id of the dataPoint to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the dataPoint, or with status 404 (Not Found)
+     * @param id the id of the dataPointDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the dataPointDTO, or with status 404 (Not Found)
      */
     @GetMapping("/data-points/{id}")
     @Timed
-    public ResponseEntity<DataPoint> getDataPoint(@PathVariable Long id) {
+    public ResponseEntity<DataPointDTO> getDataPoint(@PathVariable Long id) {
         log.debug("REST request to get DataPoint : {}", id);
-        DataPoint dataPoint = dataPointService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dataPoint));
+        DataPointDTO dataPointDTO = dataPointService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dataPointDTO));
     }
 
     /**
      * DELETE  /data-points/:id : delete the "id" dataPoint.
      *
-     * @param id the id of the dataPoint to delete
+     * @param id the id of the dataPointDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/data-points/{id}")
