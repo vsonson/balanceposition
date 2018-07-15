@@ -53,6 +53,7 @@
     <include file="config/liquibase/changelog/20180709041103_added_entity_constraints_MetricDatum.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180712041103_update_entity_DataPoint.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180712041103_drop_entity_PerformanceDatum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180714041103_drop_mood_focus_stress.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - Stack Stack will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - Stack Stack will add liquibase constraints changelogs here -->
