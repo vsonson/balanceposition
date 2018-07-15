@@ -1,24 +1,30 @@
 package com.balpos.app.domain;
 
 
+import com.balpos.app.service.dto.MetricDatumDTO;
+import com.balpos.app.service.dto.SleepDatumDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.time.LocalDate;
 
 /**
  * A SleepDatum.
  */
 @Entity
-@Table(name = "sleep_data")
+@DiscriminatorValue("Sleep")
 @Data
 @Accessors(chain = true)
-public class SleepDatum implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+@SecondaryTable(name = "sleep_data", pkJoinColumns = {
+    @PrimaryKeyJoinColumn(name = "metric_data_fk")
+})
+public class SleepDatum extends MetricDatum {
+    private static final long serialVersionUID = -6389806360974414160L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,19 +33,11 @@ public class SleepDatum implements Serializable {
     @NotNull
     @DecimalMin(value = "0")
     @DecimalMax(value = "24")
-    @Column(name = "duration_hours", nullable = false)
+    @Column(name = "duration_hours", nullable = false, table = "sleep_data")
     private Float durationHours;
 
-    @NotNull
-    @Column(name = "feel", nullable = false)
-    private String feel;
-
-    @NotNull
-    @Column(name = "jhi_timestamp", nullable = false)
-    private LocalDate timestamp;
-
-    @ManyToOne(optional = false)
-    @NotNull
-    private User user;
-
+    @Override
+    public <T extends MetricDatumDTO> void mapChildFields(T dto) {
+        setDurationHours(((SleepDatumDTO) dto).getDurationHours());
+    }
 }

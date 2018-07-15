@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Refresh csv tables
+    -->
+    <changeSet id="20180715-6" author="asegner">
+
+        <loadUpdateData tableName="data_point" file="classpath:/csv/data_points.csv" primaryKey="id">
+            <column name="one_per_day" type="boolean"/>
+        </loadUpdateData>
+
+        <loadUpdateData tableName="lookup_value" file="classpath:/csv/lookup_values.csv" primaryKey="id"/>
+
+    </changeSet>
+
+</databaseChangeLog>

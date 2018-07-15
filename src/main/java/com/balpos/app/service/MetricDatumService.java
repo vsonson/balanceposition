@@ -1,5 +1,6 @@
 package com.balpos.app.service;
 
+import com.balpos.app.domain.MetricDatum;
 import com.balpos.app.domain.User;
 import com.balpos.app.service.dto.MetricDatumDTO;
 import org.springframework.data.domain.Page;
@@ -16,14 +17,14 @@ public interface MetricDatumService {
      * @param metricDatumDTO the entity to save
      * @return the persisted entity
      */
-    MetricDatumDTO save(MetricDatumDTO metricDatumDTO, User user);
+    <T extends MetricDatumDTO, S extends MetricDatum> T save(T metricDatumDTO, User user);
 
     /**
-     *  Get all the metricData.
+     * Get all the metricData.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
-    Page<MetricDatumDTO> findAll(Pageable pageable);
+    Page<? extends MetricDatumDTO> findAll(Pageable pageable);
 
 }

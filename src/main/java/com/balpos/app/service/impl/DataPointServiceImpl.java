@@ -68,7 +68,6 @@ public class DataPointServiceImpl implements DataPointService {
     }
 
     @PostConstruct
-    @Profile("dev")
     public void postConstruct() throws IOException {
 
         if (dataPointRepository.count() == 0) {
@@ -84,21 +83,16 @@ public class DataPointServiceImpl implements DataPointService {
                 new FileReader(file)
             );
 
-            String line = reader.readLine();
-
+            String line = reader.readLine(); //discard first line
             List<DataPoint> dataPoints = new ArrayList<>();
-
-            while (line != null) {
-
+            for (line = reader.readLine(); line != null; line = reader.readLine()) {
                 String[] values = line.split(",");
                 DataPoint dp = new DataPoint();
+                dp.setId(Long.parseLong(values[0]));
                 dp.setName(values[1]);
-                dp.setOrder(Integer.valueOf(values[2]));
-                dp.setType(values[3]);
-                dp.setOnePerDay("1".equals(values[4]));
+                dp.setType(values[2]);
+                dp.setOnePerDay("true".equals(values[3]));
                 dataPoints.add(dp);
-
-                line = reader.readLine();
 
             }
 
@@ -107,7 +101,5 @@ public class DataPointServiceImpl implements DataPointService {
             }
 
         }
-
-
     }
 }

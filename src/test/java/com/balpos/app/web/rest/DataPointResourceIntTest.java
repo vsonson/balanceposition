@@ -50,9 +50,6 @@ public class DataPointResourceIntTest {
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_ORDER = 1;
-    private static final Integer UPDATED_ORDER = 2;
-
     @Autowired
     private DataPointRepository dataPointRepository;
 
@@ -100,8 +97,7 @@ public class DataPointResourceIntTest {
     public static DataPoint createEntity(EntityManager em) {
         DataPoint dataPoint = new DataPoint()
             .setName(DEFAULT_NAME)
-            .setType(DEFAULT_TYPE)
-            .setOrder(DEFAULT_ORDER);
+            .setType(DEFAULT_TYPE);
         return dataPoint;
     }
 
@@ -128,7 +124,6 @@ public class DataPointResourceIntTest {
         DataPoint testDataPoint = dataPointList.get(dataPointList.size() - 1);
         assertThat(testDataPoint.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testDataPoint.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testDataPoint.getOrder()).isEqualTo(DEFAULT_ORDER);
     }
 
     @Test
@@ -163,8 +158,7 @@ public class DataPointResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(dataPoint.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].order").value(hasItem(DEFAULT_ORDER)));
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)));
     }
 
     @Test
@@ -178,9 +172,8 @@ public class DataPointResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(dataPoint.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
-            .andExpect(jsonPath("$.order").value(DEFAULT_ORDER));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE));
     }
 
     @Test
@@ -263,32 +256,6 @@ public class DataPointResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllDataPointsByOrderIsEqualToSomething() throws Exception {
-        // Initialize the database
-        dataPointRepository.saveAndFlush(dataPoint);
-
-        // Get all the dataPointList where order equals to DEFAULT_ORDER
-        defaultDataPointShouldBeFound("order.equals=" + DEFAULT_ORDER);
-
-        // Get all the dataPointList where order equals to UPDATED_ORDER
-        defaultDataPointShouldNotBeFound("order.equals=" + UPDATED_ORDER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllDataPointsByOrderIsInShouldWork() throws Exception {
-        // Initialize the database
-        dataPointRepository.saveAndFlush(dataPoint);
-
-        // Get all the dataPointList where order in DEFAULT_ORDER or UPDATED_ORDER
-        defaultDataPointShouldBeFound("order.in=" + DEFAULT_ORDER + "," + UPDATED_ORDER);
-
-        // Get all the dataPointList where order equals to UPDATED_ORDER
-        defaultDataPointShouldNotBeFound("order.in=" + UPDATED_ORDER);
-    }
-
-    @Test
-    @Transactional
     public void getAllDataPointsByOrderIsNullOrNotNull() throws Exception {
         // Initialize the database
         dataPointRepository.saveAndFlush(dataPoint);
@@ -299,34 +266,6 @@ public class DataPointResourceIntTest {
         // Get all the dataPointList where order is null
         defaultDataPointShouldNotBeFound("order.specified=false");
     }
-
-    @Test
-    @Transactional
-    public void getAllDataPointsByOrderIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        dataPointRepository.saveAndFlush(dataPoint);
-
-        // Get all the dataPointList where order greater than or equals to DEFAULT_ORDER
-        defaultDataPointShouldBeFound("order.greaterOrEqualThan=" + DEFAULT_ORDER);
-
-        // Get all the dataPointList where order greater than or equals to UPDATED_ORDER
-        defaultDataPointShouldNotBeFound("order.greaterOrEqualThan=" + UPDATED_ORDER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllDataPointsByOrderIsLessThanSomething() throws Exception {
-        // Initialize the database
-        dataPointRepository.saveAndFlush(dataPoint);
-
-        // Get all the dataPointList where order less than or equals to DEFAULT_ORDER
-        defaultDataPointShouldNotBeFound("order.lessThan=" + DEFAULT_ORDER);
-
-        // Get all the dataPointList where order less than or equals to UPDATED_ORDER
-        defaultDataPointShouldBeFound("order.lessThan=" + UPDATED_ORDER);
-    }
-
-
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -335,9 +274,8 @@ public class DataPointResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(dataPoint.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].order").value(hasItem(DEFAULT_ORDER)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)));
     }
 
     /**
@@ -371,8 +309,7 @@ public class DataPointResourceIntTest {
         DataPoint updatedDataPoint = dataPointRepository.findOne(dataPoint.getId());
         updatedDataPoint
             .setName(UPDATED_NAME)
-            .setType(UPDATED_TYPE)
-            .setOrder(UPDATED_ORDER);
+            .setType(UPDATED_TYPE);
         DataPointDTO dataPointDTO = dataPointMapper.toDto(updatedDataPoint);
 
         restDataPointMockMvc.perform(put("/api/data-points")
@@ -386,7 +323,6 @@ public class DataPointResourceIntTest {
         DataPoint testDataPoint = dataPointList.get(dataPointList.size() - 1);
         assertThat(testDataPoint.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDataPoint.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testDataPoint.getOrder()).isEqualTo(UPDATED_ORDER);
     }
 
     @Test

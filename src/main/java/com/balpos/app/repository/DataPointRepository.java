@@ -1,9 +1,10 @@
 package com.balpos.app.repository;
 
 import com.balpos.app.domain.DataPoint;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
-
-import org.springframework.data.jpa.repository.*;
 
 
 /**
@@ -12,5 +13,8 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface DataPointRepository extends JpaRepository<DataPoint, Long>, JpaSpecificationExecutor<DataPoint> {
+
+    @Cacheable("datapoints")
+    DataPoint findByName(String datapointName);
 
 }

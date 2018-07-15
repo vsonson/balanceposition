@@ -1,9 +1,7 @@
 package com.balpos.app.web.rest;
 
 import com.balpos.app.BalancepositionApp;
-import com.balpos.app.domain.DataPoint;
 import com.balpos.app.domain.MetricDatum;
-import com.balpos.app.domain.User;
 import com.balpos.app.repository.MetricDatumRepository;
 import com.balpos.app.service.MetricDatumQueryService;
 import com.balpos.app.service.MetricDatumService;
@@ -11,6 +9,7 @@ import com.balpos.app.service.dto.MetricDatumDTO;
 import com.balpos.app.service.mapper.MetricDatumMapper;
 import com.balpos.app.service.util.UserResourceUtil;
 import com.balpos.app.web.rest.errors.ExceptionTranslator;
+import com.balpos.app.web.rest.mapper.FrontendViewModelMapper;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -70,6 +69,9 @@ public class MetricDatumResourceIntTest {
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
+    private FrontendViewModelMapper frontendViewModelMapper;
+
+    @Autowired
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
     @Autowired
@@ -82,42 +84,14 @@ public class MetricDatumResourceIntTest {
 
     private MetricDatum metricDatum;
 
-    /**
-     * Create an entity for this test.
-     * <p>
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static MetricDatum createEntity(EntityManager em) {
-        MetricDatum metricDatum = new MetricDatum()
-            .setDatumValue(DEFAULT_METRIC_VALUE)
-            .setTimestamp(DEFAULT_TIMESTAMP);
-        // Add required entity
-        DataPoint dataPoint = DataPointResourceIntTest.createEntity(em);
-        em.persist(dataPoint);
-        em.flush();
-        metricDatum.setDataPoint(dataPoint);
-        // Add required entity
-        User user = UserResourceIntTest.createEntity(em);
-        em.persist(user);
-        em.flush();
-        metricDatum.setUser(user);
-        return metricDatum;
-    }
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final MetricDatumResource metricDatumResource = new MetricDatumResource(metricDatumService, metricDatumQueryService, userResourceUtil);
+        final MetricDatumResource metricDatumResource = new MetricDatumResource(metricDatumService, metricDatumQueryService, userResourceUtil, frontendViewModelMapper);
         this.restMetricDatumMockMvc = MockMvcBuilders.standaloneSetup(metricDatumResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setMessageConverters(jacksonMessageConverter).build();
-    }
-
-    @Before
-    public void initTest() {
-        metricDatum = createEntity(em);
     }
 
     @Test
@@ -401,24 +375,4 @@ public class MetricDatumResourceIntTest {
         assertThat(metricDatumList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
-    @Test
-    @Transactional
-    public void equalsVerifier() throws Exception {
-        MetricDatum metricDatum1 = new MetricDatum();
-        metricDatum1.setId(1L);
-        MetricDatum metricDatum2 = new MetricDatum();
-        metricDatum2.setId(metricDatum1.getId());
-        assertThat(metricDatum1).isEqualTo(metricDatum2);
-        metricDatum2.setId(2L);
-        assertThat(metricDatum1).isNotEqualTo(metricDatum2);
-        metricDatum1.setId(null);
-        assertThat(metricDatum1).isNotEqualTo(metricDatum2);
-    }
-
-    @Test
-    @Transactional
-    public void testEntityFromId() {
-        assertThat(metricDatumMapper.fromId(42L).getId()).isEqualTo(42);
-        assertThat(metricDatumMapper.fromId(null)).isNull();
-    }
 }

@@ -1,21 +1,23 @@
 package com.balpos.app.service.dto;
 
 
+import com.balpos.app.domain.MetricDatum;
+import com.balpos.app.domain.SleepDatum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.time.LocalDate;
 
 /**
  * A DTO for the SleepDatum entity.
  */
 @Data
 @Accessors(chain = true)
-public class SleepDatumDTO implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class SleepDatumDTO extends MetricDatumDTO {
 
     private static final long serialVersionUID = -5792625896653164268L;
 
@@ -24,10 +26,10 @@ public class SleepDatumDTO implements Serializable {
     @DecimalMax(value = "24")
     private Float durationHours;
 
-    @NotNull
-    private String feel;
-
-    @NotNull
-    private LocalDate timestamp;
+    @Override
+    public <S extends MetricDatum> void mapChildFields(S entity) {
+        setDurationHours(((SleepDatum) entity).getDurationHours());
+    }
 
 }
+

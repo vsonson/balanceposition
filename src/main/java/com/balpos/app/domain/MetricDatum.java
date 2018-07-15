@@ -1,6 +1,7 @@
 package com.balpos.app.domain;
 
 
+import com.balpos.app.service.dto.MetricDatumDTO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -15,9 +16,11 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "metric_data")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "data_point_name")
 @Data
 @Accessors(chain = true)
-public class MetricDatum implements Serializable {
+public abstract class MetricDatum implements Serializable {
 
     private static final long serialVersionUID = -6413608757818454153L;
 
@@ -35,7 +38,7 @@ public class MetricDatum implements Serializable {
     private LocalDateTime timestamp;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "data_point_name", referencedColumnName = "name")
+    @JoinColumn(name = "data_point_name", referencedColumnName = "name", insertable = false, updatable = false)
     @NotNull
     private DataPoint dataPoint;
 
@@ -43,4 +46,7 @@ public class MetricDatum implements Serializable {
     @NotNull
     private User user;
 
+    //TODO fix code smell
+    public <T extends MetricDatumDTO> void mapChildFields(T dto) {
+    }
 }

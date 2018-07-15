@@ -19,8 +19,6 @@ public class DataPointDTO implements Serializable {
 
     private String type;
 
-    private Integer order;
-
     private Boolean onePerDay;
 
 }

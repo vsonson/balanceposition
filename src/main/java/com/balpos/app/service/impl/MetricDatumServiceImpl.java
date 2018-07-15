@@ -55,31 +55,30 @@ public class MetricDatumServiceImpl implements MetricDatumService {
      * @return the persisted entity
      */
     @Override
-    public MetricDatumDTO save(MetricDatumDTO metricDatumDTO, User user) {
+    @SuppressWarnings("unchecked")
+    public <T extends MetricDatumDTO, S extends MetricDatum> T save(T metricDatumDTO, User user) {
         log.debug("Request to save MetricDatum : {}", metricDatumDTO);
-        MetricDatum metricDatum = metricDatumMapper.toEntity(metricDatumDTO);
+        S metricDatum = metricDatumMapper.toEntity(metricDatumDTO);
 
         // if this should only insert one record per day then get the current record, if exists, and update it
         if (metricDatum.getDataPoint().getOnePerDay()) {
-            MetricDatum metricDatumUpdate = getDatumForDay(metricDatumDTO.getTimestamp().toLocalDate(), metricDatum.getDataPoint(), user);
+            S metricDatumUpdate = getDatumForDay(metricDatumDTO.getTimestamp().toLocalDate(), metricDatum.getDataPoint(), user);
             if (metricDatumUpdate != null) {
-                metricDatum = metricDatumUpdate;
-                metricDatum.setDatumValue(metricDatumDTO.getDatumValue());
-                metricDatum.setTimestamp(metricDatumDTO.getTimestamp());
+                metricDatum.setId(metricDatumUpdate.getId());
             }
         }
 
         metricDatum.setUser(user);
         metricDatum = metricDatumRepository.save(metricDatum);
-        return metricDatumMapper.toDto(metricDatum);
+        return (T) metricDatumMapper.toDto(metricDatum);
     }
 
-
-    private MetricDatum getDatumForDay(LocalDate day, DataPoint dataPoint, User user) {
+    @SuppressWarnings("unchecked")
+    private <S extends MetricDatum> S getDatumForDay(LocalDate day, DataPoint dataPoint, User user) {
         //check for a record from today and update it if it exists
         LocalDateTime firstMomentOfDay = day.atStartOfDay();
-        List<MetricDatum> metricDatumList = metricDatumRepository.findByUserAndDataPointAndTimestampBetween(user, dataPoint, firstMomentOfDay, firstMomentOfDay.plusDays(1));
-        return (metricDatumList == null || metricDatumList.isEmpty()) ? null : metricDatumList.get(0);
+        List<? extends MetricDatum> metricDatumList = metricDatumRepository.findByUserAndDataPointAndTimestampBetween(user, dataPoint, firstMomentOfDay, firstMomentOfDay.plusDays(1));
+        return (metricDatumList == null || metricDatumList.isEmpty()) ? null : (S) metricDatumList.get(0);
     }
 
 
