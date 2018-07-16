@@ -1,0 +1,32 @@
+id,data_point_name,subclass_name,source_value                    ,mapped_value
+1 ,Mood           ,datum_value  ,Great                           ,5
+2 ,Mood           ,datum_value  ,Good                            ,4
+3 ,Mood           ,datum_value  ,Ehh                             ,3
+4 ,Mood           ,datum_value  ,Lousy                           ,2
+5 ,Mood           ,datum_value  ,Awful                           ,1
+6 ,Sleep          ,datum_value  ,Not rested                      ,1
+7 ,Sleep          ,datum_value  ,Somewhat rested                 ,2
+8 ,Sleep          ,datum_value  ,Rested                          ,3
+9 ,Sleep          ,datum_value  ,Extremely rested                ,4
+10,Stress         ,datum_value  ,Not stressed                    ,1
+11,Stress         ,datum_value  ,Somewhat stressed               ,2
+12,Stress         ,datum_value  ,Stressed                        ,3
+13,Stress         ,datum_value  ,Extremely Stressed              ,4
+14,Focus          ,datum_value  ,Extremely unfocused             ,1
+15,Focus          ,datum_value  ,Unfocused                       ,2
+16,Focus          ,datum_value  ,Focused                         ,3
+17,Focus          ,datum_value  ,Extremely focused               ,4
+18,Body           ,headache     ,No                              ,1
+19,Body           ,headache     ,Mild                            ,2
+20,Body           ,headache     ,Severe                          ,3
+21,Body           ,datum_value  ,No                              ,1
+22,Body           ,datum_value  ,Mild                            ,2
+23,Body           ,datum_value  ,Severe                          ,3
+24,Performance    ,datum_value  ,Poorly                          ,1
+25,Performance    ,datum_value  ,Just okay                       ,2
+26,Performance    ,datum_value  ,Good                            ,3
+27,Performance    ,datum_value  ,Rocked it                       ,4
+28,Interest       ,datum_value  ,Not interested in any activities,1
+29,Interest       ,datum_value  ,Interested in some but not all  ,2
+30,Interest       ,datum_value  ,Interested in most of them      ,3
+31,Interest       ,datum_value  ,Interested in all of them       ,4

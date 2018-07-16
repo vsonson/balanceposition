@@ -1,24 +1,27 @@
 package com.balpos.app.domain;
 
 
-import com.balpos.app.domain.enumeration.DigestiveLevel;
-import com.balpos.app.domain.enumeration.HeadacheLevel;
+import com.balpos.app.service.dto.BodyDatumDTO;
+import com.balpos.app.service.dto.MetricDatumDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.time.LocalDate;
 
 /**
  * A BodyDatum.
  */
 @Entity
-@Table(name = "body_data")
+@DiscriminatorValue("Body")
 @Data
 @Accessors(chain = true)
-public class BodyDatum implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+@SecondaryTable(name = "body_data", pkJoinColumns = {
+    @PrimaryKeyJoinColumn(name = "metric_data_fk")
+})
+public class BodyDatum extends MetricDatum {
 
     private static final long serialVersionUID = -6616181000484960886L;
 
@@ -27,21 +30,12 @@ public class BodyDatum implements Serializable {
     private Long id;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "headache", nullable = false)
-    private HeadacheLevel headache;
+    @Column(name = "headache", nullable = false, table = "body_data")
+    private String headache;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "digestive", nullable = false)
-    private DigestiveLevel digestive;
-
-    @NotNull
-    @Column(name = "jhi_timestamp", nullable = false)
-    private LocalDate timestamp;
-
-    @ManyToOne(optional = false)
-    @NotNull
-    private User user;
+    @Override
+    public <T extends MetricDatumDTO> void mapChildFields(T dto) {
+        setHeadache(((BodyDatumDTO) dto).getHeadache());
+    }
 
 }

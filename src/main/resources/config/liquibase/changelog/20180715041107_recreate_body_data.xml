@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Recreate the body table to use our single table hierarchy
+    -->
+    <changeSet id="20180715-4" author="asegner">
+        <dropTable tableName="body_data"/>
+
+        <createTable tableName="body_data">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="headache" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="metric_data_fk" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="metric_data_fk"
+                                 baseTableName="body_data"
+                                 constraintName="fk_body_datum_metric_data"
+                                 referencedColumnNames="id"
+                                 referencedTableName="metric_data"/>
+    </changeSet>
+
+</databaseChangeLog>

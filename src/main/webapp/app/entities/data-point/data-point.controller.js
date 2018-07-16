@@ -5,23 +5,28 @@
         .module('balancepositionApp')
         .controller('DataPointController', DataPointController);
 
-    DataPointController.$inject = ['$state', 'DataPoint', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    DataPointController.$inject = ['DataPoint', 'ParseLinks', 'AlertService', 'paginationConstants'];
 
-    function DataPointController($state, DataPoint, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function DataPointController(DataPoint, ParseLinks, AlertService, paginationConstants) {
 
         var vm = this;
 
+        vm.dataPoints = [];
         vm.loadPage = loadPage;
-        vm.predicate = pagingParams.predicate;
-        vm.reverse = pagingParams.ascending;
-        vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.page = 0;
+        vm.links = {
+            last: 0
+        };
+        vm.predicate = 'id';
+        vm.reset = reset;
+        vm.reverse = true;
 
         loadAll();
 
         function loadAll () {
             DataPoint.query({
-                page: pagingParams.page - 1,
+                page: vm.page,
                 size: vm.itemsPerPage,
                 sort: sort()
             }, onSuccess, onError);
@@ -32,29 +37,29 @@
                 }
                 return result;
             }
+
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
-                vm.queryCount = vm.totalItems;
-                vm.dataPoints = data;
-                vm.page = pagingParams.page;
+                for (var i = 0; i < data.length; i++) {
+                    vm.dataPoints.push(data[i]);
+                }
             }
+
             function onError(error) {
                 AlertService.error(error.data.message);
             }
         }
 
-        function loadPage(page) {
-            vm.page = page;
-            vm.transition();
+        function reset () {
+            vm.page = 0;
+            vm.dataPoints = [];
+            loadAll();
         }
 
-        function transition() {
-            $state.transitionTo($state.$current, {
-                page: vm.page,
-                sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
-                search: vm.currentSearch
-            });
+        function loadPage(page) {
+            vm.page = page;
+            loadAll();
         }
     }
 })();
