@@ -1,16 +1,16 @@
 package com.balpos.app.web.rest;
 
 import com.balpos.app.BalancepositionApp;
-
 import com.balpos.app.domain.DataPoint;
 import com.balpos.app.repository.DataPointRepository;
+import com.balpos.app.service.DataPointQueryService;
 import com.balpos.app.service.DataPointService;
+import com.balpos.app.service.UserDataPointService;
 import com.balpos.app.service.dto.DataPointDTO;
 import com.balpos.app.service.mapper.DataPointMapper;
+import com.balpos.app.service.mapper.UserDataPointMapper;
+import com.balpos.app.service.util.UserResourceUtil;
 import com.balpos.app.web.rest.errors.ExceptionTranslator;
-import com.balpos.app.service.dto.DataPointCriteria;
-import com.balpos.app.service.DataPointQueryService;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -51,6 +51,15 @@ public class DataPointResourceIntTest {
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
     @Autowired
+    private UserDataPointMapper userDataPointMapper;
+
+    @Autowired
+    private UserDataPointService userDataPointService;
+
+    @Autowired
+    private UserResourceUtil userResourceUtil;
+
+    @Autowired
     private DataPointRepository dataPointRepository;
 
     @Autowired
@@ -78,19 +87,9 @@ public class DataPointResourceIntTest {
 
     private DataPoint dataPoint;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final DataPointResource dataPointResource = new DataPointResource(dataPointService, dataPointQueryService);
-        this.restDataPointMockMvc = MockMvcBuilders.standaloneSetup(dataPointResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
-
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -99,6 +98,16 @@ public class DataPointResourceIntTest {
             .setName(DEFAULT_NAME)
             .setType(DEFAULT_TYPE);
         return dataPoint;
+    }
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        final DataPointResource dataPointResource = new DataPointResource(userDataPointService, userResourceUtil, userDataPointMapper);
+        this.restDataPointMockMvc = MockMvcBuilders.standaloneSetup(dataPointResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before
@@ -266,6 +275,7 @@ public class DataPointResourceIntTest {
         // Get all the dataPointList where order is null
         defaultDataPointShouldNotBeFound("order.specified=false");
     }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */

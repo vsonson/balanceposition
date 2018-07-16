@@ -4,6 +4,7 @@
 /build/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
+**/app.constants.js
 
 ######################
 # Node
@@ -125,7 +126,6 @@ Desktop.ini
 *.*~
 *~
 .merge_file*
-src/main/webapp/app/app.constants.js
 
 ######################
 # Gradle Wrapper

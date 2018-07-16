@@ -55,10 +55,13 @@
     <include file="config/liquibase/changelog/20180712041103_drop_entity_PerformanceDatum.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180714041103_drop_mood_focus_stress.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180715041103_recreate_sleep_data.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180715041105_recreate_datapoints.xml" relativeToChangelogFile="false"/>
+    <!--<include file="config/liquibase/changelog/20180715041105_recreate_datapoints.xml" relativeToChangelogFile="false"/>--> <!-- replaced by line below -->
+    <include file="config/liquibase/changelog/20180716041105_recreate_datapoints.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180715041107_recreate_body_data.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180715041109_create_lookup_value_table.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180715041111_refresh_csv_tables.xml" relativeToChangelogFile="false"/>
+    <!--<include file="config/liquibase/changelog/20180715041111_refresh_csv_tables.xml" relativeToChangelogFile="false"/> --><!--we wont want to reload it after we modify the csv format-->
+    <include file="config/liquibase/changelog/20180716041109_update_lookup_value_table_fk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180716041110_user_data_point.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - Stack Stack will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - Stack Stack will add liquibase constraints changelogs here -->

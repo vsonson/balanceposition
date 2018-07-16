@@ -28,6 +28,9 @@ public class DataPoint implements Serializable {
     @Column(name = "jhi_type")
     private String type;
 
+    @Column(name = "jhi_order")
+    private Integer order;
+
     @Column(name = "one_per_day")
     private Boolean onePerDay;
 

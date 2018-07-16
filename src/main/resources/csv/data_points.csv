@@ -1,8 +1,8 @@
-id,name,jhi_type,one_per_day
-1,Sleep,General,true
-2,Stress,General,true
-3,Mood,General,false
-4,Focus,General,true
-5,Body,General,true
-6,Performance,General,true
-7,Interest,General,true
+id,name,jhi_type,jhi_order,one_per_day
+1,Sleep,General,1,true
+2,Stress,General,2,true
+3,Interest,General,3,true
+4,Focus,General,4,true
+5,Mood,General,5,false
+6,Body,General,6,true
+7,Performance,General,7,true

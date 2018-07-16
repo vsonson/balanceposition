@@ -1,6 +1,7 @@
 package com.balpos.app.service.dto;
 
 import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 import lombok.Data;
@@ -22,4 +23,6 @@ public class DataPointCriteria {
     private StringFilter name;
 
     private StringFilter type;
+
+    private IntegerFilter order;
 }
