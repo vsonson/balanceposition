@@ -13,8 +13,6 @@ public class DataPointDTO implements Serializable {
 
     private static final long serialVersionUID = -8967554606502281954L;
 
-    private Long id;
-
     private String name;
 
     private Integer order;

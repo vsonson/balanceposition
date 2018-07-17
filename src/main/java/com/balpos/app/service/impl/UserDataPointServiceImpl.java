@@ -31,7 +31,10 @@ public class UserDataPointServiceImpl implements UserDataPointService {
     public UserDataPointDTO save(UserDataPointDTO userDataPointDTO, User user) {
         log.debug("Request to save UserDataPoint : {}", userDataPointDTO);
         UserDataPoint userDataPoint = userDataPointMapper.toEntity(userDataPointDTO);
-        //TODO check if user has set one for this datapoint yet
+        UserDataPoint dbUserDataPoint = userDataPointRepository.findByUserAndDataPoint_Name(user, userDataPointDTO.getDataPoint().getName());
+        if (dbUserDataPoint!=null) {
+            userDataPoint.setId(dbUserDataPoint.getId());
+        }
         userDataPoint.setUser(user);
         userDataPoint = userDataPointRepository.save(userDataPoint);
         return userDataPointMapper.toDto(userDataPoint);

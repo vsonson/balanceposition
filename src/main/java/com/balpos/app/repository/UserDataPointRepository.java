@@ -1,5 +1,6 @@
 package com.balpos.app.repository;
 
+import com.balpos.app.domain.DataPoint;
 import com.balpos.app.domain.User;
 import com.balpos.app.domain.UserDataPoint;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,6 @@ public interface UserDataPointRepository extends JpaRepository<UserDataPoint, Lo
 
     @Query("SELECT udp,dp FROM DataPoint dp LEFT JOIN UserDataPoint udp ON dp.name = udp.dataPoint AND udp.user = :user")
     List<Object[]> findByUser(@Param("user") User user);
+
+    UserDataPoint findByUserAndDataPoint_Name(User user, String dataPoint_name);
 }
