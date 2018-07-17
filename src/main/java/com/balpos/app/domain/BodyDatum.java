@@ -1,8 +1,6 @@
 package com.balpos.app.domain;
 
 
-import com.balpos.app.service.dto.BodyDatumDTO;
-import com.balpos.app.service.dto.MetricDatumDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -32,10 +30,5 @@ public class BodyDatum extends MetricDatum {
     @NotNull
     @Column(name = "headache", nullable = false, table = "body_data")
     private String headache;
-
-    @Override
-    public <T extends MetricDatumDTO> void mapChildFields(T dto) {
-        setHeadache(((BodyDatumDTO) dto).getHeadache());
-    }
 
 }

@@ -80,6 +80,9 @@ public class DataPointQueryService extends QueryService<DataPoint> {
             if (criteria.getType() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getType(), DataPoint_.type));
             }
+            if (criteria.getOrder() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getOrder(), DataPoint_.order));
+            }
         }
         return specification;
     }

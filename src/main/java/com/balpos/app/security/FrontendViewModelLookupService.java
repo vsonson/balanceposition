@@ -4,6 +4,8 @@ import com.balpos.app.domain.LookupValue;
 import com.balpos.app.repository.FrontendViewModelLookupRepository;
 import com.balpos.app.service.mapper.DataPointMapper;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -32,39 +34,43 @@ public class FrontendViewModelLookupService {
         return frontendViewModelLookupRepository.findByDatapointNameAndSubclassNameAndSourceValue(datapointName, subclassName, sourceValue);
     }
 
-    @PostConstruct
-    public void postConstruct() throws IOException {
+    @Component
+    @Profile({"dev", "prod"})
+    public class pcHolder {
+        @PostConstruct
+        public void postConstruct() throws IOException {
 
-        if (frontendViewModelLookupRepository.count() == 0) {
+            if (frontendViewModelLookupRepository.count() == 0) {
 
-            File file = new File("lookup_values.csv");
+                File file = new File("lookup_values.csv");
 
-            if (!file.exists()) {
-                URL resource = this.getClass().getResource("/csv/lookup_values.csv");
-                file = new File(resource.getFile());
+                if (!file.exists()) {
+                    URL resource = this.getClass().getResource("/csv/lookup_values.csv");
+                    file = new File(resource.getFile());
+                }
+
+                BufferedReader reader = new BufferedReader(
+                    new FileReader(file)
+                );
+
+                String line = reader.readLine(); //discard first line
+                List<LookupValue> luvs = new ArrayList<>();
+                for (line = reader.readLine(); line != null; line = reader.readLine()) {
+                    String[] values = line.split(",");
+                    LookupValue luv = new LookupValue();
+                    luv.setId(Long.parseLong(values[0]));
+                    luv.setDatapoint(dataPointMapper.fromName(values[1]));
+                    luv.setSubclassName(values[2]);
+                    luv.setSourceValue(values[3]);
+                    luv.setMappedValue(Integer.parseInt(values[4]));
+                    luvs.add(luv);
+                }
+
+                if (!luvs.isEmpty()) {
+                    frontendViewModelLookupRepository.save(luvs);
+                }
+
             }
-
-            BufferedReader reader = new BufferedReader(
-                new FileReader(file)
-            );
-
-            String line = reader.readLine(); //discard first line
-            List<LookupValue> luvs = new ArrayList<>();
-            for (line = reader.readLine(); line != null; line = reader.readLine()) {
-                String[] values = line.split(",");
-                LookupValue luv = new LookupValue();
-                luv.setId(Long.parseLong(values[0]));
-                luv.setDatapoint(dataPointMapper.fromName(values[1]));
-                luv.setSubclassName(values[2]);
-                luv.setSourceValue(values[3]);
-                luv.setMappedValue(Integer.parseInt(values[4]));
-                luvs.add(luv);
-            }
-
-            if (!luvs.isEmpty()) {
-                frontendViewModelLookupRepository.save(luvs);
-            }
-
         }
     }
 }

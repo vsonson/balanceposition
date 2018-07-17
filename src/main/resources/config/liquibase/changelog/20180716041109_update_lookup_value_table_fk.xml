@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Recreate the body table to use our single table hierarchy
+    -->
+    <changeSet id="20180716-5" author="asegner">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_lookup_value_data_point_name"
+                                            foreignKeyTableName="lookup_value"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="data_point_name"
+                                 baseTableName="lookup_value"
+                                 constraintName="fk_lookup_value_data_point_name"
+                                 referencedColumnNames="name"
+                                 referencedTableName="data_point"/>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,7 +1,6 @@
 package com.balpos.app.domain;
 
 
-import com.balpos.app.service.dto.MetricDatumDTO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -46,7 +45,4 @@ public abstract class MetricDatum implements Serializable {
     @NotNull
     private User user;
 
-    //TODO fix code smell
-    public <T extends MetricDatumDTO> void mapChildFields(T dto) {
-    }
 }

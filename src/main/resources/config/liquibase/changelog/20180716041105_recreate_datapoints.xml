@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <!--
+        Recreate the datapoints table
+    -->
+    <changeSet id="20180716-1" author="asegner">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_metric_datum_data_point_name"
+                                        foreignKeyTableName="metric_data"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="metric_data" constraintName="fk_metric_datum_data_point_name"/>
+    </changeSet>
+
+    <changeSet id="20180716-2" author="asegner">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_lookup_value_data_point_name"
+                                        foreignKeyTableName="lookup_value"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="lookup_value" constraintName="fk_lookup_value_data_point_name"/>
+    </changeSet>
+
+    <changeSet id="20180716-3" author="asegner">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="data_point"/>
+        </preConditions>
+        <dropTable tableName="data_point"/>
+    </changeSet>
+
+    <changeSet id="20180716-4" author="asegner">
+        <createTable tableName="data_point">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="jhi_type" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="jhi_order" type="integer">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="one_per_day" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <loadData tableName="data_point" file="classpath:/csv/data_points.csv">
+            <column name="one_per_day" type="boolean"/>
+        </loadData>
+
+        <createIndex tableName="data_point" indexName="nameindex">
+            <column name="name"/>
+        </createIndex>
+        <addUniqueConstraint tableName="data_point" columnNames="name"/>
+        <addNotNullConstraint tableName="data_point"
+                              columnName="name"
+                              columnDataType="varchar(255)"/>
+        <addForeignKeyConstraint baseColumnNames="data_point_name"
+                                 baseTableName="metric_data"
+                                 constraintName="fk_metric_datum_data_point_name"
+                                 referencedColumnNames="name"
+                                 referencedTableName="data_point"/>
+
+    </changeSet>
+
+</databaseChangeLog>
