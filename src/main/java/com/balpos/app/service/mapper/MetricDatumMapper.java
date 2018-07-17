@@ -66,7 +66,7 @@ public abstract class MetricDatumMapper {
             S metricDatum = getNewDatumForDto(dto);
             metricDatum.setDatumValue(dto.getDatumValue());
             metricDatum.setTimestamp(dto.getTimestamp());
-            metricDatum.mapChildFields(dto);
+            metricDatum = mapChildFields(dto, metricDatum);
             return metricDatum;
 
         } catch (IllegalAccessException | InstantiationException e) {
@@ -75,17 +75,41 @@ public abstract class MetricDatumMapper {
         }
     }
 
+    private <S extends MetricDatum, T extends MetricDatumDTO> S mapChildFields(T dto, S metricDatum) {
+        String datapointName = dto.getDataPointName();
+        switch (datapointName) {
+            case "Body":
+                ((BodyDatum) metricDatum).setHeadache(((BodyDatumDTO) dto).getHeadache());
+                break;
+            case "Sleep":
+                ((SleepDatum) metricDatum).setDurationHours(((SleepDatumDTO) dto).getDurationHours());
+                break;
+        }
+        return metricDatum;
+    }
+
     public <S extends MetricDatum, T extends MetricDatumDTO> T toDto(S entity) {
         if (entity == null) {
             return null;
         }
-
         T metricDTO = getNewDtoForDatum(entity);
         metricDTO.setDatumValue(entity.getDatumValue());
         metricDTO.setTimestamp(entity.getTimestamp());
-        metricDTO.mapChildFields(entity);
-
+        metricDTO = mapChildFields(entity, metricDTO);
         return metricDTO;
+    }
+
+    private <S extends MetricDatum, T extends MetricDatumDTO> T mapChildFields(S entity, T dto) {
+        String datapointName = entity.getDataPoint().getName();
+        switch (datapointName) {
+            case "Body":
+                ((BodyDatumDTO) dto).setHeadache(((BodyDatum) entity).getHeadache());
+                break;
+            case "Sleep":
+                ((SleepDatumDTO) dto).setDurationHours(((SleepDatum) entity).getDurationHours());
+                break;
+        }
+        return dto;
     }
 
     public abstract List<MetricDatumDTO> toDto(List<? extends MetricDatum> entityList);

@@ -1,8 +1,6 @@
 package com.balpos.app.domain;
 
 
-import com.balpos.app.service.dto.MetricDatumDTO;
-import com.balpos.app.service.dto.SleepDatumDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -35,9 +33,4 @@ public class SleepDatum extends MetricDatum {
     @DecimalMax(value = "24")
     @Column(name = "duration_hours", nullable = false, table = "sleep_data")
     private Float durationHours;
-
-    @Override
-    public <T extends MetricDatumDTO> void mapChildFields(T dto) {
-        setDurationHours(((SleepDatumDTO) dto).getDurationHours());
-    }
 }

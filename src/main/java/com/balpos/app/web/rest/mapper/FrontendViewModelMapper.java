@@ -2,6 +2,7 @@ package com.balpos.app.web.rest.mapper;
 
 import com.balpos.app.domain.LookupValue;
 import com.balpos.app.security.FrontendViewModelLookupService;
+import com.balpos.app.service.dto.BodyDatumDTO;
 import com.balpos.app.service.dto.MetricDatumDTO;
 import com.balpos.app.service.mapper.MetricDatumMapper;
 import org.mapstruct.Mapper;
@@ -27,9 +28,23 @@ public abstract class FrontendViewModelMapper {
         lookupValue.ifPresent(luv -> metricDatumDTO.setDatumValue(luv.getMappedValue().toString()));
 
         // map the extra values
-        metricDatumDTO.mapChildFields(metricDatumDTO);
+        mapChildFields(metricDatumDTO);
 
         return metricDatumDTO;
+    }
+
+    public <S extends MetricDatumDTO> void mapChildFields(S metricDatumDTO) {
+        String datapointName = metricDatumDTO.getDataPointName();
+        switch (datapointName) {
+            case "Body":
+                Optional<LookupValue> lookupValue = frontendViewModelLookupService.findByDatapointNameAndSubclassNameAndSourceValue(
+                    metricDatumDTO.getDataPointName(),
+                    "headache",
+                    ((BodyDatumDTO) metricDatumDTO).getHeadache());
+                lookupValue.ifPresent(luv -> ((BodyDatumDTO) metricDatumDTO).setHeadache(luv.getMappedValue().toString()));
+                break;
+        }
+
     }
 
     public abstract List<MetricDatumDTO> toVM(List<? extends MetricDatumDTO> metricDatumDTOList);

@@ -3,11 +3,11 @@ package com.balpos.app.web.rest.mapper;
 import com.balpos.app.domain.User;
 import com.balpos.app.repository.UserRepository;
 import liquibase.util.StringUtils;
+import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
-public class UserEmailToUserMapper {
+@Mapper(componentModel = "spring")
+public abstract class UserEmailToUserMapper {
 
     @Autowired
     private UserRepository userRepository;
