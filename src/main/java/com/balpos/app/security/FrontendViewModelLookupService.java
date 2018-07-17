@@ -3,6 +3,7 @@ package com.balpos.app.security;
 import com.balpos.app.domain.LookupValue;
 import com.balpos.app.repository.FrontendViewModelLookupRepository;
 import com.balpos.app.service.mapper.DataPointMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -37,6 +38,10 @@ public class FrontendViewModelLookupService {
     @Component
     @Profile({"dev", "prod"})
     public class pcHolder {
+
+        @Autowired
+        private FrontendViewModelLookupRepository frontendViewModelLookupRepository;
+
         @PostConstruct
         public void postConstruct() throws IOException {
 
