@@ -5,7 +5,8 @@ import com.balpos.app.service.dto.UserDataPointDTO;
 import com.balpos.app.service.mapper.UserDataPointMapper;
 import com.balpos.app.service.util.UserResourceUtil;
 import com.balpos.app.web.rest.util.HeaderUtil;
-import com.balpos.app.web.rest.vm.UserDataPointVM;
+import com.balpos.app.web.rest.vm.DataPointVM;
+import com.balpos.app.web.rest.vm.PostDataPointVM;
 import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -44,10 +45,11 @@ public class DataPointResource {
      */
     @GetMapping("/data-points")
     @Timed
-    public ResponseEntity<List<UserDataPointDTO>> getAllDataPoints(Principal principal) {
+    public ResponseEntity<List<DataPointVM>> getAllDataPoints(Principal principal) {
         log.debug("REST request to get DataPoints");
         List<UserDataPointDTO> userDataPoints = userDataPointService.findByUser(userResourceUtil.getUserFromLogin(principal.getName()).get());
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userDataPoints));
+        List<DataPointVM> result = userDataPointMapper.toDpVM( userDataPoints );
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
     /**
@@ -58,13 +60,14 @@ public class DataPointResource {
      */
     @PostMapping("/data-points")
     @Timed
-    public ResponseEntity<? extends UserDataPointDTO> createUserDataPoint(@Valid @RequestBody UserDataPointVM userDataPointVM, Principal principal) throws URISyntaxException {
-        log.debug("REST request to save UserDataPoints : {}", userDataPointVM);
-        UserDataPointDTO userDataPointDTO = userDataPointMapper.toDto(userDataPointVM);
+    public ResponseEntity<? extends DataPointVM> createUserDataPoint(@Valid @RequestBody PostDataPointVM postDataPointVM, Principal principal) throws URISyntaxException {
+        log.debug("REST request to save UserDataPoints : {}", postDataPointVM);
+        UserDataPointDTO userDataPointDTO = userDataPointMapper.toDto(postDataPointVM);
         UserDataPointDTO result = userDataPointService.save(userDataPointDTO, userResourceUtil.getUserFromLogin(principal.getName()).get());
+        DataPointVM mappedResult = userDataPointMapper.toDpVM(result);
         return ResponseEntity.created(new URI("/data-points/"))
-            .headers(HeaderUtil.createEntityCreationAlert("UserDataPoint", result.getDataPoint().getName()))
-            .body(result);
+            .headers(HeaderUtil.createEntityCreationAlert("DataPoint", mappedResult.getName()))
+            .body(mappedResult);
     }
 
 }
