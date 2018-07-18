@@ -16,9 +16,6 @@ public abstract class DataPointMapper implements EntityMapper<DataPointDTO, Data
     @Autowired
     private DataPointRepository dataPointRepository;
 
-    @Mapping(target = "id", ignore = true)
-    public abstract DataPoint toEntity(DataPointDTO dto);
-
     public DataPoint fromName(String dataPointName) {
         return dataPointRepository.findByName(dataPointName);
     }
