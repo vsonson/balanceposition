@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * A PerformanceDatum.
  */
 @Entity
-@DiscriminatorValue("Performance")
+@DiscriminatorValue(DatumType.PERFORMANCE)
 public class PerformanceDatum extends MetricDatum {
 
     private static final long serialVersionUID = 5563439836065280892L;

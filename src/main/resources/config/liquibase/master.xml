@@ -5,63 +5,112 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824162954_added_entity_UserInfo.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824162955_added_entity_ThoughtOfDay.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824162958_added_entity_TrackMetric.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824162959_added_entity_TrackMetricQuestion.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163000_added_entity_MetricHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824162954_added_entity_UserInfo.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824162955_added_entity_ThoughtOfDay.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824162958_added_entity_TrackMetric.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824162959_added_entity_TrackMetricQuestion.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163000_added_entity_MetricHistory.xml"
+             relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163001_added_entity_Program.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163002_added_entity_ProgramLevel.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163004_added_entity_ProgramHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163002_added_entity_ProgramLevel.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163004_added_entity_ProgramHistory.xml"
+             relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163005_added_entity_Note.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163006_added_entity_UserNotification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163006_added_entity_UserNotification.xml"
+             relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170824163009_added_entity_PathWay.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163010_added_entity_PathStep.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163011_added_entity_PathAction.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163014_added_entity_Resources.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163016_added_entity_WellnessHistory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163019_added_entity_IncentiveAction.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20171110011552_added_entity_QuoteOfTheDay.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20171110011810_added_entity_QuoteOfTheDayHistory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20171221021853_added_entity_DataPoint.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824162954_added_entity_constraints_UserInfo.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824162959_added_entity_constraints_TrackMetricQuestion.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163000_added_entity_constraints_MetricHistory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163002_added_entity_constraints_ProgramLevel.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163004_added_entity_constraints_ProgramHistory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163005_added_entity_constraints_Note.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163006_added_entity_constraints_UserNotification.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163009_added_entity_constraints_PathWay.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163010_added_entity_constraints_PathStep.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170824163011_added_entity_constraints_PathAction.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20171110011810_added_entity_constraints_QuoteOfTheDayHistory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180614162954_update_entity_UserInfo.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180626015147_added_entity_StressDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180626015147_added_entity_constraints_StressDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180702005658_added_entity_MoodDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180702040149_added_entity_FocusDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180703004252_added_entity_SleepDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180703011313_added_entity_PerformanceDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180703052041_added_entity_BodyDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180709041103_added_entity_MetricDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180702005658_added_entity_constraints_MoodDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180702006458_additional_constraints_MoodDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180702040149_added_entity_constraints_FocusDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180703004252_added_entity_constraints_SleepDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180703011313_added_entity_constraints_PerformanceDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180703052041_added_entity_constraints_BodyDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180709041103_added_entity_constraints_MetricDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180712041103_update_entity_DataPoint.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180712041103_drop_entity_PerformanceDatum.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180714041103_drop_mood_focus_stress.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163010_added_entity_PathStep.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163011_added_entity_PathAction.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163014_added_entity_Resources.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163016_added_entity_WellnessHistory.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163019_added_entity_IncentiveAction.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171110011552_added_entity_QuoteOfTheDay.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171110011810_added_entity_QuoteOfTheDayHistory.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171221021853_added_entity_DataPoint.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824162954_added_entity_constraints_UserInfo.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824162959_added_entity_constraints_TrackMetricQuestion.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163000_added_entity_constraints_MetricHistory.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163002_added_entity_constraints_ProgramLevel.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163004_added_entity_constraints_ProgramHistory.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163005_added_entity_constraints_Note.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163006_added_entity_constraints_UserNotification.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163009_added_entity_constraints_PathWay.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163010_added_entity_constraints_PathStep.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170824163011_added_entity_constraints_PathAction.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171110011810_added_entity_constraints_QuoteOfTheDayHistory.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180614162954_update_entity_UserInfo.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180626015147_added_entity_StressDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180626015147_added_entity_constraints_StressDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180702005658_added_entity_MoodDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180702040149_added_entity_FocusDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180703004252_added_entity_SleepDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180703011313_added_entity_PerformanceDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180703052041_added_entity_BodyDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180709041103_added_entity_MetricDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180702005658_added_entity_constraints_MoodDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180702006458_additional_constraints_MoodDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180702040149_added_entity_constraints_FocusDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180703004252_added_entity_constraints_SleepDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180703011313_added_entity_constraints_PerformanceDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180703052041_added_entity_constraints_BodyDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180709041103_added_entity_constraints_MetricDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180712041103_update_entity_DataPoint.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180712041103_drop_entity_PerformanceDatum.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180714041103_drop_mood_focus_stress.xml"
+             relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180715041103_recreate_sleep_data.xml" relativeToChangelogFile="false"/>
     <!--<include file="config/liquibase/changelog/20180715041105_recreate_datapoints.xml" relativeToChangelogFile="false"/>--> <!-- replaced by line below -->
     <include file="config/liquibase/changelog/20180716041105_recreate_datapoints.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180715041107_recreate_body_data.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180715041109_create_lookup_value_table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180715041109_create_lookup_value_table.xml"
+             relativeToChangelogFile="false"/>
     <!--<include file="config/liquibase/changelog/20180715041111_refresh_csv_tables.xml" relativeToChangelogFile="false"/> --><!--we wont want to reload it after we modify the csv format-->
-    <include file="config/liquibase/changelog/20180716041109_update_lookup_value_table_fk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180716041109_update_lookup_value_table_fk.xml"
+             relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180716041110_user_data_point.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180723041111_refresh_csv_tables.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - Stack Stack will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - Stack Stack will add liquibase constraints changelogs here -->

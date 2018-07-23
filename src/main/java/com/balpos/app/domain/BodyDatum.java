@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * A BodyDatum.
  */
 @Entity
-@DiscriminatorValue("Body")
+@DiscriminatorValue(DatumType.BODY)
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)

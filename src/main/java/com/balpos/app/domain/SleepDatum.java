@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
  * A SleepDatum.
  */
 @Entity
-@DiscriminatorValue("Sleep")
+@DiscriminatorValue(DatumType.SLEEP)
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)

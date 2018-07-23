@@ -8,7 +8,7 @@ import javax.persistence.Entity;
  * A MoodDatum.
  */
 @Entity
-@DiscriminatorValue("Mood")
+@DiscriminatorValue(DatumType.MOOD)
 public class MoodDatum extends MetricDatum {
 
     private static final long serialVersionUID = -8747084459455291792L;

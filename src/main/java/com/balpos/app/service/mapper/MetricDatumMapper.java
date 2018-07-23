@@ -26,19 +26,25 @@ public abstract class MetricDatumMapper {
         // TODO this duplicates information already declared in annotations
         // TODO determine the type based on the discriminatorvalue annotation
         switch (datapoint.getName()) {
-            case "Stress":
+            case DatumType.INJURY:
+                return InjuryDatum.class;
+            case DatumType.ENERGY:
+                return EnergyDatum.class;
+            case DatumType.STRESS:
                 return StressDatum.class;
-            case "Mood":
+            case DatumType.MOOD:
                 return MoodDatum.class;
-            case "Interest":
+            case DatumType.INTEREST:
                 return InterestDatum.class;
-            case "Focus":
+            case DatumType.FOCUS:
                 return FocusDatum.class;
-            case "Performance":
+            case DatumType.APPETITE:
+                return AppetiteDatum.class;
+            case DatumType.PERFORMANCE:
                 return PerformanceDatum.class;
-            case "Sleep":
+            case DatumType.SLEEP:
                 return SleepDatum.class;
-            case "Body":
+            case DatumType.BODY:
                 return BodyDatum.class;
         }
         throw new IllegalArgumentException("Unrecognized data point class");
@@ -48,9 +54,9 @@ public abstract class MetricDatumMapper {
         // TODO this duplicates information already declared in annotations
         // TODO determine the type based on the secondarytable annotation
         switch (datapoint.getName()) {
-            case "Sleep":
+            case DatumType.SLEEP:
                 return SleepDatumDTO.class;
-            case "Body":
+            case DatumType.BODY:
                 return BodyDatumDTO.class;
             default:
                 return MetricDatumDTO.class;
