@@ -30,3 +30,15 @@ id,data_point_name,subclass_name,source_value                    ,mapped_value
 29,Interest       ,datum_value  ,Interested in some but not all  ,2
 30,Interest       ,datum_value  ,Interested in most of them      ,3
 31,Interest       ,datum_value  ,Interested in all of them       ,4
+32,Appetite       ,datum_value  ,No appetite                     ,1
+33,Appetite       ,datum_value  ,Less than usual                 ,2
+34,Appetite       ,datum_value  ,Usual                           ,3
+35,Appetite       ,datum_value  ,More than usual                 ,4
+36,Appetite       ,datum_value  ,Insatiable                      ,5
+37,Energy         ,datum_value  ,On empty                        ,1
+38,Energy         ,datum_value  ,Half charged                    ,2
+39,Energy         ,datum_value  ,Charged                         ,3
+40,Energy         ,datum_value  ,Super charged                   ,4
+41,Injury         ,datum_value  ,No                              ,1
+42,Injury         ,datum_value  ,Nagging but still playing       ,2
+43,Injury         ,datum_value  ,Unable to play                  ,3

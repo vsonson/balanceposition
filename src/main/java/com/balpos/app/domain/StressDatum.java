@@ -8,7 +8,7 @@ import javax.persistence.Entity;
  * A StressDatum.
  */
 @Entity
-@DiscriminatorValue("Stress")
+@DiscriminatorValue(DatumType.STRESS)
 public class StressDatum extends MetricDatum {
 
     private static final long serialVersionUID = -6282586102195331L;
