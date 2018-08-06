@@ -1,22 +1,24 @@
 package com.balpos.app.service;
 
 
-import com.balpos.app.domain.DataPoint_;
-import com.balpos.app.domain.MetricDatum;
-import com.balpos.app.domain.MetricDatum_;
-import com.balpos.app.domain.User_;
+import com.balpos.app.domain.*;
 import com.balpos.app.repository.MetricDatumRepository;
 import com.balpos.app.service.dto.MetricDatumCriteria;
 import com.balpos.app.service.dto.MetricDatumDTO;
 import com.balpos.app.service.mapper.MetricDatumMapper;
 import io.github.jhipster.service.QueryService;
+import io.github.jhipster.service.filter.StringFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.metamodel.SingularAttribute;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -28,7 +30,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @Slf4j
-public class MetricDatumQueryService extends QueryService<MetricDatum> {
+public class MetricDatumQueryService extends EnhancedQueryService<MetricDatum> {
     private final MetricDatumRepository metricDatumRepository;
 
     private final MetricDatumMapper metricDatumMapper;

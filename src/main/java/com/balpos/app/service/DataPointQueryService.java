@@ -7,7 +7,6 @@ import com.balpos.app.repository.DataPointRepository;
 import com.balpos.app.service.dto.DataPointCriteria;
 import com.balpos.app.service.dto.DataPointDTO;
 import com.balpos.app.service.mapper.DataPointMapper;
-import io.github.jhipster.service.QueryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +25,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @Slf4j
-public class DataPointQueryService extends QueryService<DataPoint> {
+public class DataPointQueryService extends EnhancedQueryService<DataPoint> {
 
     private final DataPointRepository dataPointRepository;
 
