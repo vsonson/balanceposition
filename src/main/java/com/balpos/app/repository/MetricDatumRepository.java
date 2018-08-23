@@ -22,5 +22,5 @@ public interface MetricDatumRepository extends JpaRepository<MetricDatum, Long>,
     @Query("select metric_data from MetricDatum metric_data where metric_data.user.login = ?#{principal.username}")
     List<? extends MetricDatum> findByUserIsCurrentUser();
 
-    List<? extends MetricDatum> findByUserAndDataPointAndTimestampBetween(User user, DataPoint dataPoint, LocalDateTime start, LocalDateTime end);
+    List<? extends MetricDatum> findByUserAndDataPointAndTimestampBetweenOrderByTimestampAsc(User user, DataPoint dataPoint, LocalDateTime start, LocalDateTime end);
 }

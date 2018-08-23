@@ -1,7 +1,7 @@
 package com.balpos.app.web.rest.mapper;
 
 import com.balpos.app.domain.LookupValue;
-import com.balpos.app.security.FrontendViewModelLookupService;
+import com.balpos.app.security.MetricValueMappingLookupService;
 import com.balpos.app.service.dto.BodyDatumDTO;
 import com.balpos.app.service.dto.MetricDatumDTO;
 import com.balpos.app.service.mapper.MetricDatumMapper;
@@ -17,11 +17,11 @@ public abstract class FrontendViewModelMapper {
     @Autowired
     private MetricDatumMapper metricDatumMapper;
     @Autowired
-    private FrontendViewModelLookupService frontendViewModelLookupService;
+    private MetricValueMappingLookupService metricValueMappingLookupService;
 
     public <S extends MetricDatumDTO> S toVM(S metricDatumDTO) {
         // map the value
-        Optional<LookupValue> lookupValue = frontendViewModelLookupService.findByDatapointNameAndSubclassNameAndSourceValue(
+        Optional<LookupValue> lookupValue = metricValueMappingLookupService.findByDatapointNameAndSubclassNameAndSourceValue(
             metricDatumDTO.getDataPointName(),
             "datum_value",
             metricDatumDTO.getDatumValue());
@@ -37,7 +37,7 @@ public abstract class FrontendViewModelMapper {
         String datapointName = metricDatumDTO.getDataPointName();
         switch (datapointName) {
             case "Body":
-                Optional<LookupValue> lookupValue = frontendViewModelLookupService.findByDatapointNameAndSubclassNameAndSourceValue(
+                Optional<LookupValue> lookupValue = metricValueMappingLookupService.findByDatapointNameAndSubclassNameAndSourceValue(
                     metricDatumDTO.getDataPointName(),
                     "headache",
                     ((BodyDatumDTO) metricDatumDTO).getHeadache());

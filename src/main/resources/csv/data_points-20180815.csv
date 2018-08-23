@@ -1,0 +1,11 @@
+id,name,jhi_type,jhi_order,one_per_day
+1,Sleep,General,1,true
+2,Stress,General,2,true
+3,Interest,General,3,true
+4,Focus,General,4,true
+5,Mood,General,5,false
+6,Body,General,6,true
+7,Performance,General,7,true
+8,Appetite,General,8,true
+9,Energy,General,9,true
+10,Injury,General,10,true

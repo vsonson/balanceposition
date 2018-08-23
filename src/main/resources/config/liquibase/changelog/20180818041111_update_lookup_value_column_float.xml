@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Change data type for 'mappedValue' column from Integer to Float
+    -->
+    <changeSet id="20180818-01" author="asegner">
+        <modifyDataType tableName="lookup_value" columnName="mapped_value" newDataType="${floatType}" />
+    </changeSet>
+
+    <changeSet id="20180818-02" author="asegner">
+        <addColumn tableName="data_point_user">
+            <column name="lastupdate" type="datetime"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20180818-03" author="asegner">
+        <loadUpdateData tableName="data_point" file="classpath:/csv/data_points-20180815.csv" primaryKey="id">
+            <column name="one_per_day" type="boolean"/>
+        </loadUpdateData>
+        <loadUpdateData tableName="lookup_value" file="classpath:/csv/lookup_values-20180815.csv" primaryKey="id"/>
+    </changeSet>
+
+</databaseChangeLog>
