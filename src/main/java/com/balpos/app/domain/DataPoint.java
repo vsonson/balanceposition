@@ -33,5 +33,4 @@ public class DataPoint implements Serializable {
 
     @Column(name = "one_per_day")
     private Boolean onePerDay;
-
 }

@@ -1,7 +1,7 @@
 package com.balpos.app.security;
 
 import com.balpos.app.domain.LookupValue;
-import com.balpos.app.repository.FrontendViewModelLookupRepository;
+import com.balpos.app.repository.MetricValueMappingLookupRepository;
 import com.balpos.app.service.mapper.DataPointMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,19 +20,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class FrontendViewModelLookupService {
+public class MetricValueMappingLookupService {
 
-    private final FrontendViewModelLookupRepository frontendViewModelLookupRepository;
+    private final MetricValueMappingLookupRepository metricValueMappingLookupRepository;
     private final DataPointMapper dataPointMapper;
 
-    public FrontendViewModelLookupService(FrontendViewModelLookupRepository frontendViewModelLookupRepository, DataPointMapper dataPointMapper) {
-        this.frontendViewModelLookupRepository = frontendViewModelLookupRepository;
+    public MetricValueMappingLookupService(MetricValueMappingLookupRepository metricValueMappingLookupRepository, DataPointMapper dataPointMapper) {
+        this.metricValueMappingLookupRepository = metricValueMappingLookupRepository;
         this.dataPointMapper = dataPointMapper;
     }
 
     @Cacheable("frontendViewModelLookup")
     public Optional<LookupValue> findByDatapointNameAndSubclassNameAndSourceValue(String datapointName, String subclassName, String sourceValue) {
-        return frontendViewModelLookupRepository.findByDatapointNameAndSubclassNameAndSourceValue(datapointName, subclassName, sourceValue);
+        return metricValueMappingLookupRepository.findByDatapointNameAndSubclassNameAndSourceValue(datapointName, subclassName, sourceValue);
     }
 
     @Component
@@ -40,12 +40,12 @@ public class FrontendViewModelLookupService {
     public class pcHolder {
 
         @Autowired
-        private FrontendViewModelLookupRepository frontendViewModelLookupRepository;
+        private MetricValueMappingLookupRepository metricValueMappingLookupRepository;
 
         @PostConstruct
         public void postConstruct() throws IOException {
 
-            if (frontendViewModelLookupRepository.count() == 0) {
+            if (metricValueMappingLookupRepository.count() == 0) {
 
                 File file = new File("lookup_values.csv");
 
@@ -67,12 +67,12 @@ public class FrontendViewModelLookupService {
                     luv.setDatapoint(dataPointMapper.fromName(values[1]));
                     luv.setSubclassName(values[2]);
                     luv.setSourceValue(values[3]);
-                    luv.setMappedValue(Integer.parseInt(values[4]));
+                    luv.setMappedValue(Float.parseFloat(values[4]));
                     luvs.add(luv);
                 }
 
                 if (!luvs.isEmpty()) {
-                    frontendViewModelLookupRepository.save(luvs);
+                    metricValueMappingLookupRepository.save(luvs);
                 }
 
             }

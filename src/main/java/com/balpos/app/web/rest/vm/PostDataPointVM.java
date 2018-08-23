@@ -1,6 +1,5 @@
 package com.balpos.app.web.rest.vm;
 
-import com.balpos.app.domain.Color;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -12,8 +11,6 @@ public class PostDataPointVM implements Serializable {
 
     @NotNull
     private Boolean enabled;
-    @NotNull
-    private Color color;
     @NotNull
     private String dataPointName;
 

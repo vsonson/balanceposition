@@ -1,0 +1,44 @@
+id,data_point_name,subclass_name,source_value                    ,mapped_value
+1 ,Mood           ,datum_value  ,Great                           ,3
+2 ,Mood           ,datum_value  ,Good                            ,2
+3 ,Mood           ,datum_value  ,Ehh                             ,1
+4 ,Mood           ,datum_value  ,Lousy                           ,0
+5 ,Mood           ,datum_value  ,Awful                           ,-1
+6 ,Sleep          ,datum_value  ,Not rested                      ,-3
+7 ,Sleep          ,datum_value  ,Somewhat rested                 ,-2
+8 ,Sleep          ,datum_value  ,Rested                          ,0
+9 ,Sleep          ,datum_value  ,Extremely rested                ,3
+10,Stress         ,datum_value  ,Not stressed                    ,2
+11,Stress         ,datum_value  ,Somewhat stressed               ,1
+12,Stress         ,datum_value  ,Stressed                        ,0
+13,Stress         ,datum_value  ,Extremely Stressed              ,-1
+14,Focus          ,datum_value  ,Extremely unfocused             ,0
+15,Focus          ,datum_value  ,Unfocused                       ,1
+16,Focus          ,datum_value  ,Focused                         ,2
+17,Focus          ,datum_value  ,Extremely focused               ,3
+18,Body           ,headache     ,No                              ,1
+19,Body           ,headache     ,Mild                            ,0
+20,Body           ,headache     ,Severe                          ,-1
+21,Body           ,datum_value  ,No                              ,1
+22,Body           ,datum_value  ,Mild                            ,0
+23,Body           ,datum_value  ,Severe                          ,-1
+24,Performance    ,datum_value  ,Poorly                          ,0
+25,Performance    ,datum_value  ,Just okay                       ,1
+26,Performance    ,datum_value  ,Good                            ,2
+27,Performance    ,datum_value  ,Rocked it                       ,3
+28,Interest       ,datum_value  ,Not interested in any activities,0
+29,Interest       ,datum_value  ,Interested in some but not all  ,1
+30,Interest       ,datum_value  ,Interested in most of them      ,2
+31,Interest       ,datum_value  ,Interested in all of them       ,3
+32,Appetite       ,datum_value  ,No appetite                     ,-3
+33,Appetite       ,datum_value  ,Less than usual                 ,-2
+34,Appetite       ,datum_value  ,Usual                           ,0
+35,Appetite       ,datum_value  ,More than usual                 ,3.5
+36,Appetite       ,datum_value  ,Insatiable                      ,5
+37,Energy         ,datum_value  ,On empty                        ,0
+38,Energy         ,datum_value  ,Half charged                    ,1
+39,Energy         ,datum_value  ,Charged                         ,2
+40,Energy         ,datum_value  ,Super charged                   ,3
+41,Injury         ,datum_value  ,No                              ,1
+42,Injury         ,datum_value  ,Nagging but still playing       ,0
+43,Injury         ,datum_value  ,Unable to play                  ,-1

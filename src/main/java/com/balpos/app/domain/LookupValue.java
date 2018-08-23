@@ -15,22 +15,22 @@ public class LookupValue {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "data_point_name", referencedColumnName = "name", insertable = false, updatable = false)
     @NotNull
-    public DataPoint datapoint;
+    private DataPoint datapoint;
 
     @NotNull
     @Column(name = "subclass_name")
-    public String subclassName;
+    private String subclassName;
 
     @NotNull
     @Column(name = "source_value")
-    public String sourceValue;
+    private String sourceValue;
 
     @NotNull
     @Column(name = "mapped_value")
-    public Integer mappedValue;
+    private Float mappedValue;
 }

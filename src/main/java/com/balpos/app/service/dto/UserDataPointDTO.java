@@ -1,9 +1,11 @@
 package com.balpos.app.service.dto;
 
 
+import com.balpos.app.domain.Color;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * A DTO for the DataPoint entity.
@@ -14,8 +16,10 @@ public class UserDataPointDTO implements Serializable {
 
     private Boolean enabled;
 
-    private String color;
+    private Color color;
 
     private DataPointDTO dataPoint;
+
+    private LocalDateTime lastupdate;
 
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @SuppressWarnings("unused")
 @Repository
-public interface FrontendViewModelLookupRepository extends JpaRepository<LookupValue, Long>, JpaSpecificationExecutor<LookupValue> {
+public interface MetricValueMappingLookupRepository extends JpaRepository<LookupValue, Long>, JpaSpecificationExecutor<LookupValue> {
 
     Optional<LookupValue> findByDatapointNameAndSubclassNameAndSourceValue(String datapointName, String subclassName, String sourceValue);
 }
