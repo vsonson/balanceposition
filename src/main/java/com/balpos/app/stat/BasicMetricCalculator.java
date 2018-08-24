@@ -32,9 +32,9 @@ public class BasicMetricCalculator implements MetricCalculator {
         for (MetricDatum datum : content) {
 
             // find converted value
-            Optional<LookupValue> convertedValue = metricValueMappingLookupService
-                .findByDatapointNameAndSubclassNameAndSourceValue(datum.getDataPoint().getName(), "datum_value", datum.getDatumValue());
+            Optional<LookupValue> convertedValue = getMainValue(datum);
             if (!convertedValue.isPresent()) continue;
+            Float additionalValue = getAdditionalValue(datum);
 
             // determine duration since last datum
             Long duration = (localDateTime == null)
@@ -45,18 +45,27 @@ public class BasicMetricCalculator implements MetricCalculator {
             Double mappedValue = convertedValue.get().getMappedValue().doubleValue();
             delta = Math.min(1, duration / StatConstant.SEC_PER_DAY);
             localDateTime = datum.getTimestamp();
-            mainCalculation(condition, delta, mappedValue);
-            additionalCalculation(condition, delta, mappedValue);
+            mainCalculation(condition, delta, mappedValue, additionalValue);
+            additionalCalculation(condition, delta, mappedValue, additionalValue);
         }
 
         return status(condition);
     }
 
-    protected void mainCalculation(Double[] condition, Double delta, Double mappedValue) {
-        condition[0] += (mappedValue - condition[0]) * (delta / smoothTime);
+    protected Float getAdditionalValue(MetricDatum datum) {
+        return null;
     }
 
-    protected void additionalCalculation(Double[] condition, Double delta, Double mappedValue) {
+    protected Optional<LookupValue> getMainValue(MetricDatum datum) {
+        return metricValueMappingLookupService
+            .findByDatapointNameAndSubclassNameAndSourceValue(datum.getDataPoint().getName(), "datum_value", datum.getDatumValue());
+    }
+
+    protected void mainCalculation(Double[] condition, Double delta, Double mappedValue, Float lookupValue) {
+        condition[0] += (mappedValue - condition[0]) * (delta / getSmoothTime());
+    }
+
+    protected void additionalCalculation(Double[] condition, Double delta, Double mappedValue, Float lookupValue) {
     }
 
     protected Double[] getInitialCondition() {
