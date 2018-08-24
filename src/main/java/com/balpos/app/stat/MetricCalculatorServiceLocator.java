@@ -37,8 +37,8 @@ public class MetricCalculatorServiceLocator {
         registry.put("energy", basicMetricCalculator);
 
         registry.put("mood", moodMetricCalculator);
-//        registry.put("sleep", sleepMetricCalculator);
-//        registry.put("appetite", gimMetricCalculator);
+        registry.put("sleep", sleepMetricCalculator);
+        registry.put("appetite", gimMetricCalculator);
         registry.put("injury", directMetricCalculator);
         registry.put("interest", trendMetricCalculator);
 //        registry.put("body", bodyMetricCalculator);

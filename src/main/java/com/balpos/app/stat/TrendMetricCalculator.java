@@ -17,7 +17,7 @@ public class TrendMetricCalculator extends BasicMetricCalculator {
     }
 
     @Override
-    protected void additionalCalculation(Double[] condition, Double delta, Double mappedValue) {
+    protected void additionalCalculation(Double[] condition, Double delta, Double mappedValue, Float lookupValue) {
         condition[1] += ((mappedValue - condition[0]) - condition[1]) * (delta / smoothTime);
     }
 
