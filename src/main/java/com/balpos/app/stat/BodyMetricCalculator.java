@@ -9,41 +9,33 @@ import java.util.List;
 @Component
 public class BodyMetricCalculator implements MetricCalculator {
 
+    private final NauseaMetricCalculator nauseaCalculator;
+    private final HeadacheMetricCalculator headacheCalculator;
+
+    public BodyMetricCalculator(NauseaMetricCalculator nauseaCalculator, HeadacheMetricCalculator headacheCalculator) {
+        this.nauseaCalculator = nauseaCalculator;
+        this.headacheCalculator = headacheCalculator;
+    }
+
     @Override
     public Color calculate(List<? extends MetricDatum> content) {
-        return null;
+        Color headacheResult = headacheCalculator.calculate(content);
+        Color nauseaResult = nauseaCalculator.calculate(content);
+        return status(headacheResult, nauseaResult);
+    }
+
+    private Color status(Color headacheResult, Color nauseaResult) {
+        if (Color.GRAY.equals(headacheResult)
+            || Color.GRAY.equals(nauseaResult)) {
+            return Color.GRAY;
+        } else if (Color.RED.equals(headacheResult)
+            || Color.RED.equals(nauseaResult)) {
+            return Color.RED;
+        } else if (Color.YELLOW.equals(headacheResult)
+            || Color.YELLOW.equals(nauseaResult)) {
+            return Color.YELLOW;
+        }
+        return Color.GREEN;
     }
 }
-
-
-//
-//class BodyMetric:
-//    def __init__(self, emap, timestamp=None):
-//    self.emap = emap
-//    self.nausea = DWMMetric(emap, timestamp=timestamp)
-//    self.headache = DWMMetric(emap, timestamp=timestamp)
-//
-//    def update(self, timestamp, nausea_entry, headache_entry):
-//    self.nausea.update(timestamp, nausea_entry)
-//    self.headache.update(timestamp, headache_entry)
-//    return self
-//
-//    def status(self):
-//    stats = [self.nausea.status(), self.headache.status()]
-//    if N in stats: stat = N
-//    elif R in stats: stat = R
-//    elif Y in stats: stat = Y
-//    else: stat = G
-//    return stat
-//
-//    def new_stat(self, *args):
-//    return self.update(*args).status()
-//
-//@property
-//    def timestamp(self):
-//        return max(self.nausea.timestamp, self.headache.timestamp)
-//
-//@property
-//    def condition(self):
-//        return self.status()
 

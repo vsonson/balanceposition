@@ -27,6 +27,7 @@ public class StatisticServiceImpl implements StatisticService {
             .filter(metricDatum -> metricDatum.getDataPoint().equals(dataPoint))
             .collect(Collectors.toList());
 
+        // Default to gray if the datapoint is not known
         Optional<MetricCalculator> calculator = metricCalculatorServiceLocator.getCalculator(dataPoint.getName());
         if (!calculator.isPresent()) {
             return Color.GRAY;

@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -64,6 +65,7 @@ public class MetricDatumServiceImpl implements MetricDatumService {
      */
     @Override
     @SuppressWarnings("unchecked")
+    @Transactional( isolation = Isolation.READ_UNCOMMITTED)
     public <T extends MetricDatumDTO, S extends MetricDatum> T save(T metricDatumDTO, User user) {
         log.debug("Request to save MetricDatum : {}", metricDatumDTO);
         S metricDatum = metricDatumMapper.toEntity(metricDatumDTO);
