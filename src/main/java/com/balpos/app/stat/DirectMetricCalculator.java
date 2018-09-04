@@ -8,6 +8,7 @@ import com.balpos.app.security.MetricValueMappingLookupService;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Optional;
 //    status = most recent reported condition
 public class DirectMetricCalculator implements MetricCalculator {
 
-    private final MetricValueMappingLookupService metricValueMappingLookupService;
+    protected final MetricValueMappingLookupService metricValueMappingLookupService;
 
     public DirectMetricCalculator(MetricValueMappingLookupService metricValueMappingLookupService) {
         this.metricValueMappingLookupService = metricValueMappingLookupService;
@@ -30,20 +31,28 @@ public class DirectMetricCalculator implements MetricCalculator {
         if (content.isEmpty()) {
             return Color.GRAY;
         }
-        MetricDatum lastValue = content.get(content.size() - 1);
-        return status(lastValue.getDataPoint(), lastValue.getDatumValue(), lastValue.getTimestamp());
+       return calculateProtected( content );
     }
 
-    private Color status(DataPoint dataPoint, String condition, LocalDateTime timestamp) {
-        Optional<LookupValue> value = metricValueMappingLookupService
+    protected Color calculateProtected(List<? extends MetricDatum> content) {
+        MetricDatum lastValue = content.get(content.size() - 1);
+        return status(lastValue.getDataPoint(), lastValue.getDatumValue());
+    }
+
+    protected Optional<LookupValue> getMappedValue(DataPoint dataPoint, String condition){
+        return metricValueMappingLookupService
             .findByDatapointNameAndSubclassNameAndSourceValue(dataPoint.getName(), "datum_value", condition);
+    }
+
+    protected Color status(DataPoint dataPoint, String condition) {
+        Optional<LookupValue> value =  getMappedValue(dataPoint, StringUtils.trim(condition));
         if (!value.isPresent()) return Color.GRAY;
         switch (value.get().getMappedValue().intValue()) {
             case 1:
                 return Color.GREEN;
-            case 2:
+            case 0:
                 return Color.YELLOW;
-            case 3:
+            case -1:
                 return Color.RED;
             default:
                 return Color.GRAY;

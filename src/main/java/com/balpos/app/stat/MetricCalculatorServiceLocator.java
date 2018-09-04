@@ -41,7 +41,7 @@ public class MetricCalculatorServiceLocator {
         registry.put("appetite", gimMetricCalculator);
         registry.put("injury", directMetricCalculator);
         registry.put("interest", trendMetricCalculator);
-//        registry.put("body", bodyMetricCalculator);
+        registry.put("body", bodyMetricCalculator);
     }
 
     public Optional<MetricCalculator> getCalculator(String calculatorName) {

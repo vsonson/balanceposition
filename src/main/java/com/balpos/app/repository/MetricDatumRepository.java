@@ -2,7 +2,6 @@ package com.balpos.app.repository;
 
 import com.balpos.app.domain.DataPoint;
 import com.balpos.app.domain.MetricDatum;
-import com.balpos.app.domain.PerformanceDatum;
 import com.balpos.app.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

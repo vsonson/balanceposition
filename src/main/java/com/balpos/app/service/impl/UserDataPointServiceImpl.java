@@ -60,7 +60,6 @@ public class UserDataPointServiceImpl implements UserDataPointService {
                 udp = new UserDataPoint();
                 udp.setUser(user).setDataPoint(dp);
             }
-            validateNoLogThreshold(udp);
             resultList.add(udp);
         });
         return resultList;
@@ -75,13 +74,6 @@ public class UserDataPointServiceImpl implements UserDataPointService {
             }
         }
         return null;
-    }
-
-    private void validateNoLogThreshold(UserDataPoint udp) {
-        if (udp.getLastupdate() == null
-            || udp.getLastupdate().plusDays(StatConstant.NL_THRESH).isBefore(LocalDateTime.now())) {
-            udp.setColor(Color.GRAY);
-        }
     }
 }
 
