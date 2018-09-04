@@ -1,9 +1,12 @@
 package com.balpos.app.repository;
 
 import com.balpos.app.domain.Note;
+import com.balpos.app.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
+import java.time.LocalDate;
+import java.util.List;
 
 
 /**
@@ -13,4 +16,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
+    List<Note> findByUserAndDateBetween(User user, LocalDate start, LocalDate end);
 }

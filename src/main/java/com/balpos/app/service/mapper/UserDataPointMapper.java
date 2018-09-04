@@ -7,12 +7,15 @@ import com.balpos.app.web.rest.vm.PostDataPointVM;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import javax.persistence.MappedSuperclass;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {DataPointMapper.class})
 public interface UserDataPointMapper extends EntityMapper<UserDataPointDTO, UserDataPoint> {
 
     @Mapping(target = "dataPoint", source = "dataPointName")
+    @Mapping(target = "color", ignore = true)
+    @Mapping(target = "lastupdate", ignore = true)
     UserDataPointDTO toDto(PostDataPointVM vm);
 
     @Mapping(target = "id", ignore = true)

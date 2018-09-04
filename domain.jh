@@ -71,13 +71,6 @@ entity ProgramHistory (program_history) {
   rating String,
   feeling String
 }
-entity Note (note) {
-  date LocalDate,
-  /**
-   * journalType Integer,
-   */
-  text Blob
-}
 entity UserNotification (user_notification) {
   date LocalDate,
   isVisable Boolean,
@@ -196,8 +189,6 @@ relationship OneToOne {
   UserInfo{user(email)} to User,
   MetricHistory{trackMetric} to TrackMetric,
   MetricHistory{metricQuestion} to TrackMetricQuestion,
-  Note{trackMetric} to TrackMetric,
-  Note{programStep} to ProgramStep,
   PathAction{trackMetric} to TrackMetric,
   PathAction{program} to Program,
   PathHistory{pathway} to PathWay,
@@ -215,7 +206,6 @@ relationship OneToMany {
   ProgramLevel{programSteps} to ProgramStep{programLevel},
   ProgramHistory{programSteps} to ProgramStep{programHistory},
   UserInfo{programHistory} to ProgramHistory{userInfo},
-  UserInfo{notes} to Note{userInfo},
   UserInfo{userNotifications} to UserNotification{userInfo},
   NotifcationTrigger{trigger} to Trigger{notifcationTrigger},
   WellnessItem{wellnessTriggers} to Trigger{wellnessItem},
@@ -255,8 +245,6 @@ paginate ProgramStep with pager
 service ProgramStep with serviceImpl
 paginate ProgramHistory with pager
 service ProgramHistory with serviceImpl
-paginate Note with pager
-service Note with serviceImpl
 paginate UserNotification with pager
 service UserNotification with serviceImpl
 paginate Trigger with pager
