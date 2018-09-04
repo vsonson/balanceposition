@@ -1,8 +1,10 @@
 package com.balpos.app.service;
 
-import com.balpos.app.domain.Note;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.balpos.app.domain.User;
+import com.balpos.app.service.dto.NoteDTO;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Service Interface for managing Note.
@@ -13,30 +15,25 @@ public interface NoteService {
      * Save a note.
      *
      * @param note the entity to save
+     * @param user
      * @return the persisted entity
      */
-    Note save(Note note);
+    NoteDTO save(NoteDTO note, User user);
+
+    List<NoteDTO> findAll(User user, LocalDate date);
 
     /**
-     *  Get all the notes.
+     * Get the "id" note.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param id the id of the entity
+     * @return the entity
      */
-    Page<Note> findAll(Pageable pageable);
+    NoteDTO findOne(Long id, User user);
 
     /**
-     *  Get the "id" note.
+     * Delete the "id" note.
      *
-     *  @param id the id of the entity
-     *  @return the entity
-     */
-    Note findOne(Long id);
-
-    /**
-     *  Delete the "id" note.
-     *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 }

@@ -18,8 +18,7 @@ public abstract class UserInfoUserMapper implements VMMapper<UserInfoUserVM, Use
         @Mapping(target = "userNotifications", ignore = true),
         @Mapping(target = "wellnessHistories", ignore = true),
         @Mapping(target = "incentiveHistories", ignore = true),
-        @Mapping(target = "quoteOfTheDays", ignore = true),
-        @Mapping(target = "notes", ignore = true)
+        @Mapping(target = "quoteOfTheDays", ignore = true)
     })
     public abstract UserInfo toEntity(UserInfoUserVM vm);
 

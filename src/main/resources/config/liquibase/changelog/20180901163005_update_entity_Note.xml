@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <!--
+        Update the entity Note
+    -->
+    <changeSet id="20180901163005-1" author="asegner">
+        <dropForeignKeyConstraint baseTableName="note"
+                                  constraintName="fk_note_user_info_id"/>
+        <dropForeignKeyConstraint baseTableName="note"
+                                  constraintName="fk_note_track_metric_id"/>
+        <dropColumn tableName="note"
+                    columnName="user_info_id"/>
+        <dropColumn tableName="note"
+                    columnName="program_step_id"/>
+        <dropColumn tableName="note"
+                    columnName="track_metric_id"/>
+        <dropColumn tableName="note"
+                    columnName="text_content_type"/>
+        <dropColumn tableName="note"
+                    columnName="text"/>
+    </changeSet>
+    <changeSet id="20180901163005-2" author="asegner">
+        <addColumn tableName="note">
+            <column name="data_point_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="20180901163005-3" author="asegner">
+        <addForeignKeyConstraint baseColumnNames="data_point_name"
+                                 baseTableName="note"
+                                 constraintName="fk_note_data_point_name"
+                                 referencedColumnNames="name"
+                                 referencedTableName="data_point"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="note"
+                                 constraintName="fk_note_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
+</databaseChangeLog>

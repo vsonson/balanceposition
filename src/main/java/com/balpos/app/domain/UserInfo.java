@@ -1,23 +1,19 @@
 package com.balpos.app.domain;
 
+import com.balpos.app.domain.enumeration.UserStatus;
+import com.balpos.app.domain.enumeration.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import com.balpos.app.domain.enumeration.UserStatus;
-
-import com.balpos.app.domain.enumeration.UserType;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import java.util.Set;
 
 /**
  * User is a default entity in a Stack Stack monolithic app and API gateway service and therefore cannot be modified in order to add a new relationship, fields etc.  Define a UserData entity so that the name does not collide with the User entity
@@ -123,10 +119,6 @@ public class UserInfo implements Serializable {
 
     @OneToMany(mappedBy = "userInfo")
     @JsonIgnore
-    private Set<Note> notes = new HashSet<>();
-
-    @OneToMany(mappedBy = "userInfo")
-    @JsonIgnore
     private Set<UserNotification> userNotifications = new HashSet<>();
 
     @OneToMany(mappedBy = "userInfo")
@@ -139,8 +131,8 @@ public class UserInfo implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "user_info_quote_of_the_day",
-               joinColumns = @JoinColumn(name="user_infos_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="quote_of_the_days_id", referencedColumnName="id"))
+        joinColumns = @JoinColumn(name = "user_infos_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "quote_of_the_days_id", referencedColumnName = "id"))
     private Set<QuoteOfTheDay> quoteOfTheDays = new HashSet<>();
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
@@ -485,31 +477,6 @@ public class UserInfo implements Serializable {
 
     public void setProgramHistories(Set<ProgramHistory> programHistories) {
         this.programHistories = programHistories;
-    }
-
-    public Set<Note> getNotes() {
-        return notes;
-    }
-
-    public UserInfo notes(Set<Note> notes) {
-        this.notes = notes;
-        return this;
-    }
-
-    public UserInfo addNotes(Note note) {
-        this.notes.add(note);
-        note.setUserInfo(this);
-        return this;
-    }
-
-    public UserInfo removeNotes(Note note) {
-        this.notes.remove(note);
-        note.setUserInfo(null);
-        return this;
-    }
-
-    public void setNotes(Set<Note> notes) {
-        this.notes = notes;
     }
 
     public Set<UserNotification> getUserNotifications() {
