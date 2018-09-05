@@ -55,7 +55,6 @@ public class NoteResource {
             if (noteFromDb == null) {
                 return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new note cannot already have an ID")).body(null);
             }
-            note = noteFromDb;
         }
         NoteDTO result = noteService.save(note, user);
         return ResponseEntity.created(new URI("/api/notes/" + result.getId()))
