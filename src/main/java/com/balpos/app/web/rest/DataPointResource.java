@@ -48,7 +48,7 @@ public class DataPointResource {
      */
     @GetMapping("/data-points")
     @Timed
-    public ResponseEntity<List<DataPointVM>> getAllDataPoints(Principal principal, @RequestParam Boolean ignoreStale) {
+    public ResponseEntity<List<DataPointVM>> getAllDataPoints(Principal principal, @RequestParam(defaultValue = "false") Boolean ignoreStale) {
         log.debug("REST request to get DataPoints");
         List<UserDataPointDTO> userDataPoints = userDataPointService.findByUser(userResourceUtil.getUserFromLogin(principal.getName()).get());
         // set stale data point colors to GRAY
